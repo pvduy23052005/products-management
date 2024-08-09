@@ -1,0 +1,39 @@
+//--------------------------------------------------------
+// CAC KIEN THUC VE TINH NAGN BO LOC .
+
+// lay ve gia tri bien status . 
+req.query.status 
+
+// get url : link trang web do  
+let url = new URL(window.location.href);
+
+// ley ve gia tri cua cac the public . 
+getAttribute("ten-class")
+
+// thay doi gia tri cua thuoc tinh public 
+searchParams.set("status", status);
+
+// lay ra url va thay doi . 
+window.location.href = url.href 
+//---------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'

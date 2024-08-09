@@ -1,0 +1,22 @@
+extends ../../layouts/default.pug
+
+block main 
+   h1( class = "Them") Them moi san pham . 
+
+   form(
+      action="/admin/products/create"
+      id = "form-create-products"
+      method = "POST"
+      ) 
+         
+         div()
+            label(for="id")
+            input(
+               type="text"
+               id = "id"
+               ) 
+         input(
+            type="submit"
+
+            )
+          

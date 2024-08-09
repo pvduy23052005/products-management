@@ -1,0 +1,151 @@
+extends ../../layouts/default.pug
+
+block main 
+
+   if( messages.thanhCong)
+      .info
+         div(
+            show-alert
+            time = 5000
+         ) #{messages.thanhCong} <span close-alert >X</span>
+          
+
+   h1 #{pageTitle}
+
+   .card.mb-3
+      .card-header do loc tim tiem 
+      .card-body 
+      each item in listbutton 
+         button(
+            class = item.class,
+            button-status = item.status
+         ) #{item.name}
+
+   //- tinh nang tinh kiem . 
+   form(id ="form-search")
+         input(
+         type="text"
+         placeholder = "Nhap tu khoa"
+         name ="keyword"
+         value = keyword
+      )
+         button(type ="submit") tim  
+
+   //- tinh nang chinh sua status product
+   form(
+      action="products/change-multi"
+      method = "GET"
+      form-change-multi 
+   ) 
+      select(name="type" class = "form-control")
+         option(value="active") Hoạt động  
+         option(value ="unactive") Dừng hoạt động
+         option(value = "delete-all") Xóa tất cả
+         option(value = "change-position") thay đổi vị trí 
+      input(
+         type="type"
+         value=""
+         name = "ids"
+         class = "from-control"
+      ) 
+      button(type ="submit" class = "btn") Ap dung
+   
+   a(
+      href="/admin/products/create"
+      class = "btn"
+   ) + Them Moi  
+
+   table(class = "table.table-hover.table-sm" checkbox-multi)
+      thead   
+         tr  
+            th 
+               input(type ="checkbox" , name = "checkAll")
+            th STT 
+            th hình ảnh
+            th tiêu đề  
+            th giá
+            th vị trí 
+            th trạng thái  
+            th hành động
+      tbody
+         each item,index  in product 
+            tr
+               td
+                  input(
+                     type="checkbox"
+                     name ="id"
+                     value = item._id 
+                  )
+               td #{index + 1}
+               td    
+                  img(src=item.hinhAnh, width = "100px" alt="")
+               td #{item.TenSanPham}
+               td #{item.gia}$
+               td
+                  input(
+                     type = "number"
+                     value = item.position 
+                     style = "width : 50px "
+                     min = "1"
+                     name = "position"
+                  )
+               td 
+                  if(  item.status === "active")
+                     button(
+                        href = "javascript:;"
+                        data-status = item.status
+                        data-id = item._id 
+                        button-change-status  
+                     ) Hoat dong
+                  else 
+                     button(
+                        href = "javascript:;"
+                        data-status = item.status
+                        data-id = item._id 
+                        button-change-status 
+                     ) Dung hoat dong 
+               td 
+                  button(
+                  ) Sửa 
+                  button(
+                     button-delete
+                     data-id = item._id  
+                  ) Xóa 
+
+   div 
+      ul(class ="pagination")
+         li(class = "page-item")
+            if(pagination.currentPase > 1)
+               li(class = "page-item")
+                  button(class = "page-link" 
+                     button-page = pagination.currentPase -1  
+                  ) Trang tuoc
+            
+         - for( let i = 1 ; i <= pagination.soLuongPage ;i++)
+            li(class = `page-item ${pagination.currentPase === i ? "mau2" : "" }`)
+               button(class = "page-link"
+                     button-page = i 
+                     ) #{i}
+
+         if(pagination.currentPase < pagination.soLuongPage)
+               li(class = "page-item")
+                  button(class = "page-link" 
+                     button-page = pagination.currentPase +1 
+                  ) Trang sau
+   //- status . 
+   form(
+      action=""
+      method = "GET"
+      id = "from-change-status" 
+      data-path = "/admin/products/change-status" 
+   ) 
+
+   form(
+      action=""
+      method = "GET"
+      id = "from-change-item" 
+      data-path = "/admin/products/delete"
+   ) 
+
+
+   script(src="/admin/js/product.js") 
