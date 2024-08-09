@@ -1,5 +1,6 @@
   // thep thang exprev vao file index . 
 const express = require("express");
+require("dotenv").config();  
 
 // nhung file vao phan 
 const route1 = require("./routes/client/index.route.js");
@@ -11,7 +12,7 @@ database.connect();
 
 // cho app = expre
 const app = express();
-const port = 3500;
+const port = process.env.PORT;
 
 // phan tich du lieu Json . 
 const cors = require('cors');
