@@ -33,8 +33,8 @@ block main
 
    //- tinh nang chinh sua status product
    form(
-      action="products/change-multi"
-      method = "GET"
+      action="products/change-multi?_method=PATCH"
+      method = "POST"
       form-change-multi 
    ) 
       select(name="type" class = "form-control")
@@ -135,17 +135,17 @@ block main
    //- status . 
    form(
       action=""
-      method = "GET"
+      method = "POST"
       id = "from-change-status" 
       data-path = "/admin/products/change-status" 
    ) 
 
    form(
       action=""
-      method = "GET"
+      method = "POST"
       id = "from-change-item" 
       data-path = "/admin/products/delete"
    ) 
 
 
-   script(src="/admin/js/product.js") 
+   script(src="/admin/js/product.js")

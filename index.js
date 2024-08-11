@@ -1,6 +1,7 @@
   // thep thang exprev vao file index . 
 const express = require("express");
-require("dotenv").config();  
+const methodOverride = require("method-override"); 
+require("dotenv").config(); 
 
 // nhung file vao phan 
 const route1 = require("./routes/client/index.route.js");
@@ -14,13 +15,14 @@ database.connect();
 const app = express();
 const port = process.env.PORT;
 
+app.use(methodOverride('_method'));
+
 // phan tich du lieu Json . 
 const cors = require('cors');
 app.use(cors());
 
 // thu vien de tra ve object cho name , va ids . 
 const bodyParser = require("body-parser"); 
-app.use(bodyParser.json()); // Để phân tích dữ liệu JSON
 app.use(bodyParser.urlencoded({ extended: true })); // Để phân tích dữ liệu x-www-form-urlencoded
 
 // nhung file tinh . 

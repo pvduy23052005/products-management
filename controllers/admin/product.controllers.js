@@ -83,11 +83,9 @@ module.exports.changeStatus = async (req, res) => {
 // 
 // /change-status/:status/:id : 
 module.exports.changeMulti = async (req, res) => {
-   const type = req.query.type
-   const listId = req.query.ids.split(", ");
-
-   console.log(type); 
-
+   const type = req.body.type
+   const listId = req.body.ids.split(", ");
+ 
    switch (type) {
       case "active":
          await product.updateMany({ _id: { $in: listId } }, { status: "active" });
@@ -129,11 +127,8 @@ module.exports.changeMulti = async (req, res) => {
 // : /admin/products/delete/:id 
 module.exports.deleteItem = async (req, res) => {
    const id = req.params.id;
-   console.log(id);
    // update lai hienThi . 
-   await product.updateOne({ _id: id },
-      { hienThi: true },
-   );
+   await product.updateOne({ _id: id },{ hienThi: true });
    req.flash("thanhCong" , `Xoa thanh cong san pham`);  
 
 

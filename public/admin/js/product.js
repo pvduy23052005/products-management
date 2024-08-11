@@ -15,7 +15,7 @@ if( buttonChangeStatus.length != 0 ){
          const newStatus = (dataStatus == "active" ? "unactive" : "active" ); 
 
          // chuyen action
-         const action = path +  `/${newStatus}/${dataId}`
+         const action = path +  `/${newStatus}/${dataId}?_method=PATCH`
          // gan lai action from. 
          fromStatus.action = action ;
          
@@ -48,7 +48,6 @@ if( tableMulti){
    });  
 
    // bat su kien cho tung o input 1 . 
-
    checkboxId.forEach((input) =>{
       input.addEventListener("click" , () =>{         // lay ra o input da click . 
          let count = tableMulti.querySelectorAll("input[name='id']:checked").length; 
@@ -64,7 +63,7 @@ if( tableMulti){
 } 
 
 // LAY VE FORM
-const formChangeMulti = document.querySelector("[form-change-multi]"); 
+const formChangeMulti = document.querySelector("[form-change-multi]");
 if( formChangeMulti){
    formChangeMulti.addEventListener("submit" , (event) => {
       // ngan chan lai load lai trang . 
@@ -91,7 +90,6 @@ if( formChangeMulti){
  
          checkboxId1.forEach( (input) =>{
             const id = input.value; 
-            
             if(typeChange === "change-position"){
                // lay ra input vi tri . 
                // Su dung ham closest("")  : 
@@ -136,7 +134,7 @@ if( buttonDelete.length > 0){
             // lay ra id 
             const id = button.getAttribute("data-id"); 
             // gui len sever . 
-            const action = path + `/${id}`; 
+            const action = path + `/${id}?_method=PATCH`; 
             
             formDelete.action = action ; 
 

@@ -8,12 +8,12 @@ router.get("/" , controller.product);
 // route cho thay doi 1  status product . 
 // :status la data dong .  
 // :id    la data dong . 
-router.get("/change-status/:status/:id" , controller.changeStatus); 
+router.patch("/change-status/:status/:id" , controller.changeStatus); 
 
 // thay doi nhieu san pham . 
-router.get("/change-multi", controller.changeMulti); 
+router.patch("/change-multi", controller.changeMulti);
 
-router.get("/delete/:id" , controller.deleteItem); 
+router.patch("/delete/:id" , controller.deleteItem);
 
 // [GET] 
 router.get("/create" , controller.createGet); 
