@@ -17,7 +17,8 @@ searchParams.set("status", status);
 window.location.href = url.href 
 //---------------------------------------------------------------------
 
-
+// update 1 sna pham vaho trong database . 
+product.save();
 
 
 

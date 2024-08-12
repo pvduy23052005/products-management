@@ -3,6 +3,7 @@ const product = require("../../models/product.model.js");
 const helperListButton = require("../../helpers/listButton.js");
 const helperSearch = require("../../helpers/search.js");
 const helperPagination = require("../../helpers/pagination.js");
+const Product = require("../../models/product.model.js");
 
 // phuogn thuc {GET} /product . 
 module.exports.product = async (req, res) => { 
@@ -129,22 +130,38 @@ module.exports.deleteItem = async (req, res) => {
    const id = req.params.id;
    // update lai hienThi . 
    await product.updateOne({ _id: id },{ hienThi: true });
-   req.flash("thanhCong" , `Xoa thanh cong san pham`);  
-
+   req.flash("thanhCong" , `Xoa thanh cong san pham`);
 
    res.redirect("back");
 }
 
 //[GET] products/create
-module.exports.createGet = ( req , res) => { 
+module.exports.createGet = ( req , res) => {
 
-   res.render("admin/pages/products/create.pug" , {
+   res.render("admin/pages/products/create.pug",{
       pageTitle : "Trang them moi san pham " , 
-   }); 
+   });
 }
 
 // [POST] products/create
-module.exports.createPost = ( req , res) => { 
-   console.log(req.body); 
-   res.send("OK"); 
-}
+module.exports.createPost = async ( req , res) => { 
+   req.body.gia = parseInt(req.body.gia); 
+   req.body.giam = parseInt(req.body.giam); 
+   req.body.soLuong = parseInt(req.body.soLuong); 
+   // nhap position . 
+   if(req.body.position == "") {
+      req.body.position =  await product.countDocuments() + 1;
+   }
+   else {
+      req.body.position = parseInt(req.body.position); 
+   }
+   // dung toan tu new 
+   try{
+      const product = new Product(req.body); 
+      await product.save(); 
+      console.log("CAP NHAT THANH CONG!"); 
+   }catch{ 
+      console.log("loi")
+   }
+   res.redirect("/admin/products");
+} 

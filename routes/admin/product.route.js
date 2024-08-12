@@ -15,11 +15,11 @@ router.patch("/change-multi", controller.changeMulti);
 
 router.patch("/delete/:id" , controller.deleteItem);
 
-// [GET] 
-router.get("/create" , controller.createGet); 
+// [GET] /admin/products/create
+router.get("/create" , controller.createGet);
 
-// [POST] 
-router.post("/create" , controller.createPost) ; 
+// [POST] /admin/products/
+router.post("/create" , controller.createPost); 
 
 // xuat may cai route nay ra . 
 module.exports = router ; 

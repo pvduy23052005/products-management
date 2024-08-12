@@ -49,11 +49,11 @@ block main
          class = "from-control"
       ) 
       button(type ="submit" class = "btn") Ap dung
-   
-   a(
-      href="/admin/products/create"
-      class = "btn"
-   ) + Them Moi  
+   .product-create
+      a(
+         href="/admin/products/create"
+         class = "btn"
+      ) + Them Moi  
 
    table(class = "table.table-hover.table-sm" checkbox-multi)
       thead   

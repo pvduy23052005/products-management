@@ -1,21 +1,113 @@
 extends ../../layouts/default.pug
 
 block main 
-   h1( class = "Them") Them moi san pham . 
+
+   h1( class = "Them") Them moi san pham. 
 
    form(
       action="/admin/products/create"
       id = "form-create-products"
       method = "POST"
-      ) 
-         
-         div()
-            label(for="id")
+      )
+         div(class = "form-group")
+            label(for="TenSanPham") Tiêu đề
             input(
                type="text"
-               id = "id"
-               ) 
-         input(
-            type="submit"
-
+               class ="form-control"
+               id = "TenSanPham"
+               name = "TenSanPham"
+               required
             )
+
+         div(class = "form-group")
+            label(for="SoLuong") Số lượng
+            input(
+               type="number"
+               class ="form-control"
+               id = "SoLuong"
+               name = "SoLuong"
+               value ="0"
+               min ="0"
+            )
+         
+         div(class = "form-group")
+            label(for="hinhAnh") Ảnh
+            input(
+               type="text"
+               class ="form-control"
+               id = "hinhAnh"
+               name = "hinhAnh"
+            )
+
+         div(class = "form-group")
+            label(for="gia") Giá
+            input(
+               type="number"
+               class ="form-control"
+               id = "gia"
+               name = "gia"
+               value ="0"
+               min ="0"
+            )
+         
+         div(class = "form-group")
+            label(for="discount") % Giảm
+            input(
+               type="number"
+               class ="form-control"
+               id = "discount"
+               name = "giam"
+               value ="0"
+               min ="0"
+            )
+
+
+         div(for ="statusActive form-check form-check-inline")
+            input(
+               type = "radio"
+               class = "form-check-input"
+               id = "statusActive"
+               name = "status"
+               value = "active"
+               checked
+            )
+            label(for = "statusActive" class = "form-check-label") Hoạt động
+         div(for ="statusActive form-check form-check-inline")
+            input(
+               type = "radio"
+               class = "form-check-input"
+               id = "statusInactive"
+               name = "status"
+               value = "inactive"
+            )
+            label(for = "statusInActive" class = "form-check-label") Dừng hoạt động
+
+         div(class = "form-group")
+            label(for="position") Ví trí
+            input(
+               type="number"
+               class ="form-control"
+               id = "position"
+               name = "position"
+               placeholder = "Tự động tăng"
+               min = "1"
+            )
+
+         div(class = "form-group")
+            label(for="desc") Mô tả
+            input(
+               type="text"
+               class ="form-control"
+               id = "title"
+               name = "description"
+               rows = "5"
+            )
+
+         div(class ="form-group")
+            button(
+               type = "submit"
+               class = "btn btn-primary"
+            ) tạo mới 
+         
+
+            
