@@ -1,5 +1,7 @@
 const express = require("express"); 
+const multer = require("multer"); 
 const router =  express.Router(); 
+const upload = multer( {dest : "./public/uploads/"} );
 
 const controller = require("../../controllers/admin/product.controllers.js"); 
 
@@ -19,7 +21,8 @@ router.patch("/delete/:id" , controller.deleteItem);
 router.get("/create" , controller.createGet);
 
 // [POST] /admin/products/
-router.post("/create" , controller.createPost); 
+router.post("/create" , upload.single("hinhAnh") ,controller.createPost); 
+ 
 
 // xuat may cai route nay ra . 
 module.exports = router ; 

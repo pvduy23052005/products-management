@@ -8,6 +8,7 @@ block main
       action="/admin/products/create"
       id = "form-create-products"
       method = "POST"
+      enctype = "multipart/form-data"
       )
          div(class = "form-group")
             label(for="TenSanPham") Tiêu đề
@@ -33,10 +34,11 @@ block main
          div(class = "form-group")
             label(for="hinhAnh") Ảnh
             input(
-               type="text"
+               type="file"
                class ="form-control"
                id = "hinhAnh"
                name = "hinhAnh"
+               accept = "image/*"
             )
 
          div(class = "form-group")

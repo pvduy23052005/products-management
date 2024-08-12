@@ -155,8 +155,13 @@ module.exports.createPost = async ( req , res) => {
    else {
       req.body.position = parseInt(req.body.position); 
    }
+
+   // update anh . => database .  ( req.file). 
+   req.body.hinhAnh =  `/uploads/${req.file.filename}`; 
+
    // dung toan tu new 
    try{
+      // tao 1 san pham moi . 
       const product = new Product(req.body); 
       await product.save(); 
       console.log("CAP NHAT THANH CONG!"); 
