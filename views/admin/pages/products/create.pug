@@ -31,7 +31,10 @@ block main
                min ="0"
             )
          
-         div(class = "form-group")
+         div(
+            class = "form-group"
+            upload-image
+            )
             label(for="hinhAnh") Ảnh
             input(
                type="file"
@@ -39,7 +42,12 @@ block main
                id = "hinhAnh"
                name = "hinhAnh"
                accept = "image/*"
+               upload-image-input
             )
+            img(
+               src="" , width = "100px" , height = "100px" , ,
+               upload-image-preview 
+               )
 
          div(class = "form-group")
             label(for="gia") Giá

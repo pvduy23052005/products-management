@@ -114,3 +114,10 @@
    height: 30px;
    font-family: 50px;
 }
+
+[upload-image-preview] {
+   display: inline;
+   width: 100px;
+   height : 100px ; 
+   
+}

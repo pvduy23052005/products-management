@@ -62,3 +62,21 @@ if(buttonPase.length != 0){
       }); 
    }); 
 }
+
+// UPLOAD ANH 
+const uploadImage = document.querySelector("[upload-image]");
+if( uploadImage){
+   const uploadImageInput = document.querySelector("[upload-image-input]"); 
+   const preview = document.querySelector("[upload-image-preview]");
+   uploadImageInput.addEventListener("change" , (event) => {
+      console.log(event); 
+      // tiem den files[0] trong event -> target 
+      const file = event.target.files[0]; 
+      
+      if( file) {
+         // gan lai cho private cua the img . 
+         preview.src = URL.createObjectURL(file); 
+      }
+   });
+
+} 
