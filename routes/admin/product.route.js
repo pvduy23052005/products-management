@@ -4,7 +4,7 @@ const router =  express.Router();
 const upload = multer( {dest : "./public/uploads/"} );
 
 const controller = require("../../controllers/admin/product.controllers.js"); 
-
+const validate =  require("../../validates/admin/product.validate.js"); 
 router.get("/" , controller.product); 
 
 // route cho thay doi 1  status product . 
@@ -21,7 +21,10 @@ router.patch("/delete/:id" , controller.deleteItem);
 router.get("/create" , controller.createGet);
 
 // [POST] /admin/products/
-router.post("/create" , upload.single("hinhAnh") ,controller.createPost); 
+router.post("/create" , upload.single("hinhAnh") ,
+   validate.createPost, 
+   controller.createPost
+); 
  
 
 // xuat may cai route nay ra . 

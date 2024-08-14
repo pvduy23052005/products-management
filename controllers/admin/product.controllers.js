@@ -145,6 +145,13 @@ module.exports.createGet = ( req , res) => {
 
 // [POST] products/create
 module.exports.createPost = async ( req , res) => { 
+   // neu TenSanPham
+   // if(!req.body.TenSanPham){
+   //    req.flash("error" ,`Vui long nhap tieu de . ` ); 
+   //    res.redirect("back"); 
+   //    return ; 
+   // }
+
    req.body.gia = parseInt(req.body.gia); 
    req.body.giam = parseInt(req.body.giam); 
    req.body.soLuong = parseInt(req.body.soLuong); 
@@ -156,8 +163,10 @@ module.exports.createPost = async ( req , res) => {
       req.body.position = parseInt(req.body.position); 
    }
 
-   // update anh . => database .  ( req.file). 
-   req.body.hinhAnh =  `/uploads/${req.file.filename}`; 
+   if(req.file){
+         // update anh . => database .  ( req.file). 
+      req.body.hinhAnh =  `/uploads/${req.file.filename}`; 
+   }
 
    // dung toan tu new 
    try{

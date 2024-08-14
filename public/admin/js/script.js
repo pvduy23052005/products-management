@@ -78,5 +78,4 @@ if( uploadImage){
          preview.src = URL.createObjectURL(file); 
       }
    });
-
 } 
