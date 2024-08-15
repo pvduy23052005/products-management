@@ -20,12 +20,24 @@ router.patch("/delete/:id" , controller.deleteItem);
 // [GET] /admin/products/create
 router.get("/create" , controller.createGet);
 
-// [POST] /admin/products/
-router.post("/create" , upload.single("hinhAnh") ,
+// [POST] /admin/products/create 
+router.post("/create" ,
+   upload.single("hinhAnh") ,
    validate.createPost, 
    controller.createPost
+); 
+
+// params : truong chuyen data dong . 
+// query  : truong sau dau ? 
+router.get("/edit/:id" ,controller.edit);
+
+router.patch("/edit/:id",
+   upload.single("hinhAnh") ,
+   validate.createPost,
+   controller.editPatch 
 ); 
  
 
 // xuat may cai route nay ra . 
-module.exports = router ; 
+module.exports = router ;  
+

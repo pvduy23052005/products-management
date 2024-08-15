@@ -105,7 +105,10 @@ block main
                         button-change-status 
                      ) Dung hoat dong 
                td 
-                  button(
+                  a(
+                     href = `/admin/products/edit/${item._id}`
+                     data-id = item._id 
+                     
                   ) Sửa 
                   button(
                      button-delete

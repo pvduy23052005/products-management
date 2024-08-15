@@ -82,7 +82,7 @@ module.exports.changeStatus = async (req, res) => {
 }
 
 // 
-// /change-status/:status/:id : 
+// /change-status/:status/:id: 
 module.exports.changeMulti = async (req, res) => {
    const type = req.body.type
    const listId = req.body.ids.split(", ");
@@ -143,15 +143,10 @@ module.exports.createGet = ( req , res) => {
    });
 }
 
-// [POST] products/create
+// [POST] products/create  
 module.exports.createPost = async ( req , res) => { 
    // neu TenSanPham
-   // if(!req.body.TenSanPham){
-   //    req.flash("error" ,`Vui long nhap tieu de . ` ); 
-   //    res.redirect("back"); 
-   //    return ; 
-   // }
-
+ 
    req.body.gia = parseInt(req.body.gia); 
    req.body.giam = parseInt(req.body.giam); 
    req.body.soLuong = parseInt(req.body.soLuong); 
@@ -179,3 +174,51 @@ module.exports.createPost = async ( req , res) => {
    }
    res.redirect("/admin/products");
 } 
+
+// [GET] /admin/products/edit/:id 
+// tinh nang sua san pham . 
+module.exports.edit = async ( req , res) => {
+   
+   try{
+      let find = {
+         hienThi : false, 
+         _id : req.params.id
+      }    
+   
+      const product1 = await product.findOne(find); 
+      console.log(product1); 
+   
+      
+      res.render("admin/pages/products/edit.pug" , {
+         pageTitle : "Chinh sua san pham ", 
+         product : product1
+      }); 
+   }catch (error) {// neu that bai tran g
+       res.redirect("/admin/products"); 
+   }
+}
+
+// [patch] /admin/products/edit/:id/
+module.exports.editPatch =  async ( req , res) => {
+
+   req.body.gia = parseInt(req.body.gia); 
+   req.body.giam = parseInt(req.body.giam); 
+   req.body.soLuong = parseInt(req.body.soLuong);
+   req.body.position = parseInt(req.body.position); 
+
+
+   if(req.file){
+      // update anh . => database .  ( req.file). 
+   req.body.hinhAnh =  `/uploads/${req.file.filename}`;  
+   }
+   
+   try{
+      await product.updateOne( {_id : req.params.id} ,req.body);
+      res.flash("thanhCong" , "Cap nhat thanh cong"); 
+   } catch ( error){
+      res.flash("error" , "Cap nhat that bai"); 
+   }
+
+
+   res.redirect("back"); 
+}
