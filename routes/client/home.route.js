@@ -5,7 +5,7 @@ const router = express.Router();
 const homeController = require("../../controllers/client/home.controller.js");
 
 // tao cac rou ther con
-router.get("/", homeController.inex);
+router.get("/", homeController.index);
 
 // xuat ra router moi su dung dc . 
 module.exports = router; 
