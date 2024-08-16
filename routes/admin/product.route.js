@@ -36,7 +36,9 @@ router.patch("/edit/:id",
    validate.createPost,
    controller.editPatch 
 ); 
- 
+
+router.get("/detail/:id" , controller.detail); 
+
 
 // xuat may cai route nay ra . 
 module.exports = router ;  

@@ -190,7 +190,7 @@ module.exports.edit = async ( req , res) => {
    
       
       res.render("admin/pages/products/edit.pug" , {
-         pageTitle : "Chinh sua san pham ", 
+         pageTitle : "Chinh sua san pham ",
          product : product1
       }); 
    }catch (error) {// neu that bai tran g
@@ -216,9 +216,26 @@ module.exports.editPatch =  async ( req , res) => {
       await product.updateOne( {_id : req.params.id} ,req.body);
       res.flash("thanhCong" , "Cap nhat thanh cong"); 
    } catch ( error){
-      res.flash("error" , "Cap nhat that bai"); 
    }
 
-
    res.redirect("back"); 
+}
+
+// [GET] /admin/products/detail/:id 
+//  Chi tiet sua san pham . 
+module.exports.detail = async ( req , res) => {
+   try{
+      let find = {
+         hienThi : false, 
+         _id : req.params.id
+      } 
+      const product1 = await product.findOne(find); 
+      console.log(product1);
+      res.render("admin/pages/products/detail.pug" ,{
+         pageTitle : product1.TenSanPham,
+         product : product1
+      });
+   }catch (error) {// neu that bai tran g
+      res.redirect("/admin/products"); 
+   }
 }
