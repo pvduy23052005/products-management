@@ -16,7 +16,7 @@ const productSchema = new mongoose.Schema({
    hienThi: {
       type : Boolean, 
       default :false,
-      unique : true
+      unique : true// tao slug la duy nhat . 
    },
    hinhAnh: String,
    gia: Number,

@@ -3,7 +3,7 @@ const mongoose = require('../node_modules/mongoose');
 
 module.exports.connect = async () => {
    try {
-      await mongoose.connect('mongodb://localhost:27017/Data-base');
+      await mongoose.connect(process.env.MONGO_URL);
       console.log("Thanh cong");
    } catch {
       console.log("That bai ");
