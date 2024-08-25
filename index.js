@@ -26,7 +26,7 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true })); // Để phân tích dữ liệu x-www-form-urlencoded
 
 // nhung file tinh . 
-app.use(express.static("public"));
+app.use(express.static(`${__dirname}/public`));
 
 //Fash : HIEN THI THONG BAO CHO  
 const flash = require("express-flash"); 
@@ -37,7 +37,7 @@ app.use(session({cookie:  { maxAge : 60000}}));
 app.use(flash()); 
 
 // cau hinh cho pug . 
-app.set("views", "./views");
+app.set("views", `${__dirname}/views`);
 app.set("view engine", "pug");
 
 // goi route vua nhung o code 5 .chuyen vao app .  
