@@ -21,7 +21,7 @@ app.use(methodOverride('_method'));
 const cors = require('cors');
 app.use(cors());
 
-// thu vien de tra ve object cho name , va ids . 
+// thu vie  n de tra ve object cho name , va ids . 
 const bodyParser = require("body-parser"); 
 app.use(bodyParser.urlencoded({ extended: true })); // Để phân tích dữ liệu x-www-form-urlencoded
 
