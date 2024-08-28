@@ -40,10 +40,18 @@ module.exports.product = async (req, res) => {
       countProduct
    )
 
+   let sort = {}
+   if( req.query.sortKey && req.query.sortValue){
+      sort[req.query.sortKey] = req.query.sortValue; 
+   }else {
+      sort.position = "desc"; 
+   }
+
+
    // limit(n) : so hang de query
    // skip(n) :  so hang bo qua . 
    const data = await product.find(find)
-      .sort({position : "desc"})
+      .sort(sort)
       .limit(objectPagination.limitItems)
       .skip(objectPagination.skip);
 
@@ -200,12 +208,6 @@ module.exports.editPatch =  async ( req , res) => {
    req.body.soLuong = parseInt(req.body.soLuong);
    req.body.position = parseInt(req.body.position); 
 
-
-   if(req.file){
-      // update anh . => database .  ( req.file). 
-      req.body.hinhAnh =  `/uploads/${req.file.filename}`;  
-   }
-   
    try{
       await product.updateOne( {_id : req.params.id} ,req.body);
       res.flash("thanhCong" , "Cap nhat thanh cong"); 

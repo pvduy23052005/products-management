@@ -119,5 +119,8 @@
    display: inline;
    width: 100px;
    height : 100px ; 
-   
+}
+
+.khoi3{
+   border: 1px solid rgb(143, 126, 126);
 }

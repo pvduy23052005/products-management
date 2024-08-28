@@ -12,48 +12,67 @@ block main
 
    h1 #{pageTitle}
 
-   .card.mb-3
-      .card-header do loc tim tiem 
-      .card-body 
-      each item in listbutton 
-         button(
-            class = item.class,
-            button-status = item.status
-         ) #{item.name}
+   div(class = "khoi3")
+      .card.mb-3
+         .card-header do loc tim tiem 
+         .card-body 
+         each item in listbutton 
+            button(
+               class = item.class,
+               button-status = item.status
+            ) #{item.name}
 
-   //- tinh nang tinh kiem . 
-   form(id ="form-search")
-         input(
-         type="text"
-         placeholder = "Nhap tu khoa"
-         name ="keyword"
-         value = keyword
-      )
-         button(type ="submit") tim  
+      //- tinh nang tinh kiem . 
+      form(id ="form-search")
+            input(
+            type="text"
+            placeholder = "Nhap tu khoa"
+            name ="keyword"
+            value = keyword
+         )
+            button(type ="submit") tim  
 
-   //- tinh nang chinh sua status product
-   form(
-      action="products/change-multi?_method=PATCH"
-      method = "POST"
-      form-change-multi 
-   ) 
-      select(name="type" class = "form-control")
-         option(value="active") Hoạt động  
-         option(value ="unactive") Dừng hoạt động
-         option(value = "delete-all") Xóa tất cả
-         option(value = "change-position") thay đổi vị trí 
-      input(
-         type="type"
-         value=""
-         name = "ids"
-         class = "from-control"
+      //- tinh nang chinh sua status product
+      form(
+         action="products/change-multi?_method=PATCH"
+         method = "POST"
+         form-change-multi 
       ) 
-      button(type ="submit" class = "btn") Ap dung
-   .product-create
-      a(
-         href="/admin/products/create"
-         class = "btn"
-      ) + Them Moi  
+         select(name="type" class = "form-control")
+            option(value="active") Hoạt động  
+            option(value ="unactive") Dừng hoạt động
+            option(value = "delete-all") Xóa tất cả
+            option(value = "change-position") thay đổi vị trí 
+         input(
+            type="type"
+            value=""
+            name = "ids"
+            class = "from-control"
+         ) 
+         button(type ="submit" class = "btn") Ap dung
+      .product-create
+         a(
+            href="/admin/products/create"
+            class = "btn"
+         ) + Them Moi  
+
+   div(sort)
+      select(
+         class="form-control"
+         name ="sort" 
+         sort-select
+      ) 
+         option(value ="position-desc") Vi tri giam dan 
+         option(value ="position-asc") Vi tri tang dan 
+         option(value ="gia-desc") Gia giam dan 
+         option(value ="gia-asc") Gia tang dan
+         option(value ="TenSanPham-asc") Tieu de  A-Z 
+         option(value ="TenSanPham-desc") Tieu de Z-A
+      
+      button(
+         sort-clear
+      ) Clear
+
 
    table(class = "table.table-hover.table-sm" checkbox-multi)
       thead   
