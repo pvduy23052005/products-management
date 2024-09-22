@@ -232,6 +232,6 @@ module.exports.detail = async ( req , res) => {
          product : product1
       });
    }catch (error) {// neu that bai tran g
-      res.redirect("/admin/products"); 
+      res.redirect("/admin/products");
    }
 }

@@ -11,12 +11,12 @@ const productSchema = new mongoose.Schema({
    SoLuong: Number,
    slug : {
       type : String , 
-      slug : "TenSanPham"
+      slug : "TenSanPham",
+      unique : true// tao slug la duy nhat .
    },
    hienThi: {
       type : Boolean, 
-      default :false,
-      unique : true// tao slug la duy nhat . 
+      default :false, 
    },
    hinhAnh: String,
    gia: Number,
