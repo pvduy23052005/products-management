@@ -1,5 +1,5 @@
 extends ../../layouts/default.pug
-
+include ../../mixins/select-tree.pug
 block main 
    if( messages.error)
       .info
@@ -28,13 +28,22 @@ block main
             )
          div(class = "form-group")
             label(for="parent_id") danh muc cha 
-            input(
-               type="text"
-               class = form-control 
+            //- input(
+            //-    type="text"
+            //-    class = form-control 
+            //-    id = "parent_id"
+            //-    name = "parent_id"
+            //-    required 
+            //-    )
+            select(
                id = "parent_id"
                name = "parent_id"
-               required 
-               )
+               class ="form-control"  
+            )
+               option(value="") --chon danh muc cha 
+               if( records)
+                  +select-tree(records , 1)
+
          div(
             class = "form-group"
             upload-image

@@ -127,14 +127,16 @@ block main
                   a(
                      href = `/admin/products/edit/${item._id}`
                      data-id = item._id 
-                     
+                     class = "btn btn-warning btn-sm"
                   ) Sửa 
                   button(
                      button-delete
                      data-id = item._id  
+                     class = "btn btn-danger btn-sm ml-1"
                   ) Xóa 
                   a(
                      href=`/admin/products/detail/${item._id}`
+                     class = "btn btn-secondary btn-sm"
                      ) Chi tiet
 
    div 
