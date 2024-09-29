@@ -128,7 +128,7 @@ if (buttonDelete.length > 0) {
    buttonDelete.forEach((button) => {
       button.addEventListener("click", () => {
          //su dung Ham confirm . 
-         const check = confirm("Ban co chan muon xoa khong . ");
+         const check = confirm("Ban co chan muon xoa khong .");
          // check xem client an ok khong . 
          if (check) {
             // lay ra id 

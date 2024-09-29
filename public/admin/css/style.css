@@ -25,10 +25,9 @@
 .body .main {
    margin: 150px;
    position: relative;
-   left: 150px;
+   left: 70px;
    width: calc(100% -180px);
 }
-
 
 .sider .inner-menu ul {
    list-style: none;

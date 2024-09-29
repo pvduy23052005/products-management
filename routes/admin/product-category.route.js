@@ -17,6 +17,11 @@ router.post("/create",
    controller.createPost
 );
 
-router.post("/edit/:id", controller.edit); 
+router.get("/edit/:id", controller.edit);
 
-module.exports = router; 
+router.patch("/edit/:id",
+   upload.single("hinhAnh"),
+   uploadCloud.uploadCloud,
+   controller.editPatch);
+
+module.exports = router;

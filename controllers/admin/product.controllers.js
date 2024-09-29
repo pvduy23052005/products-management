@@ -4,6 +4,8 @@ const helperListButton = require("../../helpers/listButton.js");
 const helperSearch = require("../../helpers/search.js");
 const helperPagination = require("../../helpers/pagination.js");
 const Product = require("../../models/product.model.js");
+const ProductCategory = require("../../models/product-category.model.js"); 
+
 
 // phuogn thuc {GET} /product . 
 module.exports.product = async (req, res) => { 
@@ -144,10 +146,38 @@ module.exports.deleteItem = async (req, res) => {
 }
 
 //[GET] products/create
-module.exports.createGet = ( req , res) => {
+module.exports.createGet = async ( req , res) => {
+
+   const records = await ProductCategory.find({hienThi : false}); 
+
+   let find = {
+      hienThi: false,
+   }
+   let cnt = 0;
+   function createTree(arr, parentId = "") {
+      // tao 1 mang tree ;
+      const tree = [];
+      arr.forEach((item) => {
+         if (item.parent_id === parentId) {
+            ++cnt;
+            const newItem = item;
+            newItem.index = cnt;
+            const children = createTree(arr, item.id);
+            if (children.length > 0) {
+               newItem.children = children;
+            }
+            tree.push(newItem);
+         }
+      });
+      return tree;
+   }
+
+   const newRecords = createTree(records); 
+   
 
    res.render("admin/pages/products/create.pug",{
-      pageTitle : "Trang them moi san pham " , 
+      pageTitle : "Trang them moi san pham " ,
+      category : newRecords
    });
 }
 
@@ -186,14 +216,33 @@ module.exports.edit = async ( req , res) => {
          hienThi : false, 
          _id : req.params.id
       }    
-   
       const product1 = await product.findOne(find); 
       console.log(product1); 
-   
-      
+      const records = await ProductCategory.find({hienThi : false}); 
+      let cnt = 0;
+      function createTree(arr, parentId = "") {
+         // tao 1 mang tree ;
+         const tree = [];
+         arr.forEach((item) => {
+            if (item.parent_id === parentId) {
+               ++cnt;
+               const newItem = item;
+               newItem.index = cnt;
+               const children = createTree(arr, item.id);
+               if (children.length > 0) {
+                  newItem.children = children;
+               }
+               tree.push(newItem);
+            }
+         });
+         return tree;
+      }
+      const newRecords = createTree(records); 
       res.render("admin/pages/products/edit.pug" , {
          pageTitle : "Chinh sua san pham ",
-         product : product1
+         product : product1, 
+         category : newRecords,
+         
       }); 
    }catch (error) {// neu that bai tran g
        res.redirect("/admin/products"); 
@@ -213,7 +262,6 @@ module.exports.editPatch =  async ( req , res) => {
       res.flash("thanhCong" , "Cap nhat thanh cong"); 
    } catch ( error){
    }
-
    res.redirect("back"); 
 }
 

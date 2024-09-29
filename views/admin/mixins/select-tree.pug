@@ -1,7 +1,10 @@
-mixin select-tree(records, level)
+mixin select-tree(records, level , parent_id = "")
    each item in records
       - const prefix = Array(level + 1 ).join("-- ")
-      option(value=item._id) #{prefix}#{item.TenSanPham}
+      option(
+         value=item._id
+         selected = (item.id === parent_id ? true  : false )
+         ) #{prefix}#{item.TenSanPham}
          if item.children && item.children.length > 0
-            +select-tree( item.children , level + 1)
+            +select-tree( item.children , level + 1 )
 

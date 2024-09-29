@@ -12,7 +12,7 @@ module.exports = (query) => {
       },
       {
          name: "Dung hoat dong ",
-         status: "unactive",
+         status: "inactive",
          class: ""
       },
    ]
@@ -22,7 +22,7 @@ module.exports = (query) => {
       const index = listButton.findIndex((item) => item.status == query.status)
       listButton[index].class = "mau"; 
    }else {
-      listButton[0].class ="mau"; 
+      listButton[0].class ="mau";
    } 
 
    // tra ve mang vua thay doi . 

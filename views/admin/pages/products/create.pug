@@ -1,4 +1,5 @@
 extends ../../layouts/default.pug
+include ../../mixins/select-tree.pug
 
 block main 
    if( messages.error)
@@ -26,6 +27,17 @@ block main
                name = "TenSanPham"
                required
             )
+
+         div(class = "form-group")
+            label(for="product-category-id") Danh muc 
+            select(
+               name="product-category-id"
+               id = "product-category-id"
+               class = "form-control"
+            )  
+               option( value = "") --Danh muc cha-- 
+               if(category)
+                  +select-tree(category ,1)
 
          div(class = "form-group")
             label(for="SoLuong") Số lượng

@@ -7,6 +7,10 @@ mongoose.plugin(slug);
 // dinh dang cac truong muon lay ra trong database . 
 const productSchema = new mongoose.Schema({
    id : String , 
+   product_category_id : {
+      type : String , 
+      default : ""
+   } ,  
    TenSanPham: String,
    SoLuong: Number,
    slug : {

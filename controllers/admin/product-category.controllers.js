@@ -6,15 +6,15 @@ module.exports.index = async (req, res) => {
    let find = {
       hienThi: false,
    }
-   let cnt = 0 
+   let cnt = 0
    function createTree(arr, parentId = "") {
       // tao 1 mang tree ;
       const tree = [];
       arr.forEach((item) => {
          if (item.parent_id === parentId) {
-            cnt++; 
+            cnt++;
             const newItem = item;
-            newItem.index = cnt ; 
+            newItem.index = cnt;
             const children = createTree(arr, item.id);
             if (children.length > 0) {
                newItem.children = children;
@@ -37,17 +37,17 @@ module.exports.index = async (req, res) => {
 // [GET] / admin/product-category/create
 module.exports.create = async (req, res) => {
    let find = {
-     hienThi: false,
+      hienThi: false,
    }
-   let cnt = 0 ; 
+   let cnt = 0;
    function createTree(arr, parentId = "") {
       // tao 1 mang tree ;
       const tree = [];
       arr.forEach((item) => {
          if (item.parent_id === parentId) {
-            ++cnt ; 
+            ++cnt;
             const newItem = item;
-            newItem.index = cnt ; 
+            newItem.index = cnt;
             const children = createTree(arr, item.id);
             if (children.length > 0) {
                newItem.children = children;
@@ -83,14 +83,42 @@ module.exports.createPost = async (req, res) => {
       console.log("THANH CONG");
    } catch (error) {
       console.log("THAT BAI")
-      console.error(error);
    }
 
    res.redirect("/admin/products-category");
 }
 
-module.exports.edit = ( req , res) =>{
-   res.render("admin/pages/product-category/edit.pug" ,{
-      pageTitle :"Trang chinh sua "
-   }); 
+// [get] / admin/product-category/edit/:id
+module.exports.edit = async (req, res) => {
+   try{
+      const id = req.params.id;
+      const data1 = await ProductCategory.findOne({
+         _id: id,
+         hienThi: false
+      });
+      const records = await ProductCategory.find();
+   
+      res.render("admin/pages/product-category/edit.pug", {
+         pageTitle: "Trang chinh sua danh muc san pham  ",
+         data: data1,
+         records: records
+      });
+   }catch( error) {
+      res.redirect("/admin/products-category"); 
+   }
+}
+
+// [PATCH] / admin/product-category/edit/:id
+module.exports.editPatch = async (req, res) => {
+   const id = req.params.id
+
+   req.body.position = parseInt(req.body.position);
+
+   try {
+      await ProductCategory.updateOne({ _id: id }, req.body)
+      console.log("THANH CONG"); 
+   } catch (error) {
+      console.log("That bai"); 
+   }
+   res.redirect("back");
 }

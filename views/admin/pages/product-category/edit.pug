@@ -1,19 +1,19 @@
 extends ../../layouts/default.pug
 include ../../mixins/select-tree.pug
 block main 
-   if( messages.thanhCong)
+   if( messages.error)
       .info
          div(
             show-alert
             time = 5000
-         ) #{messages.thanhCong} <span close-alert >X</span>
+         ) #{messages.error} <span close-alert >X</span>
 
 
-   h1( class = "Them") #{pageTitle}
+   h1( class = "Them") Chinh sua san pham. 
 
-   form( 
-      action=`/admin/products/edit/${product._id}?_method=PATCH`  
-      id = "form-edit-products"
+   form(
+      action=`/admin/products-category/edit/${data._id}?_method=PATCH`
+      id = "form-create-products"
       method = "POST"
       enctype = "multipart/form-data"
       )
@@ -24,7 +24,7 @@ block main
                class ="form-control"
                id = "TenSanPham"
                name = "TenSanPham"
-               value = product.TenSanPham 
+               value = data.TenSanPham
                required
             )
          div(class = "form-group")
@@ -35,20 +35,9 @@ block main
                class ="form-control"  
             )
                option(value="") --chon danh muc cha-- 
-               if(category)
-                  +select-tree(category , 1 , category.parent_id)
+               if( records)
+                  +select-tree(records , 1 , data.parent_id)
 
-         div(class = "form-group")
-            label(for="SoLuong") Số lượng
-            input(
-               type="number"
-               class ="form-control"
-               id = "SoLuong"
-               name = "SoLuong"
-               value = product.SoLuong
-               min ="0"
-            )
-         
          div(
             class = "form-group"
             upload-image
@@ -57,41 +46,17 @@ block main
             input(
                type="file"
                class ="form-control"
-               id = "hinhAnh"
+               id = "hinhAnh" 
                name = "hinhAnh"
                accept = "image/*"
+               value = data.hinhAnh
                upload-image-input
             )
             img(
-               src= product.hinhAnh 
-               width = "100px" 
-               height = "100px" 
+               src= data.hinhAnh , width = "100px" , height = "100px" 
                upload-image-preview 
                )
-
-         div(class = "form-group")
-            label(for="gia") Giá
-            input(
-               type="number"
-               class ="form-control"
-               id = "gia"
-               name = "gia"
-               value = product.gia
-               min ="0"
-            )
          
-         div(class = "form-group")
-            label(for="discount") % Giảm
-            input(
-               type="number"
-               class ="form-control"
-               id = "discount"
-               name = "giam"
-               value =product.giam
-               min ="0"
-            )
-
-
          div(for ="statusActive form-check form-check-inline")
             input(
                type = "radio"
@@ -99,7 +64,7 @@ block main
                id = "statusActive"
                name = "status"
                value = "active"
-               checked = ( product.status == 'active' ? true : false)
+               checked = ( data.status == 'active' ? true  : false)               
             )
             label(for = "statusActive" class = "form-check-label") Hoạt động
          div(for ="statusActive form-check form-check-inline")
@@ -107,9 +72,9 @@ block main
                type = "radio"
                class = "form-check-input"
                id = "statusInactive"
-               name = "status" 
+               name = "status"
                value = "inactive"
-               checked = ( product.status == 'inactive' ? true  : false)
+               checked = ( data.status == 'inactive' ? true  : false) 
             )
             label(for = "statusInActive" class = "form-check-label") Dừng hoạt động
 
@@ -122,15 +87,15 @@ block main
                name = "position"
                placeholder = "Tự động tăng"
                min = "1"
-               value = product.position  
+               value = data.position
             )
 
          div(class = "form-group")
-            label(for="desc") Mô tả
+            label(for="description") Mô tả
             input(
                type="text"
                class ="form-control"
-               id = "title"
+               id = "description"
                name = "description"
                rows = "5"
             )
@@ -139,6 +104,6 @@ block main
             button(
                type = "submit"
                class = "btn btn-primary"
-            ) Cap nhat  
+            ) CAP NHAT 
 
    script(src="/admin/js/product.js")
