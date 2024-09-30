@@ -111,7 +111,8 @@
    margin: 5px;
    width: 500px;
    height: 30px;
-   font-family: 50px;
+   font-family: 50px; 
+   display: inline;
 }
 
 [upload-image-preview] {
@@ -123,3 +124,4 @@
 .khoi3{
    border: 1px solid rgb(143, 126, 126);
 }
+
