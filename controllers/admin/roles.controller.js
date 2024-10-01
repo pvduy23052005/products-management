@@ -43,3 +43,36 @@ module.exports.createPost = async (req, res) => {
       console.log("[CAP NHAT THAT BAI]");
    }
 }
+
+// [get] /admin/roles/edit/:id
+module.exports.edit = async (req, res) => {
+   try {
+      const id = req.params.id;
+
+      const find = {
+         _id: id,
+         deleted: false
+      }  
+      const data = await Roles.findOne(find);
+      res.render("admin/pages/roles/edit.pug", {
+         pageTitle: "trang chinh sua nhom quyen",
+         data: data
+      });
+   } catch (error) {
+      res.render("/admin/roles");
+   }
+}
+
+// [get] /admin/roles/edit/:id
+module.exports.editPatch = async (req, res) => {
+   try {
+      const id = req.params.id;
+      console.log(req.body);
+      await Roles.updateOne({ _id: id }, req.body);
+      req.flash("success", "CAP NHAT NHOM QUYEN THANH CONG");
+   } catch (error) {
+      req.flash("error", "CAP NHAT NHOM QUYEN THAT BAI");
+   }
+   res.redirect("back");
+}
+

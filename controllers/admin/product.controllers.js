@@ -110,7 +110,7 @@ module.exports.changeMulti = async (req, res) => {
          break; 
       case "delete-all": // xoa 1 san pham . 
          await product.updateMany({ _id: { $in: listId } }, { hienThi: true });
-                  req.flash("thanhCong" , `Xoa thanh cong ${listId.length} san pham`);  
+         req.flash("thanhCong" , `Xoa thanh cong ${listId.length} san pham`);  
 
          break ;
       case "change-position":// thay doi vi tri 
@@ -217,7 +217,6 @@ module.exports.edit = async ( req , res) => {
          _id : req.params.id
       }    
       const product1 = await product.findOne(find); 
-      console.log(product1); 
       const records = await ProductCategory.find({hienThi : false}); 
       let cnt = 0;
       function createTree(arr, parentId = "") {
