@@ -149,7 +149,7 @@ if (buttonDelete.length > 0) {
 // TINH NANG CAP ( IN RA THONG BAO . )
 const show = document.querySelector("[show-alert]");
 if (show) {
-   const time = parseInt(show.getAttribute("time"));
+   const time = parseInt(show.getAttribute("data-time"));
    const close = show.querySelector("[close-alert]");
    setTimeout(() => {
       // de an thong bao sau 5s  

@@ -32,7 +32,6 @@ module.exports.create = async (req, res) => {
 
 // [POST] /admin/roles/create
 module.exports.createPost = async (req, res) => {
-   console.log(req.body);
 
    try {
       const records = new Roles(req.body);
@@ -52,7 +51,7 @@ module.exports.edit = async (req, res) => {
       const find = {
          _id: id,
          deleted: false
-      }  
+      }
       const data = await Roles.findOne(find);
       res.render("admin/pages/roles/edit.pug", {
          pageTitle: "trang chinh sua nhom quyen",
@@ -76,3 +75,35 @@ module.exports.editPatch = async (req, res) => {
    res.redirect("back");
 }
 
+// [get] /admin/roles/permissions
+module.exports.permissions = async (req, res) => {
+   //lay ra nhom quyen roles . 
+   let find = {
+      deleted: false
+   }
+
+   const records = await Roles.find(find);
+
+   res.render("admin/pages/roles/permissions.pug", {
+      pageTitle: "Phan quyen",
+      records: records
+   });
+
+}
+
+// [get] /admin/roles/permissions
+module.exports.permissionsPatch = async (req, res) => {
+   try {
+      // chuyen tu json -> js JSON.pare()
+      const permissions = JSON.parse(req.body.permissions);
+      for (const item of permissions) {
+         const id = item.id;
+         const permissions1 = item.permissions;
+         await Roles.updateOne({ _id: id }, { permissions: permissions1 });
+      }
+      req.flash("success" , "Cap quyen thanh cong") ; 
+   } catch (error) {
+      req.flash("error" , "Cap quyen that bai"); 
+   }
+   res.redirect("/admin/roles/permissions");
+}
