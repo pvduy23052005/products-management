@@ -1,16 +1,13 @@
 extends ../../layouts/default.pug
 include ../../mixins/select-tree.pug
+include ../../mixins/alert.pug.pug
+
 
 block main 
-   if( messages.thanhCong)
-      .info
-         div(
-            show-alert
-            time = 5000
-         ) #{messages.thanhCong} <span close-alert >X</span>
-
 
    h1( class = "Them") #{pageTitle}
+   +alert-success(3000)
+   +alert-error(3000)
 
    form( 
       action=`/admin/products/edit/${product._id}?_method=PATCH`  

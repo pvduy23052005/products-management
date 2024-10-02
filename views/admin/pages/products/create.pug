@@ -1,13 +1,10 @@
 extends ../../layouts/default.pug
 include ../../mixins/select-tree.pug
+include ../../alert.pug
 
 block main 
-   if( messages.error)
-      .info
-         div(
-            show-alert
-            time = 5000
-         ) #{messages.error} <span close-alert >X</span>
+   +alert-success(3000)
+   +alert-error(3000)
 
 
    h1( class = "Them") Them moi san pham. 

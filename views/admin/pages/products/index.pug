@@ -1,13 +1,11 @@
 extends ../../layouts/default.pug
+include ../../mixins/select-tree.pug
+include ../../mixins/alert.pug
 
 block main 
 
-   if( messages.thanhCong)
-      .messages.info
-         div(
-            show-alert
-            time = 5000
-         ) #{messages.thanhCong} <span close-alert >X</span>
+   +alert-success(3000)
+   +alert-error(3000)
           
 
    h1 #{pageTitle}
@@ -47,14 +45,14 @@ block main
             type="type"
             value=""
             name = "ids"
-            class = "from-control"
+            class = "d-none"
          ) 
-         button(type ="submit" class = "btn") Ap dung
+         button(type ="submit" class = "btn btn-primary") Ap dung
       .product-create
          a(
             href="/admin/products/create"
-            class = "btn"
-         ) + Them Moi  
+            class = "btn btn-success"
+         ) + Them Moi 
 
    div(sort)
       select(
@@ -114,11 +112,13 @@ block main
                         href = "javascript:;"
                         data-status = item.status
                         data-id = item._id 
+                        class = "btn-info"
                         button-change-status  
                      ) Hoat dong
                   else 
                      button(
                         href = "javascript:;"
+                        class = ""
                         data-status = item.status
                         data-id = item._id 
                         button-change-status 

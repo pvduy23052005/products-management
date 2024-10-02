@@ -100,17 +100,17 @@ module.exports.changeMulti = async (req, res) => {
    switch (type) {
       case "active":
          await product.updateMany({ _id: { $in: listId } }, { status: "active" });
-         req.flash("thanhCong" , `Cap nhat thanh cong ${listId.length} san pham`);  
+         req.flash("success" , `Cap nhat thanh cong`);  
 
          break;
-      case "unactive":
+      case "inactive":
          await product.updateMany({ _id: { $in: listId } }, { status: "inactive" });
-         req.flash("thanhCong" , `Cap nhat thanh cong ${listId.length} san pham`);  
+         req.flash("success" , `Cap nhat thanh cong`);  
 
          break; 
       case "delete-all": // xoa 1 san pham . 
          await product.updateMany({ _id: { $in: listId } }, { hienThi: true });
-         req.flash("thanhCong" , `Xoa thanh cong ${listId.length} san pham`);  
+         req.flash("success" , `Xoa thanh cong`);  
 
          break ;
       case "change-position":// thay doi vi tri 
@@ -123,7 +123,7 @@ module.exports.changeMulti = async (req, res) => {
             // update lai . 
             await product.updateOne({ _id : id } , { position : position1}); 
          }
-         req.flash("thanhCong" , `Thanh Doi thanh cong ${listId.length} san pham`);  
+         req.flash("success" , `Thanh Doi thanh cong`);  
 
          break;
       default:
