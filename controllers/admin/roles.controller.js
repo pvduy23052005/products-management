@@ -103,7 +103,7 @@ module.exports.permissionsPatch = async (req, res) => {
       }
       req.flash("success" , "Cap quyen thanh cong") ; 
    } catch (error) {
-      req.flash("error" , "Cap quyen that bai"); 
+      req.flash("error" , "Cap quyen that ");
    }
    res.redirect("/admin/roles/permissions");
 }
