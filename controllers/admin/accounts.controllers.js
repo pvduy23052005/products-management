@@ -51,7 +51,7 @@ module.exports.createPost = async (req, res) => {
 
    if (false) {// email da ton tai roi 
       try {
-         res.flash("error", `Email da ton tai`);
+         req.flash("error", `Email da ton tai`);
          res.redirect("back"); 
       } catch (error) {
          console.log("loi");
