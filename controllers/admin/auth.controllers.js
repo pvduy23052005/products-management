@@ -3,9 +3,13 @@ const Account = require("../../models/accounts.model.js");
 
 // [get]  /admin/auth/login
 module.exports.login = (req, res) => {
-   res.render("admin/pages/auth/login.pug", {
-      pageTitle: "Dang nhap",
-   });
+   if (req.cookies.token) {
+      res.redirect("/admin/dashboard");
+   } else {
+      res.render("admin/pages/auth/login.pug", {
+         pageTitle: "Dang nhap",
+      });
+   }
 }
 
 // [post]  /admin/auth/login
@@ -44,7 +48,7 @@ module.exports.loginPost = async (req, res) => {
 // [get]  /admin/auth/logout
 module.exports.logout = (req, res) => {
    // xoa cookie ham res.clearCookie("")
-   res.clearCookie("token"); 
+   res.clearCookie("token");
 
-   res.redirect("/admin/auth/login"); 
+   res.redirect("/admin/auth/login");
 }
