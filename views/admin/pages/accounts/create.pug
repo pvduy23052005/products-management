@@ -1,0 +1,103 @@
+extend ../../layouts/default.pug
+include ../../mixins/alert.pug
+
+block main 
+   h1(class = "mb-4") tao tai khoan . 
+
+   +alert-error(5000)
+   h1  #{messages.error}
+
+   form(
+      action = `/admin/accounts/create`
+      method  = "POST"
+      enctype = "multipart/form-data"
+   )
+      div(class ="form-group")
+         label(for="fullName") Ho ten *
+         input(
+            type="text"
+            class = "form-control"
+            name = "fullName"
+            id = "fullName"
+            required
+            )
+      div(class ="form-group")
+         label(for="email") Email 
+         input(
+            type="email"
+            class = "form-control"
+            name = "email"
+            id = "email"
+            required
+            )
+      
+      div(class ="form-group")
+         label(for="password") Mat khau
+         input(
+            type="password"
+            class = "form-control"
+            name = "password"
+            id = "password"
+            required
+            )   
+      div(class ="form-group")
+         label(for="phone") So dien thoai 
+         input(
+            type="phone"
+            class = "form-control"
+            name = "phone"
+            id = "phone"
+            required
+            )
+
+      div(
+         class = "form-group"
+         upload-image 
+      )
+         label(for="avatar") Avatar 
+         input(
+               type="file"
+               class ="form-control"
+               id = "avatar" 
+               name = "avatar"
+               accept = "image/*"
+               upload-image-input
+            )
+         img(
+            src=""
+            class = "image-preview"
+            upload-image-preview 
+            )
+
+      div(class = "form-group")
+         label(for="role_id" ,class ="display:inline-block") Phan quyen
+         select(name ="role_id" id ="role_id" class ="form-control")
+            option(value="")  -- chon --
+            each role in roles 
+               option(value = role.id) #{role.title}
+      div(for ="form-group form-check form-check-inline")
+         input(
+            type = "radio"
+            class = "form-check-input"
+            id = "statusActive"
+            name = "status"
+            value = "active"
+            checked
+         )
+         label(for = "statusActive" class = "form-check-label") Hoạt động
+
+      div(for ="form-group form-check form-check-inline")
+         input(
+            type = "radio"
+            class = "form-check-input"
+            id = "statusInActive"
+            name = "status"
+            value = "inactive"
+            checked
+         )
+         label(for = "statusActive" class = "form-check-label") Dung hoạt động
+      div(class = "form-group") 
+         button(
+            type : "submit"
+            class = "btn btn-primary"
+         ) Tao moi
