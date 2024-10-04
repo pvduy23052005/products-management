@@ -127,41 +127,41 @@
 }
 
 
+
 /* login */
-.login{
-   width: 300px;
-   height: 300px;
-   margin-left: 200px;
-   border: 1px solid grey;
-   border-radius: 10px;
-   text-align: center;
+ 
+.login {
+   background-color: white; /* Màu nền cho form đăng nhập */
+   padding: 100px; /* Khoảng cách bên trong */
+   border-radius: 20px; /* Bo góc cho form */
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */
+   text-align: center; /* Căn giữa nội dung */
 }
-div{
-   text-align: center;
+ 
+input[type="text"],
+input[type="password"] {
+   width: 100%; /* Đặt chiều rộng của input */
+   padding: 10px; /* Khoảng cách bên trong */
+   margin: 10px 0; /* Khoảng cách giữa các input */
+   border: 1px solid #ccc; /* Đường viền */
+   border-radius: 4px; /* Bo góc cho input */
 }
-h2{
-   color: black;
-   font-family: sans-serif;
+ 
+.loginButton {
+   width: 100%; /* Đặt chiều rộng của nút */
+   padding: 10px; /* Khoảng cách bên trong */
+   background-color: #007bff; /* Màu nền của nút */
+   color: white; /* Màu chữ */
+   border: none; /* Bỏ viền */
+   border-radius: 4px; /* Bo góc cho nút */
+   cursor: pointer; /* Con trỏ chuột */
 }
-.login input{
-   width: 200px;
-   height: 40px;
-   margin-bottom: 10px;
-   border-radius: 5px;
-   border: 1px solid grey;
-   padding-left: 20px;
-   text-align: center;
+ 
+button:hover {
+   background-color: #0056b3; /* Màu nền khi hover */
 }
-.login button{
-   width: 230px;
-   height: 40px;
-   margin-bottom: 10px;
-   border-radius: 5px;
-   border: none;
-   background-color: rgb(32, 202, 32);
-   color: antiquewhite;
+
+button:hover {
+  background-color: #0056b3; /* Màu nền khi hover */
+  transform: scale(1.05); /* Tăng kích thước khi hover */
 }
-.login button:hover{
-   font-size: 15px;
-}
-/* login */

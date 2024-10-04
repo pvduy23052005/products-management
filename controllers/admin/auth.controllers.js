@@ -7,7 +7,7 @@ module.exports.login = (req, res) => {
       res.redirect("/admin/dashboard");
    } else {
       res.render("admin/pages/auth/login.pug", {
-         pageTitle: "Dang nhap",
+         pageTitle: "Đăng nhập",
       });
    }
 }
@@ -25,7 +25,7 @@ module.exports.loginPost = async (req, res) => {
    // kiem tra email co dung ko 
    if (!user) {
       // đưa ra thông báo 
-      req.flash("error", "email khong ton tai ");
+      req.flash("error", "Email không tồn tạo");
       res.redirect("/admin/auth/login");
       return;
    }
@@ -38,7 +38,7 @@ module.exports.loginPost = async (req, res) => {
    }
 
    if (user.status == "inactive") {
-      req.flash("error", "Tai khoan cua ban bi khoa ");
+      req.flash("error", "Tài khoản bị khóa");
       res.redirect("/admin/auth/login");
       return;
    }
@@ -51,6 +51,5 @@ module.exports.loginPost = async (req, res) => {
 module.exports.logout = (req, res) => {
    // xoa cookie ham res.clearCookie("")
    res.clearCookie("token");
-
    res.redirect("/admin/auth/login");
 }

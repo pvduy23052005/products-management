@@ -2,39 +2,40 @@ extends ../../layouts/auth.pug
 include ../../mixins/alert.pug
 
 block main 
+   +alert-success(5000)
    +alert-error(5000)
-      
    .container.my-5 
       .row.justify-content-center 
          .col-8 
-            h1(class = "text-center") Đăng nhập 
-            form(
-               action="/admin/auth/login",
-               method="POST"
-               )
-               div(class = "form-group")
-                  label(for="email") Email 
-                  input(
-                     type = "email"
-                     id = "email"
-                     name = "email"
-                     class = "form-control"
-                     required 
-                  ) 
-               div(class = "form-group")
-                  label(for="password") Mật khẩu 
-                  input(
-                     type =  "password"
-                     id = "password"
-                     name = "password"
-                     class = "form-control"
-                     required 
-                  ) 
-               div(class = "form-group")
-                  button(
-                     type ="submit"
-                     class = "btn btn-primary btn-block"
-                  ) Đăng nhập 
-   scrip(src = "/public/admin/js/product.js")
+            h1(class = "login")
+               form(
+                  action="/admin/auth/login",
+                  method="POST"
+                  )
+                  div(class = "form-group")
+                     label(for="email") Email 
+                     input(
+                        type = "email"
+                        id = "email"
+                        name = "email"
+                        class = "form-control"
+                        placeholder="username"
+                        required 
+                     ) 
+                  div(class = "form-group")
+                     label(for="password") Mật khẩu 
+                     input(
+                        type =  "password"
+                        id = "password"
+                        name = "password"
+                        class = "form-control"
+                        placeholder="password"
+                        required 
+                     ) 
+                  div(class = "form-group")
+                     button(
+                        type ="submit"
+                        class = "loginButton"
+                     ) Đăng nhập 
             
             

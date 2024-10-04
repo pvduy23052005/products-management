@@ -200,9 +200,9 @@ module.exports.createPost = async ( req , res) => {
       //tao 1 san pham moi . 
       const product = new Product(req.body); 
       await product.save(); 
-      console.log("[CAP NHAT THANH CONG!]"); 
+      req.flash("success" , "Tạo thành công");  
    }catch{ 
-      console.log("loi")
+      req.flash("error" , "Thất bại ");
    }
    res.redirect("/admin/products");
 } 

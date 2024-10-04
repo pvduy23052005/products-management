@@ -12,6 +12,7 @@ const productSchema = new mongoose.Schema({
       default : ""
    } ,  
    TenSanPham: String,
+   nhaCungCap : String ,
    SoLuong: Number,
    slug : {
       type : String , 
