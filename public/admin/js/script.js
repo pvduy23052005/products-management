@@ -69,7 +69,6 @@ if( uploadImage){
    const uploadImageInput = document.querySelector("[upload-image-input]"); 
    const preview = document.querySelector("[upload-image-preview]");
    uploadImageInput.addEventListener("change" , (event) => {
-      console.log(event); 
       // tiem den files[0] trong event -> target 
       const file = event.target.files[0]; 
       

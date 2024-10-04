@@ -1,4 +1,4 @@
-  // thep thang exprev vao file index . 
+  // thep thang express vao file index . 
 const express = require("express");
 const methodOverride = require("method-override"); 
 require("dotenv").config(); 
@@ -17,11 +17,12 @@ const port = process.env.PORT;
 
 app.use(methodOverride('_method'));
 
-// phan tich du lieu Json . 
-const cors = require('cors');
+// phan tich du lieu Json .
+const cors = require('cors'); 
 app.use(cors());
 
-// thu vie  n de tra ve object cho name , va ids . 
+
+// thu vien de tra ve object cho name , va ids . 
 const bodyParser = require("body-parser"); 
 app.use(bodyParser.urlencoded({ extended: true })); // Để phân tích dữ liệu x-www-form-urlencoded
 

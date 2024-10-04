@@ -2,14 +2,14 @@
 const Account = require("../../models/accounts.model.js");
 const Roles = require("../../models/roles.model.js");
 const md5 = require("md5");
+
 // [get] /admin/accounts
 module.exports.index = async (req, res) => {
    let find = {
       deleted: false
    }
-
+   // lay ra account password , token ,
    const records = await Account.find(find).select("-password-token " );
-   console.log(records); 
    for( const record of records){
       const role = await Roles.findOne({
          deleted : false ,
@@ -17,7 +17,6 @@ module.exports.index = async (req, res) => {
       });
       record.role = role.title
    }
-
 
    res.render("admin/pages/accounts/index.pug", {
       pageTitle: "Danh sach tai khoan ",
@@ -30,8 +29,10 @@ module.exports.create = async (req, res) => {
    let find = {
       deleted: false
    }
+
    const records = await Account.find(find);
    const roles = await Roles.find({ deleted: false });
+   
    res.render("admin/pages/accounts/create.pug", {
       pageTitle: "tao tai khoan",
       records: records,

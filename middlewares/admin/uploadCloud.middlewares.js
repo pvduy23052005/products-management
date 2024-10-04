@@ -30,7 +30,7 @@ module.exports.uploadCloud= (req, res, next) =>  {
       async function upload(req) {
          let result = await streamUpload(req);
          // Cap nhat bien 'hinhAnh'
-         req.body[req.file.fieldname] = result.url;  
+         req.body[req.file.fieldname] = result.url;   
          next();  
       }
       upload(req); 

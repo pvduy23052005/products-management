@@ -24,12 +24,13 @@ module.exports.loginPost = async (req, res) => {
    });
    // kiem tra email co dung ko 
    if (!user) {
+      // đưa ra thông báo 
       req.flash("error", "email khong ton tai ");
       res.redirect("/admin/auth/login");
       return;
    }
 
-   // kiem tar mat khau dungko 
+   // kiểm tra mật khẩu đúng không 
    if (password != user.password) {
       req.flash("error", "Mat khau sai ! ");
       res.redirect("/admin/auth/login");
@@ -41,6 +42,7 @@ module.exports.loginPost = async (req, res) => {
       res.redirect("/admin/auth/login");
       return;
    }
+   // xet 
    res.cookie("token", user.token);
    res.redirect("/admin/dashboard");
 }

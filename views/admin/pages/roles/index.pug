@@ -31,20 +31,18 @@ block main
                         td #{item.title}
                         td #{item.description}
                         td 
+                           a(href=`/admin/roles/edit/${item.id}`
+                              class = "btn btn-warning btn-sm"
+                           ) Sửa
                            a(
                               href=`/admin/roles/detail/${item.id}`
                               class = "btn btn-secondary"
-                              class = "chinhSua"
-                              ) chi tiet 
-
-                           a(href=`/admin/roles/edit/${item.id}`
-                              class = "btn btn-success"
-                           ) Sua 
-
+                              class = ""
+                              ) Chi tiết 
                            a(
                               href=`/admin/roles/delete/${item.id}`
                               class = "btn btn-danger"
-                           ) Xoa  
+                           ) Xóa  
                else 
                   tr 
                      td Chua co nhom quyen 

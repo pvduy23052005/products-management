@@ -12,134 +12,137 @@ block main
 
    div(class = "khoi3")
       .card.mb-3
-         .card-header do loc tim tiem 
+         .card-header bộ lọc và tìm kiếm  
          .card-body 
-         each item in listbutton 
-            button(
-               class = item.class,
-               button-status = item.status
-            ) #{item.name}
+            each item in listbutton 
+               button(
+                  class = item.class,
+                  button-status = item.status
+               ) #{item.name}
 
-      //- tinh nang tinh kiem . 
-      form(id ="form-search")
+            //- tinh nang tinh kiem . 
+            form(id ="form-search")
+                  input(
+                  type="text"
+                  placeholder = "Nhap tu khoa"
+                  name ="keyword"
+                  value = keyword
+               )
+                  button(type ="submit") tim  
+
+            //- tinh nang chinh sua status product
+            form(
+               action="products/change-multi?_method=PATCH"
+               method = "POST"
+               form-change-multi 
+            ) 
+               select(name="type" class = "form-control")
+                  option(value="active") Hoạt động  
+                  option(value ="inactive") Dừng hoạt động
+                  option(value = "delete-all") Xóa tất cả
+                  option(value = "change-position") thay đổi vị trí 
             input(
-            type="text"
-            placeholder = "Nhap tu khoa"
-            name ="keyword"
-            value = keyword
-         )
-            button(type ="submit") tim  
+               type="type"
+               value=""
+               name = "ids"
+               class = "d-none"
+            ) 
+            button(type ="submit" class = "btn btn-primary") Ap dung
+            .product-create
+               a(
+                  href="/admin/products/create"
+                  class = "btn btn-outline-success"
+               ) + Them Moi 
 
-      //- tinh nang chinh sua status product
-      form(
-         action="products/change-multi?_method=PATCH"
-         method = "POST"
-         form-change-multi 
-      ) 
-         select(name="type" class = "form-control")
-            option(value="active") Hoạt động  
-            option(value ="inactive") Dừng hoạt động
-            option(value = "delete-all") Xóa tất cả
-            option(value = "change-position") thay đổi vị trí 
-         input(
-            type="type"
-            value=""
-            name = "ids"
-            class = "d-none"
-         ) 
-         button(type ="submit" class = "btn btn-primary") Ap dung
-      .product-create
-         a(
-            href="/admin/products/create"
-            class = "btn btn-outline-success"
-         ) + Them Moi 
+         div(sort)
+            select(
+               class="form-control"
+               name ="sort" 
+               sort-select
+            ) 
+               option(value ="position-desc") Vi tri giam dan 
+               option(value ="position-asc") Vi tri tang dan 
+               option(value ="gia-desc") Gia giam dan 
+               option(value ="gia-asc") Gia tang dan
+               option(value ="TenSanPham-asc") Tieu de  A-Z 
+               option(value ="TenSanPham-desc") Tieu de Z-A
+         
+            button(
+               sort-clear
+            ) Clear
 
-   div(sort)
-      select(
-         class="form-control"
-         name ="sort" 
-         sort-select
-      ) 
-         option(value ="position-desc") Vi tri giam dan 
-         option(value ="position-asc") Vi tri tang dan 
-         option(value ="gia-desc") Gia giam dan 
-         option(value ="gia-asc") Gia tang dan
-         option(value ="TenSanPham-asc") Tieu de  A-Z 
-         option(value ="TenSanPham-desc") Tieu de Z-A
-      
-      button(
-         sort-clear
-      ) Clear
+   .card.mb-3
+      .card-header Danh sách sản phẩm 
+         .card-body 
 
+            table(class = "table.table-hover.table-sm" checkbox-multi)
+               thead   
+                  tr  
+                     th 
+                        input(type ="checkbox" , name = "checkAll")
+                     th STT 
+                     th hình ảnh
+                     th tiêu đề  
+                     th giá
+                     th vị trí 
+                     th trạng thái  
+                     th hành động
+               tbody
+                  each item,index  in product 
+                     tr
+                        td
+                           input(
+                              type="checkbox"
+                              name ="id"
+                              value = item._id 
+                           )
+                        td #{index + 1}
+                        td    
+                           img(src=item.hinhAnh, width = "100px" alt="")
+                        td #{item.TenSanPham}
+                        td #{item.gia}$
+                        td
+                           input(
+                              type = "number"
+                              value = item.position 
+                              style = "width : 50px "
+                              min = "1"
+                              name = "position"
+                           )
+                        td 
+                           if(  item.status === "active")
+                              button(
+                                 href = "javascript:;"
+                                 data-status = item.status
+                                 data-id = item._id 
+                                 class = "btn-info"
+                                 button-change-status  
+                              ) Hoat dong
+                           else 
+                              button(
+                                 href = "javascript:;"
+                                 class = ""
+                                 data-status = item.status
+                                 data-id = item._id 
+                                 button-change-status 
+                              ) Dung hoat dong 
+                        td 
+                           a(
+                              href = `/admin/products/edit/${item._id}`
+                              data-id = item._id 
+                              class = "btn btn-warning btn-sm"
+                           ) Sửa 
+                           button(
+                              button-delete
+                              data-id = item._id  
+                              class = "btn btn-danger btn-sm ml-1"
+                           ) Xóa 
+                           a(
+                              href=`/admin/products/detail/${item._id}`
+                              class = "btn btn-secondary btn-sm"
+                              ) Chi tiet
 
-   table(class = "table.table-hover.table-sm" checkbox-multi)
-      thead   
-         tr  
-            th 
-               input(type ="checkbox" , name = "checkAll")
-            th STT 
-            th hình ảnh
-            th tiêu đề  
-            th giá
-            th vị trí 
-            th trạng thái  
-            th hành động
-      tbody
-         each item,index  in product 
-            tr
-               td
-                  input(
-                     type="checkbox"
-                     name ="id"
-                     value = item._id 
-                  )
-               td #{index + 1}
-               td    
-                  img(src=item.hinhAnh, width = "100px" alt="")
-               td #{item.TenSanPham}
-               td #{item.gia}$
-               td
-                  input(
-                     type = "number"
-                     value = item.position 
-                     style = "width : 50px "
-                     min = "1"
-                     name = "position"
-                  )
-               td 
-                  if(  item.status === "active")
-                     button(
-                        href = "javascript:;"
-                        data-status = item.status
-                        data-id = item._id 
-                        class = "btn-info"
-                        button-change-status  
-                     ) Hoat dong
-                  else 
-                     button(
-                        href = "javascript:;"
-                        class = ""
-                        data-status = item.status
-                        data-id = item._id 
-                        button-change-status 
-                     ) Dung hoat dong 
-               td 
-                  a(
-                     href = `/admin/products/edit/${item._id}`
-                     data-id = item._id 
-                     class = "btn btn-warning btn-sm"
-                  ) Sửa 
-                  button(
-                     button-delete
-                     data-id = item._id  
-                     class = "btn btn-danger btn-sm ml-1"
-                  ) Xóa 
-                  a(
-                     href=`/admin/products/detail/${item._id}`
-                     class = "btn btn-secondary btn-sm"
-                     ) Chi tiet
-
-   div 
+   div(class = "d-center") 
       ul(class ="pagination")
          li(class = "page-item")
             if(pagination.currentPase > 1)
@@ -163,7 +166,7 @@ block main
    form(
       action=""
       method = "POST"
-      id = "from-change-status" 
+      id = "from-change-status"
       data-path = "/admin/products/change-status" 
    ) 
 

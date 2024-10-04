@@ -28,9 +28,11 @@ module.exports.index = async (req, res) => {
    const records = await ProductCategory.find(find);
    const newRecords = createTree(records);
 
+   console.log(newRecords); 
+
    res.render("admin/pages/product-category/index.pug", {
       pageTitle: "Trang danh mục sản phẩm ",
-      records: newRecords
+      records: newRecords, 
    });
 }
 
