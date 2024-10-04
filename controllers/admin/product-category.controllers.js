@@ -101,7 +101,7 @@ module.exports.edit = async (req, res) => {
       const records = await ProductCategory.find();
    
       res.render("admin/pages/product-category/edit.pug", {
-         pageTitle: "Trang chinh sua danh muc san pham  ",
+         pageTitle: "Trang chinh sua danh muc san pham ",
          data: data1,
          records: records
       });
@@ -118,7 +118,7 @@ module.exports.editPatch = async (req, res) => {
 
    try {
       await ProductCategory.updateOne({ _id: id }, req.body)
-      console.log("THANH CONG"); 
+      req.falsh("success" , "i")
    } catch (error) {
       console.log("That bai"); 
    }

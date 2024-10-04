@@ -12,7 +12,7 @@ block main
 
    div(class = "khoi3")
       .card.mb-3
-         .card-header bộ lọc và tìm kiếm  
+         .card-header Bộ lọc và tìm kiếm  
          .card-body 
             each item in listbutton 
                button(
@@ -28,7 +28,7 @@ block main
                   name ="keyword"
                   value = keyword
                )
-                  button(type ="submit") tim  
+                  button(type ="submit") Tìm kiếm  
 
             //- tinh nang chinh sua status product
             form(
@@ -47,12 +47,12 @@ block main
                name = "ids"
                class = "d-none"
             ) 
-            button(type ="submit" class = "btn btn-primary") Ap dung
+            button(type ="submit" class = "btn btn-primary") Áp dụng 
             .product-create
                a(
                   href="/admin/products/create"
                   class = "btn btn-outline-success"
-               ) + Them Moi 
+               ) + THêm mới 
 
          div(sort)
             select(
@@ -60,13 +60,12 @@ block main
                name ="sort" 
                sort-select
             ) 
-               option(value ="position-desc") Vi tri giam dan 
-               option(value ="position-asc") Vi tri tang dan 
-               option(value ="gia-desc") Gia giam dan 
-               option(value ="gia-asc") Gia tang dan
-               option(value ="TenSanPham-asc") Tieu de  A-Z 
-               option(value ="TenSanPham-desc") Tieu de Z-A
-         
+               option(value ="position-desc") Vi tri giảm dần 
+               option(value ="position-asc") Vi tri giảm dần 
+               option(value ="gia-desc") Gia giẩm dàn  
+               option(value ="gia-asc") Giá tăng dần
+               option(value ="TenSanPham-asc") Tiêu đề  A-Z 
+               option(value ="TenSanPham-desc") Tiêu đề Z-A
             button(
                sort-clear
             ) Clear
@@ -117,7 +116,7 @@ block main
                                  data-id = item._id 
                                  class = "btn-info"
                                  button-change-status  
-                              ) Hoat dong
+                              ) Hoạt động
                            else 
                               button(
                                  href = "javascript:;"
@@ -125,7 +124,7 @@ block main
                                  data-status = item.status
                                  data-id = item._id 
                                  button-change-status 
-                              ) Dung hoat dong 
+                              ) Dừng hoạt động  
                         td 
                            a(
                               href = `/admin/products/edit/${item._id}`
@@ -140,7 +139,7 @@ block main
                            a(
                               href=`/admin/products/detail/${item._id}`
                               class = "btn btn-secondary btn-sm"
-                              ) Chi tiet
+                              ) Chi tiết
 
    div(class = "d-center") 
       ul(class ="pagination")
@@ -149,7 +148,7 @@ block main
                li(class = "page-item")
                   button(class = "page-link" 
                      button-page = pagination.currentPase -1  
-                  ) Trang tuoc
+                  ) Trang trước
             
          - for( let i = 1 ; i <= pagination.soLuongPage ;i++)
             li(class = `page-item ${pagination.currentPase === i ? "mau2" : "" }`)
@@ -176,6 +175,8 @@ block main
       id = "from-change-item" 
       data-path = "/admin/products/delete"
    ) 
+
+
 
 
    script(src="/admin/js/product.js")

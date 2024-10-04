@@ -1,13 +1,12 @@
 extends ../../layouts/default.pug
 include ../../mixins/select-tree.pug
-include ../../mixins/alert.pug.pug
-
+include ../../mixins/alert.pug
 
 block main 
 
-   h1( class = "Them") #{pageTitle}
-   +alert-success(3000)
-   +alert-error(3000)
+   h1( class = "mb-4") #{pageTitle}
+   +alert-success(5000)
+   +alert-error(5000)
 
    form( 
       action=`/admin/products/edit/${product._id}?_method=PATCH`  
@@ -26,13 +25,13 @@ block main
                required
             )
          div(class = "form-group")
-            label(for="parent_id") danh muc cha 
+            label(for="parent_id") Danh mục sản phẩm  
             select(
                id = "parent_id"
                name = "parent_id"
                class ="form-control"  
             )
-               option(value="") --chon danh muc cha-- 
+               option(value="") --chọn danh mục cha-- 
                if(category)
                   +select-tree(category , 1 , category.parent_id)
 
@@ -137,6 +136,6 @@ block main
             button(
                type = "submit"
                class = "btn btn-primary"
-            ) Cap nhat  
+            ) Cập nhật   
 
    script(src="/admin/js/product.js")

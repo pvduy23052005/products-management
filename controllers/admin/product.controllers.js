@@ -258,7 +258,7 @@ module.exports.editPatch =  async ( req , res) => {
 
    try{
       await product.updateOne( {_id : req.params.id} ,req.body);
-      res.flash("thanhCong" , "Cap nhat thanh cong"); 
+      res.flash("success", "Cap nhat thanh cong"); 
    } catch ( error){
    }
    res.redirect("back"); 
