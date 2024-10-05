@@ -1,14 +1,16 @@
 extend ../../layouts/default.pug
-
+include ../../mixins/alert.pug
 block main 
-   h1( class = "mb-4") Them nhom quyen 
+   h1( class = "mb-4") Thêm nhóm quyền 
+
+   
 
    form(
       action=`/admin/roles/create`
       method = "POST"
       ) 
       div(class = "from-group")
-         label(form="title") Tieu de
+         label(form="title") Tiêu đề 
          input(
             type="text"
             class = "form-control"
@@ -18,7 +20,7 @@ block main
             ) 
 
       div(class = "form-group")
-         label(for="desc") Mieu ta 
+         label(for="desc") Miêu tả 
          input(
             type="text"
             class = "form-control"
@@ -30,7 +32,7 @@ block main
          button(
             type="submit"
             class = "btn btn-primary"
-         ) them moi 
+         ) Thêm mới  
  
 
 

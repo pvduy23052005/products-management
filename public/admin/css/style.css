@@ -42,13 +42,7 @@
    border-bottom: 1px solid #515151;
 }
 
-.mau {
-   background: greenyellow;
-}
 /* xet mau cho phan trang  */
-.mau2{
-   background-color: rgb(26, 113, 228);
-}
 
 #from-seach {
    border: 1px solid gold;
@@ -131,10 +125,10 @@
 /* login */
  
 .login {
-   background-color: white; /* Màu nền cho form đăng nhập */
+   background-color: rgb(215, 232, 225); /* Màu nền cho form đăng nhập */
    padding: 100px; /* Khoảng cách bên trong */
    border-radius: 20px; /* Bo góc cho form */
-   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */
+   box-shadow: 0 0 10px rgba(92, 117, 105, 0.1); /* Đổ bóng nhẹ */
    text-align: center; /* Căn giữa nội dung */
 }
  

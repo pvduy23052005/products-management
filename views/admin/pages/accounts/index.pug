@@ -2,7 +2,7 @@ extends ../../layouts/default.pug
 include ../../mixins/alert.pug
 
 block main 
-   h1(class = "mb-4") Danh sach tai khoan
+   h1(class = "mb-4") Danh sách tài khoản
 
    +alert-success(3000)
    +alert-error(3000)
@@ -16,7 +16,7 @@ block main
                a(
                   href="/admin/accounts/create"
                   class ="btn btn-outline-success"
-               ) + Them moi
+               ) + Thêm mới
 
          table(
          class ="table table-hover table-sm"
@@ -25,10 +25,10 @@ block main
                   tr 
                      th STT 
                      th Avatar  
-                     th ho ten 
-                     th Phan quyen 
+                     th Họ tên  
+                     th Phân quyền 
                      th Email 
-                     th trang thai 
+                     th Trạng thái  
                      th Hanh dong  
                tbody  
                   each item ,index in records 
@@ -50,7 +50,7 @@ block main
                                  href=""
                                  class = "badge badge-success"
                                  data-status = "active"
-                                 ) Hoat dong
+                                 ) Hoạt động
                            else 
                               a(
                                  href=""
@@ -71,6 +71,6 @@ block main
                            a(
                               href=`/admin/account/detail/${item.id}`
                               class = "btn btn-secondary btn-sm"
-                           ) Chi tiet
+                           ) Chi tiết
 
    script(src="/admin/js/product.js") 

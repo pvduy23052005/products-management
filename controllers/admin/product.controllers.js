@@ -4,11 +4,11 @@ const helperListButton = require("../../helpers/listButton.js");
 const helperSearch = require("../../helpers/search.js");
 const helperPagination = require("../../helpers/pagination.js");
 const Product = require("../../models/product.model.js");
-const ProductCategory = require("../../models/product-category.model.js"); 
+const ProductCategory = require("../../models/product-category.model.js");
 
 
 // phuogn thuc {GET} /product . 
-module.exports.product = async (req, res) => { 
+module.exports.product = async (req, res) => {
 
    // goi den su ly bo loc . 
    const listButton = helperListButton(req.query);
@@ -44,10 +44,10 @@ module.exports.product = async (req, res) => {
 
 
    let sort = {}
-   if( req.query.sortKey && req.query.sortValue){
-      sort[req.query.sortKey] = req.query.sortValue; 
-   }else {
-      sort.position = "desc"; 
+   if (req.query.sortKey && req.query.sortValue) {
+      sort[req.query.sortKey] = req.query.sortValue;
+   } else {
+      sort.position = "desc";
    }
 
 
@@ -60,7 +60,7 @@ module.exports.product = async (req, res) => {
 
    // ham de tra ve cac key cho file pug. 
    res.render("admin/pages/products/index.pug", {
-      pageTitle: "Trang San pham ",
+      pageTitle: "Trang sản phẩm",
       product: data,
       listbutton: listButton,
       keyword: search.keyword,
@@ -83,12 +83,12 @@ module.exports.changeStatus = async (req, res) => {
          return res.status(404).send('Sản phẩm không tìm thấy');
       }
       // hien thi ra thong bao .        
-      req.flash("thanhCong" , "Cap nhat thanh cong ");  
-      
+      req.flash("success", "Thay đổi thành công");
+
       // khi click vao khong bi link sang trang khac .
       res.redirect("back");
    } catch (error) {
-      console.error(error);
+      req.flash("success", "Thay đổi thất bại");
    }
 }
 
@@ -97,34 +97,34 @@ module.exports.changeStatus = async (req, res) => {
 module.exports.changeMulti = async (req, res) => {
    const type = req.body.type
    const listId = req.body.ids.split(", ");
- 
+
    switch (type) {
       case "active":
          await product.updateMany({ _id: { $in: listId } }, { status: "active" });
-         req.flash("success" , `Cap nhat thanh cong`);  
+         req.flash("success", `Cập nhật thành công`);
 
          break;
       case "inactive":
          await product.updateMany({ _id: { $in: listId } }, { status: "inactive" });
-         req.flash("success" , `Cap nhat thanh cong`);  
+         req.flash("success", `Cập nhật thành công`);
 
-         break; 
+         break;
       case "delete-all": // xoa 1 san pham . 
          await product.updateMany({ _id: { $in: listId } }, { hienThi: true });
-         req.flash("success" , `Xoa thanh cong`);  
+         req.flash("success", `Xóa thành công`);
 
-         break ;
+         break;
       case "change-position":// thay doi vi tri 
          // loc qua tung san pham . 
-         for( const item of listId){
-            
-            const [id , position] = item.split("-"); 
-            position1 = parseInt(position); 
+         for (const item of listId) {
+
+            const [id, position] = item.split("-");
+            position1 = parseInt(position);
 
             // update lai . 
-            await product.updateOne({ _id : id } , { position : position1}); 
+            await product.updateOne({ _id: id }, { position: position1 });
          }
-         req.flash("success" , `Thanh Doi thanh cong`);  
+         req.flash("success", `Thay đổi thành công`);
 
          break;
       default:
@@ -140,16 +140,16 @@ module.exports.changeMulti = async (req, res) => {
 module.exports.deleteItem = async (req, res) => {
    const id = req.params.id;
    // update lai hienThi . 
-   await product.updateOne({ _id: id },{ hienThi: true });
-   req.flash("thanhCong" , `Xoa thanh cong san pham`);
+   await product.updateOne({ _id: id }, { hienThi: true });
+   req.flash("thanhCong", `Xóa thành công`);
 
    res.redirect("back");
 }
 
 //[GET] products/create
-module.exports.createGet = async ( req , res) => {
+module.exports.createGet = async (req, res) => {
 
-   const records = await ProductCategory.find({hienThi : false}); 
+   const records = await ProductCategory.find({ hienThi: false });
 
    let find = {
       hienThi: false,
@@ -173,52 +173,52 @@ module.exports.createGet = async ( req , res) => {
       return tree;
    }
 
-   const newRecords = createTree(records); 
-   
+   const newRecords = createTree(records);
 
-   res.render("admin/pages/products/create.pug",{
-      pageTitle : "Trang them moi san pham " ,
-      category : newRecords
+
+   res.render("admin/pages/products/create.pug", {
+      pageTitle: "Thêm mới sản phẩm",
+      category: newRecords
    });
 }
 
 // [POST] products/create  
-module.exports.createPost = async ( req , res) => { 
+module.exports.createPost = async (req, res) => {
    // neu TenSanPham
- 
-   req.body.gia = parseInt(req.body.gia); 
-   req.body.giam = parseInt(req.body.giam); 
-   req.body.soLuong = parseInt(req.body.soLuong); 
+
+   req.body.gia = parseInt(req.body.gia);
+   req.body.giam = parseInt(req.body.giam);
+   req.body.soLuong = parseInt(req.body.soLuong);
    // nhap position . 
-   if(req.body.position == "") {
-      req.body.position =  await product.countDocuments() + 1;
+   if (req.body.position == "") {
+      req.body.position = await product.countDocuments() + 1;
    }
    else {
-      req.body.position = parseInt(req.body.position); 
+      req.body.position = parseInt(req.body.position);
    }
 
-   try{
+   try {
       //tao 1 san pham moi . 
-      const product = new Product(req.body); 
-      await product.save(); 
-      req.flash("success" , "Tạo thành công");  
-   }catch{ 
-      req.flash("error" , "Thất bại ");
+      const product = new Product(req.body);
+      await product.save();
+      req.flash("success", "Tạo thành công");
+   } catch {
+      req.flash("error", "Tạo thất bại ");
    }
    res.redirect("/admin/products");
-} 
+}
 
 // [GET] /admin/products/edit/:id 
 // tinh nang sua san pham . 
-module.exports.edit = async ( req , res) => {
-   
-   try{
+module.exports.edit = async (req, res) => {
+
+   try {
       let find = {
-         hienThi : false, 
-         _id : req.params.id
-      }    
-      const product1 = await product.findOne(find); 
-      const records = await ProductCategory.find({hienThi : false}); 
+         hienThi: false,
+         _id: req.params.id
+      }
+      const product1 = await product.findOne(find);
+      const records = await ProductCategory.find({ hienThi: false });
       let cnt = 0;
       function createTree(arr, parentId = "") {
          // tao 1 mang tree ;
@@ -237,49 +237,49 @@ module.exports.edit = async ( req , res) => {
          });
          return tree;
       }
-      const newRecords = createTree(records); 
-      res.render("admin/pages/products/edit.pug" , {
-         pageTitle : "Chinh sua san pham ",
-         product : product1, 
-         category : newRecords,
-         
-      }); 
-   }catch (error) {// neu that bai tran g
-       res.redirect("/admin/products"); 
+      const newRecords = createTree(records);
+      res.render("admin/pages/products/edit.pug", {
+         pageTitle: "Chỉnh sửa sản phẩm",
+         product: product1,
+         category: newRecords,
+
+      });
+   } catch (error) {// neu that bai tran g
+      res.redirect("/admin/products");
    }
 }
 
 // [patch] /admin/products/edit/:id/
-module.exports.editPatch =  async ( req , res) => {
+module.exports.editPatch = async (req, res) => {
 
-   req.body.gia = parseInt(req.body.gia); 
-   req.body.giam = parseInt(req.body.giam); 
+   req.body.gia = parseInt(req.body.gia);
+   req.body.giam = parseInt(req.body.giam);
    req.body.soLuong = parseInt(req.body.soLuong);
-   req.body.position = parseInt(req.body.position); 
+   req.body.position = parseInt(req.body.position);
 
-   try{
-      await product.updateOne( {_id : req.params.id} ,req.body);
-      res.flash("success", "Cap nhat thanh cong"); 
-   } catch ( error){
+   try {
+      await product.updateOne({ _id: req.params.id }, req.body);
+      req.flash("success", "Chỉnh sửa thành công");
+   } catch (error) {
+      req.flash("error", "Sửa thất bại");
    }
-   res.redirect("back"); 
+   res.redirect("back");
 }
 
 // [GET] /admin/products/detail/:id 
 //  Chi tiet sua san pham . 
-module.exports.detail = async ( req , res) => {
-   try{
+module.exports.detail = async (req, res) => {
+   try {
       let find = {
-         hienThi : false, 
-         _id : req.params.id
-      } 
-      const product1 = await product.findOne(find); 
-      console.log(product1);
-      res.render("admin/pages/products/detail.pug" ,{
-         pageTitle : product1.TenSanPham,
-         product : product1
+         hienThi: false,
+         _id: req.params.id
+      }
+      const product1 = await product.findOne(find);
+      res.render("admin/pages/products/detail.pug", {
+         pageTitle: product1.TenSanPham,
+         product: product1
       });
-   }catch (error) {// neu that bai tran g
+   } catch (error) {
       res.redirect("/admin/products");
    }
 }

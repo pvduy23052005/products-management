@@ -1,36 +1,50 @@
 extends ../../layouts/default.pug
 
 block main 
-   h1( class = "") Chi tiet san Pham 
 
-   if( product.TenSanPham )
-      h2( class = "mb-4") #{product.TenSanPham}
-   
-   if(product.SoLuong)
-      div() So luong : #{product.SoLuong}
-   
-   if(product.hinhAnh)
-      img(src=product.hinhAnh, 
-         alt=""
-         width = "100px"
-         height = "100px"
-      )
+   .card.mb-3
+      .card-header Chi tiết sản phẩm
+      .card-body 
+         .row
+            .col-6
+               div(class = "from-group")
+                  if( product.TenSanPham )
+                     h2( class = "mb-4") #{product.TenSanPham}
 
-   if(product.gia) 
-      div() Gia ban : #{product.gia}
-   
-   if( product.giam)
-      div() Giam : #{product.giam} %
-      
-   if( product.position)
-      div() Vi tri : #{product.position}
-   
-   if( product.status)
-      if(product.status == 'active')
-         div() Trang thai: Hoat dong 
-      else 
-         div() Trang thai: Dung hoat dong 
-      
-   a(
-      href = `/admin/products/edit/${product._id}`
-      ) Chinh sua
+               div(class = "from-group") 
+                  if(product.SoLuong)
+                     div() Số lượng : #{product.SoLuong}
+
+               div(class = "from-group")
+                  if(product.hinhAnh)
+                     img(src=product.hinhAnh, 
+                        alt=""
+                        width = "100px"
+                        height = "100px"
+                     )
+
+               div(class = "from-group")
+                  if(product.gia) 
+                     div() Giá bán : #{product.gia}
+
+               div(class = "from-group")
+                  if( product.giam)
+                     h2() Giam : #{product.giam} %
+
+               div(class = "from-group")
+                  if( product.position)
+                     div() Ví trí : #{product.position}
+
+               div(class = "from-group")
+                  if( product.status)
+                     if(product.status == 'active')
+                        div() Trạng thái: Hoạt động 
+                     else 
+                        div() Trạng thái: Dừng hoạt động  
+               div(class = "from-group")
+                  a(
+                     href = `/admin/products/edit/${product._id}`
+                     class = "btn btn-primary"
+                     ) Chỉnh sửa
+
+

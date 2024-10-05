@@ -1,9 +1,10 @@
 // code trang thai thay doi san pham
 const buttonChangeStatus = document.querySelectorAll("[button-change-status]");
-if (buttonChangeStatus.length != 0) {
+if (buttonChangeStatus.length > 0) {
    // lay ra the from 
    const fromStatus = document.querySelector("#from-change-status");
-   const path = fromStatus.getAttribute("data-path"); buttonChangeStatus.forEach((button) => {
+   const path = fromStatus.getAttribute("data-path"); 
+   buttonChangeStatus.forEach((button) => {
       // bat su kien cho cac nut . 
       button.addEventListener("click", () => {
 
@@ -12,7 +13,7 @@ if (buttonChangeStatus.length != 0) {
          //lay ve id san pham . 
          const dataId = button.getAttribute("data-id");
          // doi lai status . 
-         const newStatus = (dataStatus == "active" ? "unactive" : "active");
+         const newStatus = (dataStatus == "active" ? "inactive" : "active");
 
          // chuyen action
          const action = path + `/${newStatus}/${dataId}?_method=PATCH`
@@ -26,7 +27,6 @@ if (buttonChangeStatus.length != 0) {
 }
 
 // TINH NANG THAY DOI TRANG THAI SAN PHAM . 
-// lay ve the table. 
 const tableMulti = document.querySelector("[checkbox-multi]");
 if (tableMulti) {
    // lay ra cai checkAll
@@ -68,14 +68,16 @@ if (formChangeMulti) {
    formChangeMulti.addEventListener("submit", (event) => {
       // ngan chan lai load lai trang . 
       event.preventDefault();
+      // lay ve table . 
       const tableMulti1 = document.querySelector("[checkbox-multi]");
       // lay ra cac check box da tich . 
       const checkboxId1 = tableMulti1.querySelectorAll("input[name='id']:checked");
 
+      // lay ra cai da chon 
       const typeChange = event.target.elements.type.value;
 
       if (typeChange === "delete-all") {
-         const check = confirm("Ban muon xoa nhung san pham nay ");
+         const check = confirm("Bạn có muốn xóa sản phẩm này không !");
          // neu an  .   
          if (!check) {
             return;
@@ -112,14 +114,13 @@ if (formChangeMulti) {
          // goi den de submit . 
          formChangeMulti.submit();
       } else {
-         alert("Chon it nhat 1 ban ghi");
+         alert("Chọn ít nhất 1 bản ghi");
       }
 
    });
 }
 
 // TINH NANG XOA 1 SAN PHAM . 
-// lay ra buttonDelete 
 const buttonDelete = document.querySelectorAll("[button-delete");
 if (buttonDelete.length > 0) {
    const formDelete = document.querySelector("#from-change-item");
@@ -148,11 +149,9 @@ if (buttonDelete.length > 0) {
 
 // TINH NANG CAP ( IN RA THONG BAO . )
 const show = document.querySelector("[show-alert]");
-console.log(show);
 if (show) {
    const time = parseInt(show.getAttribute("data-time"));
    const close = show.querySelector("[close-alert]");
-   console.log(time) ; 
    setTimeout(() => {
       // de an thong bao sau 5s  
       show.classList.add("alert-hidden");

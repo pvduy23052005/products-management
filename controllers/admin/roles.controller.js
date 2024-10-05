@@ -10,7 +10,7 @@ module.exports.index = async (req, res) => {
 
 
    res.render("admin/pages/roles/index.pug", {
-      pageTitle: "Nhom quen",
+      pageTitle: "Nhóm quyền",
       records: roles
    })
 }
@@ -25,7 +25,7 @@ module.exports.create = async (req, res) => {
    console.log(records);
 
    res.render("admin/pages/roles/create.pug", {
-      pageTitle: "Tao nhom quyen",
+      pageTitle: "Tạo nhóm quyền",
       records: records
    });
 }
@@ -37,9 +37,9 @@ module.exports.createPost = async (req, res) => {
       const records = new Roles(req.body);
       await records.save();
       res.redirect("/admin/roles/create");
-      console.log("[CAP NHAT THANH CONG]");
+      req.flash("success" , "Tạo thành công") ; 
    } catch (error) {
-      console.log("[CAP NHAT THAT BAI]");
+      req.flash("success" , "Tạo thất bại") ;
    }
 }
 
@@ -54,7 +54,7 @@ module.exports.edit = async (req, res) => {
       }
       const data = await Roles.findOne(find);
       res.render("admin/pages/roles/edit.pug", {
-         pageTitle: "trang chinh sua nhom quyen",
+         pageTitle: "Trang chỉnh sửa nhóm quyền",
          data: data
       });
    } catch (error) {
@@ -68,9 +68,9 @@ module.exports.editPatch = async (req, res) => {
       const id = req.params.id;
       console.log(req.body);
       await Roles.updateOne({ _id: id }, req.body);
-      req.flash("success", "CAP NHAT NHOM QUYEN THANH CONG");
+      req.flash("success", "Cập nhật thành công");
    } catch (error) {
-      req.flash("error", "CAP NHAT NHOM QUYEN THAT BAI");
+      req.flash("error", "Cập nhật thất bại");
    }
    res.redirect("back");
 }
@@ -85,7 +85,7 @@ module.exports.permissions = async (req, res) => {
    const records = await Roles.find(find);
 
    res.render("admin/pages/roles/permissions.pug", {
-      pageTitle: "Phan quyen",
+      pageTitle: "Phân quyền",
       records: records
    });
 
@@ -101,9 +101,9 @@ module.exports.permissionsPatch = async (req, res) => {
          const permissions1 = item.permissions;
          await Roles.updateOne({ _id: id }, { permissions: permissions1 });
       }
-      req.flash("success" , "Cap quyen thanh cong") ; 
+      req.flash("success" , "Cấp quyền thành công") ; 
    } catch (error) {
-      req.flash("error" , "Cap quyen that ");
+      req.flash("error" , "Cấp quyền thất bại");
    }
    res.redirect("/admin/roles/permissions");
 }

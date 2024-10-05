@@ -19,7 +19,7 @@ module.exports.index = async (req, res) => {
    }
 
    res.render("admin/pages/accounts/index.pug", {
-      pageTitle: "Danh sach tai khoan ",
+      pageTitle: "Danh sách tài khoản",
       records: records
    });
 }
@@ -34,7 +34,7 @@ module.exports.create = async (req, res) => {
    const roles = await Roles.find({ deleted: false });
    
    res.render("admin/pages/accounts/create.pug", {
-      pageTitle: "tao tai khoan",
+      pageTitle: "Tạo tài khoản",
       records: records,
       roles: roles
    });
@@ -64,9 +64,9 @@ module.exports.createPost = async (req, res) => {
          const record = new Account(req.body);
          req.body.password = md5(req.body.password);
          await record.save();
-         req.flash("success", "tao thanh cong");
+         req.flash("success", "Tạo thành công");
       } catch (error) {
-         req.flash("error", "tao that bai")
+         req.flash("error", "Tạo thất bại"); 
       }
       res.redirect("/admin/accounts");
    }

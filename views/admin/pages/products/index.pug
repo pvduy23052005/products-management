@@ -7,7 +7,6 @@ block main
    +alert-success(3000)
    +alert-error(3000)
           
-
    h1 #{pageTitle}
 
    .card.mb-3
@@ -40,22 +39,25 @@ block main
             .col-3
                //- tinh nang chinh sua status product
                form(
-                  action="products/change-multi?_method=PATCH"
+                  action=`products/change-multi?_method=PATCH`
                   method = "POST"
                   form-change-multi 
                ) 
+                  input(
+                     type="type"
+                     value=""
+                     name = "ids"
+                     class = "d-none"
+                  )
                   select(name="type" class = "form-control")
                      option(value="active") Hoạt động  
                      option(value ="inactive") Dừng hoạt động
                      option(value = "delete-all") Xóa tất cả
-                     option(value = "change-position") thay đổi vị trí 
-         input(
-            type="type"
-            value=""
-            name = "ids"
-            class = "d-none"
-         ) 
-         button(type ="submit" class = "btn btn-primary") Áp dụng 
+                     option(value = "change-position") Thay đổi vị trí
+                  button(
+                     type ="submit" 
+                     class = "btn btn-primary"
+                     ) Áp dụng  
          .product-create
             a(
                href="/admin/products/create"
@@ -68,8 +70,8 @@ block main
                name ="sort" 
                sort-select
             ) 
-               option(value ="position-desc") Vi tri giảm dần 
-               option(value ="position-asc") Vi tri giảm dần 
+               option(value ="position-desc") Vi trí giảm dần 
+               option(value ="position-asc") Vi trí tăng dần 
                option(value ="gia-desc") Gia giẩm dàn  
                option(value ="gia-asc") Giá tăng dần
                option(value ="TenSanPham-asc") Tiêu đề  A-Z 
@@ -81,6 +83,8 @@ block main
    .card.mb-3
       .card-header Danh sách sản phẩm 
          .card-body 
+            .row 
+               
             .row
                table(class = "table.table-hover.table-sm" checkbox-multi)
                   thead   
@@ -122,13 +126,13 @@ block main
                                     href = "javascript:;"
                                     data-status = item.status
                                     data-id = item._id 
-                                    class = "btn-info"
+                                    class = "btn btn-primary"
                                     button-change-status  
                                  ) Hoạt động
                               else 
                                  button(
                                     href = "javascript:;"
-                                    class = ""
+                                    class = "btn btn-danger"
                                     data-status = item.status
                                     data-id = item._id 
                                     button-change-status 
@@ -149,7 +153,7 @@ block main
                                  class = "btn btn-secondary btn-sm"
                                  ) Chi tiết
 
-   div(class = "d-center") 
+   div(class = "text-center") 
       ul(class ="pagination")
          li(class = "page-item")
             if(pagination.currentPase > 1)
@@ -159,7 +163,7 @@ block main
                   ) Trang trước
             
          - for( let i = 1 ; i <= pagination.soLuongPage ;i++)
-            li(class = `page-item ${pagination.currentPase === i ? "mau2" : "" }`)
+            li(class = `page-item ${pagination.currentPase === i ? "active" : "" }`)
                button(class = "page-link"
                      button-page = i 
                      ) #{i}
@@ -183,8 +187,4 @@ block main
       id = "from-change-item" 
       data-path = "/admin/products/delete"
    ) 
-
-
-
-
    script(src="/admin/js/product.js")
