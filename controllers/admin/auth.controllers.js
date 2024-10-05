@@ -7,7 +7,7 @@ module.exports.login = (req, res) => {
       res.redirect("/admin/dashboard");
    } else {
       res.render("admin/pages/auth/login.pug", {
-         pageTitle: "Dang nhap",
+         pageTitle: "Đăng nhập",
       });
    }
 }
@@ -25,20 +25,20 @@ module.exports.loginPost = async (req, res) => {
    // kiem tra email co dung ko 
    if (!user) {
       // đưa ra thông báo 
-      req.flash("error", "email khong ton tai ");
+      req.flash("error", "Email không tồn tại ");
       res.redirect("/admin/auth/login");
       return;
    }
 
    // kiểm tra mật khẩu đúng không 
    if (password != user.password) {
-      req.flash("error", "Mat khau sai ! ");
+      req.flash("error", "Mật khẩu sai ! ");
       res.redirect("/admin/auth/login");
       return;
    }
 
    if (user.status == "inactive") {
-      req.flash("error", "Tai khoan cua ban bi khoa ");
+      req.flash("error", "Tài khoản của bạn bị khóa");
       res.redirect("/admin/auth/login");
       return;
    }

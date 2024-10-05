@@ -82,9 +82,9 @@ module.exports.createPost = async (req, res) => {
       const record = new ProductCategory(req.body);
       await record.save();
 
-      console.log("THANH CONG");
+      console.log("THÀNH CÔNG");
    } catch (error) {
-      console.log("THAT BAI")
+      console.log("THẤT BẠI")
    }
 
    res.redirect("/admin/products-category");
@@ -101,7 +101,7 @@ module.exports.edit = async (req, res) => {
       const records = await ProductCategory.find();
    
       res.render("admin/pages/product-category/edit.pug", {
-         pageTitle: "Trang chinh sua danh muc san pham  ",
+         pageTitle: "Trang chỉnh sửa danh mục sản phẩm",
          data: data1,
          records: records
       });
@@ -118,9 +118,9 @@ module.exports.editPatch = async (req, res) => {
 
    try {
       await ProductCategory.updateOne({ _id: id }, req.body)
-      console.log("THANH CONG"); 
+      console.log("THÀNH CÔNG"); 
    } catch (error) {
-      console.log("That bai"); 
+      console.log("THẤT BẠI"); 
    }
    res.redirect("back");
 }

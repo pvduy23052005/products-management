@@ -1,167 +1,169 @@
 .header {
-   background: rgb(23, 22, 22);
-   padding: 10px 0;
-   position: sticky;
-   top: 0;
-   z-index: 999;
+  background: rgb(23, 22, 22);
+  padding: 10px 0;
+  position: sticky;
+  top: 0;
+  z-index: 999;
 }
 
 .header .inner-logo a {
-   font-size: 24px;
-   font-weight: 700;
-   color: #fff;
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
 }
 
 .body .sider {
-   width: 150px;
-   background: #323232;
-   color: #fff;
-   height: calc(100vh - 56px);
-   position: fixed;
-   top: 56px;
-   left: 0;
+  width: 150px;
+  background: #323232;
+  color: #fff;
+  height: calc(100vh - 56px);
+  position: fixed;
+  top: 56px;
+  left: 0;
 }
 
 .body .main {
-   margin: 150px;
-   position: relative;
-   left: 70px;
-   width: calc(100% -180px);
+  margin: 150px;
+  position: relative;
+  left: 70px;
+  width: calc(100% -180px);
 }
 
 .sider .inner-menu ul {
-   list-style: none;
-   padding: 0;
-   margin: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .sider .inner-menu ul li a {
-   color: #fff;
-   display: block;
-   padding: 6px 10px;
-   border-bottom: 1px solid #515151;
+  color: #fff;
+  display: block;
+  padding: 6px 10px;
+  border-bottom: 1px solid #515151;
 }
 
 .mau {
-   background: greenyellow;
+  background: greenyellow;
 }
 /* xet mau cho phan trang  */
-.mau2{
-   background-color: rgb(26, 113, 228);
+.mau2 {
+  background-color: rgb(26, 113, 228);
 }
 
 #from-seach {
-   border: 1px solid gold;
-   width: 200px;
+  border: 1px solid gold;
+  width: 200px;
 }
 
-
-/* css cho phan trang  */ 
+/* css cho phan trang  */
 .pagination {
-   list-style-type: none; /* Loại bỏ các dấu đầu dòng của danh sách */
-   padding: 0;
-   /* text-align: center; Căn giữa các phần tử trong danh sách */
+  list-style-type: none; /* Loại bỏ các dấu đầu dòng của danh sách */
+  padding: 0;
+  /* text-align: center; Căn giữa các phần tử trong danh sách */
 }
 
 .pagination .page-item {
-   display: inline-block; /* Hiển thị các phần tử li cùng một dòng */
+  display: inline-block; /* Hiển thị các phần tử li cùng một dòng */
 }
 
 .pagination .page-link {
-   padding: 5px 10px;
-   text-decoration: none;
+  padding: 5px 10px;
+  text-decoration: none;
 }
 
-.info{
-   color: greenyellow;
-   display: inline-block;
-   font-size: 30px;
-   right: 15px;
-   z-index: 9999;
-   position: fixed;
+.info {
+  color: greenyellow;
+  display: inline-block;
+  font-size: 30px;
+  right: 15px;
+  z-index: 9999;
+  position: fixed;
 }
 
-.alert-hidden{
-   display: none;
-   animation-name: alert-hidden;
-   background-color:white;
+.alert-hidden {
+  display: none;
+  animation-name: alert-hidden;
+  background-color: white;
 }
 
-[info] [close-alert]{
-   background-color: #fff;
-   display: inline-block;
-   width: 24px;
-   height: 24px;
-   text-align: center;
-   cursor: pointer;
-   border-radius: 50%;
-   -webkit-border-radius: 50%;
-   -moz-border-radius: 50%;
-   -ms-border-radius: 50%;
-   -o-border-radius: 50%;
+[info] [close-alert] {
+  background-color: #fff;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
 }
 
-.product-create{
-   background:rgb(216, 216, 233);
-   display: inline-block;
-   border: 1px solid rgb(230, 230, 239)
+.product-create {
+  background: rgb(216, 216, 233);
+  display: inline-block;
+  border: 1px solid rgb(230, 230, 239);
 }
 
-.form-group{
-   margin: 5px;
-   width: 500px;
-   height: 30px;
-   font-family: 50px; 
-   display: inline;
+.form-group {
+  margin: 5px;
+  width: 500px;
+  height: 30px;
+  font-family: 50px;
+  display: inline;
 }
 
 [upload-image-preview] {
-   display: inline;
-   width: 100px;
-   height : 100px ; 
+  display: inline;
+  width: 100px;
+  height: 100px;
 }
 
-.khoi3{
-   border: 1px solid rgb(143, 126, 126);
-   margin-top:  30px;
+.khoi3 {
+  border: 1px solid rgb(143, 126, 126);
+  margin-top: 30px;
 }
-
 
 /* login */
-.login{
-   width: 300px;
-   height: 300px;
-   margin-left: 200px;
-   border: 1px solid grey;
-   border-radius: 10px;
-   text-align: center;
+
+.login {
+  background-color: white; /* Màu nền cho form đăng nhập */
+  padding: 100px; /* Khoảng cách bên trong */
+  border-radius: 20px; /* Bo góc cho form */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */
+  text-align: center; /* Căn giữa nội dung */
 }
-div{
-   text-align: center;
+
+input[type="text"],
+input[type="password"] {
+  width: 100%; /* Đặt chiều rộng của input */
+  padding: 10px; /* Khoảng cách bên trong */
+  margin: 10px 0; /* Khoảng cách giữa các input */
+  border: 1px solid #ccc; /* Đường viền */
+  border-radius: 4px; /* Bo góc cho input */
 }
-h2{
-   color: black;
-   font-family: sans-serif;
+
+.loginButton {
+  width: 100%; /* Đặt chiều rộng của nút */
+  padding: 10px; /* Khoảng cách bên trong */
+  background-color: #007bff; /* Màu nền của nút */
+  color: white; /* Màu chữ */
+  border: none; /* Bỏ viền */
+  border-radius: 4px; /* Bo góc cho nút */
+  cursor: pointer; /* Con trỏ chuột */
 }
-.login input{
-   width: 200px;
-   height: 40px;
-   margin-bottom: 10px;
-   border-radius: 5px;
-   border: 1px solid grey;
-   padding-left: 20px;
-   text-align: center;
+
+button:hover {
+  background-color: #0056b3; /* Màu nền khi hover */
 }
-.login button{
-   width: 230px;
-   height: 40px;
-   margin-bottom: 10px;
-   border-radius: 5px;
-   border: none;
-   background-color: rgb(32, 202, 32);
-   color: antiquewhite;
+
+button:hover {
+  background-color: #0056b3; /* Màu nền khi hover */
+  transform: scale(1.05); /* Tăng kích thước khi hover */
 }
-.login button:hover{
-   font-size: 15px;
+.Logout {
+  padding: 5px; /* Khoảng cách bên trong */
+  border-radius: 5px; /* Bo góc cho form */
+  text-align: right; /* Căn giữa nội dung */
 }
-/* login */

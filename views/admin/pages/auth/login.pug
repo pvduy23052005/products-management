@@ -7,7 +7,7 @@ block main
    .container.my-5 
       .row.justify-content-center 
          .col-8 
-            h1(class = "text-center") Đăng nhập 
+         h1(class = "login")  
             form(
                action="/admin/auth/login",
                method="POST"
@@ -19,6 +19,7 @@ block main
                      id = "email"
                      name = "email"
                      class = "form-control"
+                     placeholder="Username"
                      required 
                   ) 
                div(class = "form-group")
@@ -28,12 +29,14 @@ block main
                      id = "password"
                      name = "password"
                      class = "form-control"
+                     placeholder="Password"
                      required 
                   ) 
+               br
                div(class = "form-group")
                   button(
                      type ="submit"
-                     class = "btn btn-primary btn-block"
+                     class = "loginButton"
                   ) Đăng nhập 
    scrip(src = "/public/admin/js/product.js")
             
