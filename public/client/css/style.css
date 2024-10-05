@@ -60,9 +60,18 @@
    display: none;
 }
 
-
 .product .khoi2{
    display: inline-block;
    padding: 10px;
    margin: 5px;
+}
+
+.logout{
+   padding: 5px; /* Khoảng cách bên trong */
+   border-radius: 5px; /* Bo góc cho form */
+   text-align: right; /* Căn giữa nội dung */
+}
+
+.trangtq {
+   text-align: center;
 }

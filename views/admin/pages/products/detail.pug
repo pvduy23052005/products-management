@@ -29,7 +29,7 @@ block main
 
                div(class = "from-group")
                   if( product.giam)
-                     h2() Giam : #{product.giam} %
+                     div() Giảm : #{product.giam} %
 
                div(class = "from-group")
                   if( product.position)
@@ -42,9 +42,13 @@ block main
                      else 
                         div() Trạng thái: Dừng hoạt động  
                div(class = "from-group")
-                  a(
-                     href = `/admin/products/edit/${product._id}`
-                     class = "btn btn-primary"
-                     ) Chỉnh sửa
+                  if( product.nhaCungCap)
+                     div() Ví trí : #{product.nhaCungCap}
+               
+            div(class = "from-group")
+               a(
+                  href = `/admin/products/edit/${product._id}`
+                  class = "btn btn-primary"
+                  ) Chỉnh sửa
 
 
