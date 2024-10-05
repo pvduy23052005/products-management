@@ -1,80 +1,75 @@
 // thay doi url neu click .
 const buttonStatus = document.querySelectorAll("[button-status]");
-if (buttonStatus.length != 0) {
-   // lay ra url 
+if (buttonStatus.length > 0) {
+   // lay ve url 
+   console.log(buttonStatus); 
    let url = new URL(window.location.href);
-   // duyet qua cac button . 
    buttonStatus.forEach((button) => {
       button.addEventListener("click", () => {
-         // lay ra gia tri thuoc tinh . 
-         const status = button.getAttribute("button-status");
+         const status = button.getAttribute("button-status")
+         console.log(status); 
          if (status) {
-            // thay gia tri cua status  . (ham searchParams.set())
             url.searchParams.set("status", status);
-         }
-         else {
+         } else {
             url.searchParams.delete("status");
          }
-         // cap nhat lai url . 
          window.location.href = url.href;
       });
    });
 }
 
 //TINH NAM TIM KIEM . 
-const formSearch = document.querySelector("#form-search"); 
-if( formSearch){
-   formSearch.addEventListener("submit" , (e) => {
+const formSearch = document.querySelector("#form-search");
+if (formSearch) {
+   formSearch.addEventListener("submit", (e) => {
       // lay ra url 
-      let url = new URL(window.location.href); 
-      e.preventDefault(); 
+      let url = new URL(window.location.href);
+      e.preventDefault();
       //lay ra name = keyword o input . 
-      const keyword = e.target.elements.keyword.value;  
-      if( keyword){
-         url.searchParams.set("keyword" , keyword); 
+      const keyword = e.target.elements.keyword.value;
+      if (keyword) {
+         url.searchParams.set("keyword", keyword);
       }
       else {
-         url.searchParams.delete("keyword"); 
+         url.searchParams.delete("keyword");
       }
-      
+
       // cap nhap lai url . 
-      window.location.href = url.href; 
-   }); 
+      window.location.href = url.href;
+   });
 }
 //-------------------------------------------------------------------
 
 // TINH NANG PHAN TRANG . 
-// lay ve cac buttonPase 
-
-const buttonPase = document.querySelectorAll("[button-page]"); 
-if(buttonPase.length != 0){
+const buttonPase = document.querySelectorAll("[button-page]");
+if (buttonPase.length != 0) {
    // lay ve url . 
-   let url = new URL(window.location.href); 
+   let url = new URL(window.location.href);
    // duyet qua cac buttonPage . 
-   buttonPase.forEach( (button) => {
+   buttonPase.forEach((button) => {
       // them su kien khi click vao . 
-      button.addEventListener("click" ,() =>{
+      button.addEventListener("click", () => {
          // lay ve gia tri cua class button hien tai click . 
          const page = button.getAttribute("button-page")
 
-         url.searchParams.set("page" , page); 
-         window.location.href = url.href; 
-      }); 
-   }); 
+         url.searchParams.set("page", page);
+         window.location.href = url.href;
+      });
+   });
 }
 
 // UPLOAD ANH 
 const uploadImage = document.querySelector("[upload-image]");
-if( uploadImage){
-   const uploadImageInput = document.querySelector("[upload-image-input]"); 
+if (uploadImage) {
+   const uploadImageInput = document.querySelector("[upload-image-input]");
    const preview = document.querySelector("[upload-image-preview]");
-   uploadImageInput.addEventListener("change" , (event) => {
+   uploadImageInput.addEventListener("change", (event) => {
       // tiem den files[0] trong event -> target 
-      const file = event.target.files[0]; 
-      
-      if( file) {
+      const file = event.target.files[0];
+
+      if (file) {
          // gan lai cho private cua the img . 
-         preview.src = URL.createObjectURL(file); 
+         preview.src = URL.createObjectURL(file);
       }
    });
 } 

@@ -32,7 +32,7 @@ module.exports.loginPost = async (req, res) => {
 
    // kiểm tra mật khẩu đúng không 
    if (password != user.password) {
-      req.flash("error", "Mat khau sai ! ");
+      req.flash("error", "Mật khẩu sai! ");
       res.redirect("/admin/auth/login");
       return;
    }

@@ -2,7 +2,7 @@
 // query : la url de lay ra . 
 // countProduct : so luong ban ghi trong databse . 
 module.exports =  (objectPagination , query , countProduct) =>{
-   if( query.page){
+   if( query.page){// chuyen ve dang so . 
       objectPagination.currentPase = parseInt(query.page) ; 
    }
    //dem so luong product . 

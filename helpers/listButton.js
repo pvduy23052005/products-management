@@ -1,17 +1,17 @@
 module.exports = (query) => { 
    let listButton = [
       {
-         name: "tat ca",
+         name: "Tất cả",
          status: "",
          class: ""
       },
       {
-         name: "Hoat dong",
+         name: "Hoạt động",
          status: "active",
          class: ""
       },
       {
-         name: "Dung hoat dong ",
+         name: "Dừng hoạt động",
          status: "inactive",
          class: ""
       },
@@ -20,9 +20,9 @@ module.exports = (query) => {
    if(query.status){
       // tim kiem trong listButton = tren url ko . 
       const index = listButton.findIndex((item) => item.status == query.status)
-      listButton[index].class = "mau"; 
+      listButton[index].class = "active"; 
    }else {
-      listButton[0].class ="mau";
+      listButton[0].class ="active";
    } 
 
    // tra ve mang vua thay doi . 
