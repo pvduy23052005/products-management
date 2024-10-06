@@ -22,7 +22,7 @@ block main
             required
             )
       div(class ="form-group")
-         label(for="email") Email 
+         label(for="email") Email:
          input(
             type="email"
             class = "form-control"
@@ -32,7 +32,7 @@ block main
             )
       
       div(class ="form-group")
-         label(for="password") Mật khẩu
+         label(for="password") Mật khẩu:
          input(
             type="password"
             class = "form-control"
@@ -41,7 +41,7 @@ block main
             required
             )   
       div(class ="form-group")
-         label(for="phone") Số điện thoại  
+         label(for="phone") Số điện thoại:
          input(
             type="phone"
             class = "form-control"
@@ -68,9 +68,9 @@ block main
             class = "image-preview"
             upload-image-preview 
             )
-
+      br
       div(class = "form-group")
-         label(for="role_id" ,class ="display:inline-block") Phân quyền
+         label(for="role_id" ,class ="display:inline-block") Phân quyền:
          select(name ="role_id" id ="role_id" class ="form-control")
             option(value="")  -- chon --
             each role in roles 

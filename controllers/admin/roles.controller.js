@@ -58,7 +58,6 @@ module.exports.edit = async (req, res) => {
          data: data
       });
    } catch (error) {
-      res.render("/admin/roles");
    }
 }
 

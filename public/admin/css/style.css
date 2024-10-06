@@ -39,7 +39,7 @@
   color: #fff;
   display: block;
   padding: 6px 10px;
-  border-bottom: 1px solid #515151;
+  border-bottom: 1px solid #726e6e;
 }
 
 /* xet mau cho phan trang  */
@@ -92,12 +92,6 @@
   -moz-border-radius: 50%;
   -ms-border-radius: 50%;
   -o-border-radius: 50%;
-}
-
-.product-create {
-  background: rgb(216, 216, 233);
-  display: inline-block;
-  border: 1px solid rgb(230, 230, 239);
 }
 
 .form-group {
@@ -163,4 +157,17 @@ button:hover {
 }
 .trangtq {
   text-align: center;
+}
+
+.title{
+   text-align:  center ;
+}
+
+.product-create{
+   padding: 5px; /* Khoảng cách bên trong */
+   border-radius: 5px; /* Bo góc cho form */
+   text-align: right; /* Căn giữa nội du */ 
+}
+.product-header{
+   display: inline-block;
 }

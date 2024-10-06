@@ -28,8 +28,6 @@ module.exports.index = async (req, res) => {
    const records = await ProductCategory.find(find);
    const newRecords = createTree(records);
 
-   console.log(newRecords); 
-
    res.render("admin/pages/product-category/index.pug", {
       pageTitle: "Trang danh mục sản phẩm ",
       records: newRecords, 
@@ -63,6 +61,8 @@ module.exports.create = async (req, res) => {
    const records = await ProductCategory.find(find);
    const newRecords = createTree(records);
 
+   
+
    res.render("admin/pages/product-category/create.pug", {
       pageTitle: "tạo danh mục sản phẩm ",
       records: newRecords
@@ -84,7 +84,7 @@ module.exports.createPost = async (req, res) => {
 
       req.flash("success" , "Tạo thành công") ; 
    } catch (error) {
-      req.flash("success" , "Tạo thất bại") ;
+      req.flash("error" , "Tạo thất bại") ;
    }
 
    res.redirect("/admin/products-category");
@@ -112,7 +112,7 @@ module.exports.edit = async (req, res) => {
 
 // [PATCH] / admin/product-category/edit/:id
 module.exports.editPatch = async (req, res) => {
-   const id = req.params.id
+   const id = req.params.id; 
 
    req.body.position = parseInt(req.body.position);
 

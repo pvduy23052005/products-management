@@ -88,7 +88,7 @@ module.exports.changeStatus = async (req, res) => {
       // khi click vao khong bi link sang trang khac .
       res.redirect("back");
    } catch (error) {
-      req.flash("success", "Thay đổi thất bại");
+      req.flash("error", "Thay đổi thất bại");
    }
 }
 
@@ -100,18 +100,29 @@ module.exports.changeMulti = async (req, res) => {
 
    switch (type) {
       case "active":
-         await product.updateMany({ _id: { $in: listId } }, { status: "active" });
-         req.flash("success", `Cập nhật thành công`);
-
+         try {
+            await product.updateMany({ _id: { $in: listId } }, { status: "active" });
+            req.flash("success", `Cập nhật thành công`);
+         } catch (error) {
+            req.flash("error" , "Thất bại");
+         }
          break;
       case "inactive":
-         await product.updateMany({ _id: { $in: listId } }, { status: "inactive" });
-         req.flash("success", `Cập nhật thành công`);
+         try{
+            await product.updateMany({ _id: { $in: listId } }, { status: "inactive" });
+            req.flash("success", `Cập nhật thành công`);
+         } catch (error){
+            req.flash("error" , "Thất bại");
+         }
 
-         break;
+         break; 
       case "delete-all": // xoa 1 san pham . 
-         await product.updateMany({ _id: { $in: listId } }, { hienThi: true });
-         req.flash("success", `Xóa thành công`);
+         try{
+            await product.updateMany({ _id: { $in: listId } }, { hienThi: true });
+            req.flash("success", `Xóa thành công`);
+         } catch (error){
+            req.flash("error" , "Thất bại");
+         }
 
          break;
       case "change-position":// thay doi vi tri 
@@ -130,7 +141,6 @@ module.exports.changeMulti = async (req, res) => {
       default:
          break;
    }
-
    // quay lai trang truoc do . 
    res.redirect("back");
 }
@@ -138,10 +148,14 @@ module.exports.changeMulti = async (req, res) => {
 // XOA 1 SAN PHAM . 
 // : /admin/products/delete/:id 
 module.exports.deleteItem = async (req, res) => {
-   const id = req.params.id;
-   // update lai hienThi . 
-   await product.updateOne({ _id: id }, { hienThi: true });
-   req.flash("thanhCong", `Xóa thành công`);
+   try {
+      const id = req.params.id;
+      // update lai hienThi . 
+      await product.updateOne({ _id: id }, { hienThi: true });
+      req.flash("success", `Xóa thành công`);
+   } catch (error) {
+      req.flash("error", `Xóa không thành công`);
+   }
 
    res.redirect("back");
 }
@@ -174,7 +188,6 @@ module.exports.createGet = async (req, res) => {
    }
 
    const newRecords = createTree(records);
-
 
    res.render("admin/pages/products/create.pug", {
       pageTitle: "Thêm mới sản phẩm",
@@ -209,9 +222,7 @@ module.exports.createPost = async (req, res) => {
 }
 
 // [GET] /admin/products/edit/:id 
-// tinh nang sua san pham . 
 module.exports.edit = async (req, res) => {
-
    try {
       let find = {
          hienThi: false,

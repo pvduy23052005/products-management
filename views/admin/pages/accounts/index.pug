@@ -2,13 +2,11 @@ extends ../../layouts/default.pug
 include ../../mixins/alert.pug
 
 block main 
-   h1(class = "mb-4") Danh sách tài khoản
-
-   +alert-success(3000)
-   +alert-error(3000)
+   +alert-success(5000)
+   +alert-error(5000)
 
    .card.mb-3 
-      .card-header Danh Sach 
+      .card-header  Danh sách tài khoản 
       .card-body 
          .row 
             .col-8  
@@ -29,7 +27,7 @@ block main
                      th Phân quyền 
                      th Email 
                      th Trạng thái  
-                     th Hanh dong  
+                     th Hành động  
                tbody  
                   each item ,index in records 
                      tr 
@@ -48,15 +46,15 @@ block main
                            if(item.status = "active")
                               a(
                                  href=""
-                                 class = "badge badge-success"
+                                 class = "btn btn-primary"
                                  data-status = "active"
                                  ) Hoạt động
                            else 
                               a(
                                  href=""
-                                 class = "badge badge-danger"
+                                 class = "btn btn-danger"
                                  data-status = "inactive"
-                                 ) Dung hoat dong 
+                                 ) Dừng hoạt động 
                         td 
                            a(
                               href = `/admin/accounts/edit/${item.id}`
@@ -65,12 +63,10 @@ block main
                            ) Sửa 
                            button(
                               button-delete
-                              data-id = item.id  
+                              data-id = item.id 
                               class = "btn btn-danger btn-sm ml-1"
                            ) Xóa 
                            a(
                               href=`/admin/account/detail/${item.id}`
                               class = "btn btn-secondary btn-sm"
                            ) Chi tiết
-
-   script(src="/admin/js/product.js") 

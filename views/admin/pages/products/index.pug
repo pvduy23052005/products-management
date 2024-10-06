@@ -4,10 +4,10 @@ include ../../mixins/alert.pug
 
 block main 
 
-   +alert-success(3000)
-   +alert-error(3000)
+   +alert-success(5000)
+   +alert-error(5000)
           
-   h1 #{pageTitle}
+   h1(class = "title") #{pageTitle}
 
    .card.mb-3
       .card-header Bộ lọc và tìm kiếm  
@@ -58,35 +58,38 @@ block main
                      type ="submit" 
                      class = "btn btn-primary"
                      ) Áp dụng  
-         .product-create
-            a(
-               href="/admin/products/create"
-               class = "btn btn-outline-success"
-            ) + THêm mới 
-
-      div(sort)
-            select(
-               class="form-control"
-               name ="sort" 
-               sort-select
-            ) 
-               option(value ="position-desc") Vi trí giảm dần 
-               option(value ="position-asc") Vi trí tăng dần 
-               option(value ="gia-desc") Gia giẩm dàn  
-               option(value ="gia-asc") Giá tăng dần
-               option(value ="TenSanPham-asc") Tiêu đề  A-Z 
-               option(value ="TenSanPham-desc") Tiêu đề Z-A
-            button(
-               sort-clear
-            ) Clear
 
    .card.mb-3
-      .card-header Danh sách sản phẩm 
-         .card-body 
-            .row 
-               
-            .row
-               table(class = "table.table-hover.table-sm" checkbox-multi)
+      .card-header
+         .row
+            .product-header Danh sách sản phẩm
+         .row
+            .col-8
+               .sort
+                  select(
+                     class="form-control"
+                     name ="sort" 
+                     sort-select
+                  ) 
+                     option(value ="position-desc") Vi trí giảm dần 
+                     option(value ="position-asc") Vi trí tăng dần 
+                     option(value ="gia-desc") Gia giẩm dàn  
+                     option(value ="gia-asc") Giá tăng dần
+                     option(value ="TenSanPham-asc") Tiêu đề  A-Z 
+                     option(value ="TenSanPham-desc") Tiêu đề Z-A
+                  button(
+                     sort-clear
+                     class = ""
+                  ) Clear
+            .col-2
+               .product-create
+                  a(
+                     href="/admin/products/create"
+                     class = "btn btn-outline-success"
+                  ) + THêm mới
+      .card-body 
+         .row
+            table(class = "table.table-hover.table-sm" checkbox-multi)
                   thead   
                      tr  
                         th 
@@ -187,4 +190,3 @@ block main
       id = "from-change-item" 
       data-path = "/admin/products/delete"
    ) 
-   script(src="/admin/js/product.js")
