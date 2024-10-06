@@ -28,7 +28,10 @@ const productSchema = new mongoose.Schema(
    giam: Number, 
    status : String ,
    position : Number
-});
+}, {
+   timestamps : true , 
+}
+);
 
 // product ten hinh dat . 
 // products : ten database .

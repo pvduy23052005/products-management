@@ -11,20 +11,20 @@ module.exports.index = async (req, res) => {
       }
       // // lay ra account password , token ,
       const records = await Account.find(find).select("-password-token");
-      // console.log(records) ; 
-      // try {
-      //    console.log(record); 
-      //    for( const record of records){
-      //       const role = await Roles.findOne({
-      //          deleted : false ,
-      //          _id : record.role_id
-      //       });
-      //       console.log(role); 
-      //       record.role = role.title ; 
-      //    }
-      // } catch (error) {
-      //    console.error("Khong them phan quyen " , error) ; 
-      // }
+      console.log(records.role_id);
+
+      try {
+         for( const record of records){
+            const role = await Roles.findOne({
+               _id :record.role_id, 
+               deleted : false 
+            }); 
+            console.log(role);
+            record.role = role.title ; 
+         }
+      } catch (error) {
+         console.error("Khong them phan quyen " , error) ; 
+      }
 
       res.render("admin/pages/accounts/index.pug", {
          pageTitle: "Danh sách tài khoản",
@@ -58,10 +58,7 @@ module.exports.create = async (req, res) => {
 // [post] /admin/accounts/create
 module.exports.createPost = async (req, res) => {
 
-   
-
    try {
-      
       if (false) {// email da ton tai roi 
          try {
             req.flash("error", `Email đã tồn tại`);

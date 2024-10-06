@@ -171,3 +171,9 @@ button:hover {
 .product-header{
    display: inline-block;
 }
+
+/* căn chỉnh ô tìm kiếm  */
+.input-group-append {
+   margin-top: 13px;
+ }
+ 
