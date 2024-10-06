@@ -1,7 +1,6 @@
 // tao model cho data base  .  
 const mongoose = require("mongoose");
 const slug = require("mongoose-slug-updater"); 
-
 mongoose.plugin(slug); 
 
 // dinh dang cac truong muon lay ra trong database . 

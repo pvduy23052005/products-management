@@ -1,5 +1,5 @@
 
-// next de chay sang ham tiep theo . 
+// phần tạo tài khoản . 
 module.exports.createPost = (req , res , next) => {
    // neu TenSanPham
    if(!req.body.fullName){
@@ -19,6 +19,5 @@ module.exports.createPost = (req , res , next) => {
       res.redirect("back"); 
       return ; 
    }
-
    next(); 
 }

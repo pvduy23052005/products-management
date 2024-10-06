@@ -34,7 +34,7 @@ const flash = require("express-flash");
 const  cookieParser = require("cookie-parser"); 
 const session = require("express-session"); 
 app.use(cookieParser("PHUNGVANDUY")); 
-app.use(session({cookie:  { maxAge : 60000}})); 
+app.use(session({cookie:  { maxAge : 5000}})); 
 app.use(flash()); 
 
 // cau hinh cho pug . 

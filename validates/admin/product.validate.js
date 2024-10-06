@@ -7,5 +7,11 @@ module.exports.createPost = (req , res , next) => {
          res.redirect("back"); 
          return ; 
       }
+
+      if(!req.body.gia){
+         req.flash("error" ,`Vui lòng nhập giá `); 
+         res.redirect("back"); 
+         return ; 
+      }
    next(); 
 }

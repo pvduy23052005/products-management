@@ -3,9 +3,9 @@
 module.exports.createPost = (req , res , next) => {
    // neu TenSanPham
    if(!req.body.TenSanPham){
-      req.flash("error" ,`Vui long nhap tieu de! ` ); 
+      req.flash("error" ,`Vui lòng nhập tiêu đề! ` ); 
       res.redirect("back"); 
       return ; 
    }
-next(); 
+   next(); 
 }
