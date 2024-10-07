@@ -11,19 +11,17 @@ module.exports.index = async (req, res) => {
       }
       // // lay ra account password , token ,
       const records = await Account.find(find).select("-password-token");
-      console.log(records.role_id);
 
       try {
-         for( const record of records){
+         for (const record of records) {
             const role = await Roles.findOne({
-               _id :record.role_id, 
-               deleted : false 
-            }); 
-            console.log(role);
-            record.role = role.title ; 
+               _id: record.role_id,
+               deleted: false
+            });
+            record.role = role.title;
          }
       } catch (error) {
-         console.error("Khong them phan quyen " , error) ; 
+         console.error("Không thêm mới được", error);
       }
 
       res.render("admin/pages/accounts/index.pug", {
@@ -31,7 +29,7 @@ module.exports.index = async (req, res) => {
          records: records
       });
    } catch (error) {
-      console.log("loi roi") ; 
+      console.log("lỗi rồi");
    }
 }
 
@@ -41,33 +39,32 @@ module.exports.create = async (req, res) => {
       let find = {
          deleted: false
       }
-   
-      const records = await Account.find(find);
-      const roles = await Roles.find({ deleted: false });
-      
+      const roles = await Roles.find(find);
+
       res.render("admin/pages/accounts/create.pug", {
          pageTitle: "Tạo tài khoản",
-         records: records,
          roles: roles
       });
    } catch (error) {
-      console.error("loi :" , error) ;  
+      console.error("loi phan tao tai khoan ", error);
    }
 }
 
 // [post] /admin/accounts/create
 module.exports.createPost = async (req, res) => {
-
+   const check = await Account.findOne({
+      deleted: false,
+      email: req.body.email
+   });
+   console.log(check);
    try {
-      if (false) {// email da ton tai roi 
+      if (check) {// email da ton tai roi 
          try {
             req.flash("error", `Email đã tồn tại`);
-            res.redirect("back"); 
          } catch (error) {
-            console.log("loi");
+            console.error("loi phan email ", error);
          }
-         res.redirect("back"); 
-   
+         res.redirect("back");
       } else { // email chua ton tai .  
          try {
             const record = new Account(req.body);
@@ -75,12 +72,12 @@ module.exports.createPost = async (req, res) => {
             await record.save();
             req.flash("success", "Tạo thành công");
          } catch (error) {
-            req.flash("error", "Tạo thất bại"); 
+            req.flash("error", "Tạo thất bại");
          }
          res.redirect("/admin/accounts");
       }
    } catch (error) {
-      console.error("Loi")
+      console.log("Loi");
    }
 }
 

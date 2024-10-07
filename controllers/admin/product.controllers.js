@@ -104,24 +104,24 @@ module.exports.changeMulti = async (req, res) => {
             await product.updateMany({ _id: { $in: listId } }, { status: "active" });
             req.flash("success", `Cập nhật thành công`);
          } catch (error) {
-            req.flash("error" , "Thất bại");
+            req.flash("error", "Thất bại");
          }
          break;
       case "inactive":
-         try{
+         try {
             await product.updateMany({ _id: { $in: listId } }, { status: "inactive" });
             req.flash("success", `Cập nhật thành công`);
-         } catch (error){
-            req.flash("error" , "Thất bại");
+         } catch (error) {
+            req.flash("error", "Thất bại");
          }
 
-         break; 
+         break;
       case "delete-all": // xoa 1 san pham . 
-         try{
+         try {
             await product.updateMany({ _id: { $in: listId } }, { hienThi: true });
             req.flash("success", `Xóa thành công`);
-         } catch (error){
-            req.flash("error" , "Thất bại");
+         } catch (error) {
+            req.flash("error", "Thất bại");
          }
 
          break;
@@ -294,3 +294,4 @@ module.exports.detail = async (req, res) => {
       res.redirect("/admin/products");
    }
 }
+

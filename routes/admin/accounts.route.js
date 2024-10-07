@@ -13,7 +13,7 @@ router.get("/create", controller.create);
 router.post("/create",
    upload.single("avatar"),
    uploadCloud.uploadCloud,
-   validate.createPost, 
+   validate.createPost,
    controller.createPost
 );
 

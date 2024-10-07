@@ -14,18 +14,13 @@ module.exports.login = (req, res) => {
 
 // [post]  /admin/auth/login
 module.exports.loginPost = async (req, res) => {
-
-
    const email = req.body.email;
    const password = req.body.password;
-
-
    const user = await Account.findOne({
       email: email,
       deleted: false,
    });
 
-   
    // kiem tra email co dung ko 
    if (!user) {
       // đưa ra thông báo 
