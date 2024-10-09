@@ -34,8 +34,8 @@ block main
             )
                option(value="") --chon danh muc cha-- 
                if( records)
-                  //- +select-tree(records , 1 , data.parent_id)
-
+                  each record in records 
+                     option(value=record.id) #{record.title} 
          div(
             class = "form-group"
             upload-image

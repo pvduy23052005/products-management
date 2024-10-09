@@ -1,32 +1,18 @@
 const ProductCategory = require("../../models/product-category.model.js");
-
+const createTreeHelpers = require("../../helpers/createTree.js"); 
 
 // [GET] /admin/product-category 
 module.exports.index = async (req, res) => {
    let find = {
       deleted: false,
    }
-   // function createTree(arr, parentId = "") {
-   //    // tao 1 mang tree ;
-   //    const tree = [];
-   //    arr.forEach((item) => {
-   //       if (item.parent_id === parentId) {
-   //          const newItem = item;
-   //          const children = createTree(arr, item.id);
-   //          if (children.length > 0) {
-   //             newItem.children = children;
-   //          }
-   //          tree.push(newItem);
-   //       }
-   //    });
-   //    return tree;
-   // }
-   // const newRecords = createTree(records);
 
    const records = await ProductCategory.find(find);
+   const newRecords = createTreeHelpers.tree(records) ; 
+
    res.render("admin/pages/product-category/index.pug", {
       pageTitle: "Trang danh mục sản phẩm ",
-      records: records,
+      records: newRecords, 
    });
 }
 
@@ -35,28 +21,13 @@ module.exports.create = async (req, res) => {
    let find = {
       deleted: false,
    }
-   // function createTree(arr, parentId = "") {
-   //    // tao 1 mang tree ;
-   //    const tree = [];
-   //    arr.forEach((item) => {
-   //       if (item.parent_id === parentId) {
-   //          const newItem = item;
-   //          const children = createTree(arr, item.id);
-   //          if (children.length > 0) {
-   //             newItem.children = children;
-   //          }
-   //          tree.push(newItem);
-   //       }
-   //    });
-   //    return tree;
-   // }
    const records = await ProductCategory.find(find);
-
+   const newRecords =  createTreeHelpers.tree(records) ; 
 
    // const newRecords = createTree(records);
    res.render("admin/pages/product-category/create.pug", {
-      pageTitle: "tạo danh mục sản phẩm ",
-      records: records
+      pageTitle: "Tạo danh mục sản phẩm ",
+      records: newRecords
    });
 }
 
@@ -87,7 +58,8 @@ module.exports.edit = async (req, res) => {
          _id: id,
          deleted: false
       });
-      const records = await ProductCategory.find();
+      const records = await ProductCategory.find({deleted : false });
+
       res.render("admin/pages/product-category/edit.pug", {
          pageTitle: "Trang chỉnh sửa danh mục sản phẩm",
          data: data1,

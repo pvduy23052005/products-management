@@ -31,10 +31,9 @@ block main
                name = "parent_id"
                class ="form-control"  
             )
-               option(value="") -Chọn danh muc cha-- 
+               option(value="") --Chọn danh muc cha-- 
                if( records)
-                  each record in records 
-                     option(value= record.id) #{record.title} 
+                  +select-tree(records , 1)
 
          div(
             class = "form-group"

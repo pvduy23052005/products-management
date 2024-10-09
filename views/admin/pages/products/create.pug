@@ -26,16 +26,15 @@ block main
             )
 
          div(class = "form-group")
-            label(for="product-category-id") Danh muc 
+            label(for="product-category-id") Danh mục 
             select(
                name="product-category-id"
                id = "product-category-id"
                class = "form-control"
             )  
-               option( value = "") --Danh muc cha-- 
-               if(category)
-                  each record in category
-                     option(value=record.id) #{record.title} 
+               option( value = "") --Danh mục cha-- 
+               if(records)
+                  +select-tree(records , 1) 
 
          div(class = "form-group")
             label(for="SoLuong") Số lượng

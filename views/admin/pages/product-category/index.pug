@@ -2,7 +2,6 @@ extend ../../layouts/default.pug
 include ../../mixins/table-tree.pug
 include ../../mixins/alert.pug
 
-
 block main  
    h1(class ="mb-4") Danh mục sản phẩm  
 
@@ -23,7 +22,7 @@ block main
          .row
             table(class = "table.table-hover.table-sm" checkbox-multi)
                thead
-                  tr  
+                  tr 
                      th 
                         input(type ="checkbox" , name = "checkAll")
                      th STT 
@@ -33,55 +32,4 @@ block main
                      th trạng thái  
                      th hành động
                tbody
-                  each item in records 
-                     tr
-                        td
-                           input(
-                              type="checkbox"
-                              name ="id"
-                              value = item._id 
-                           )
-                        td #{item.index}
-                        td    
-                           img(src=item.hinhAnh, width = "100px" alt="")
-                        td  #{prefix} #{item.title}
-                        td
-                           input(
-                              type = "number"
-                              value = item.position 
-                              style = "width : 50px "
-                              min = "1"
-                              name = "position"
-                           )
-                        td 
-                           if(  item.status === "active")
-                              button(
-                                 href = "javascript:;"
-                                 data-status = item.status
-                                 data-id = item._id 
-                                 button-change-status  
-                                 class = "btn btn-primary"
-                              ) Hoạt Động
-                           else 
-                              button(
-                                 href = "javascript:;"
-                                 data-status = item.status
-                                 data-id = item._id 
-                                 button-change-status 
-                                 class = "btn btn-danger"
-                              ) Dừng hoạt dộng
-                        td
-                           a(
-                              href = `/admin/products-category/edit/${item._id}`
-                              class = "btn btn-warning btn-sm"
-                              data-id = item._id 
-                           ) Sửa 
-                           button(
-                              button-delete
-                              data-id = item._id  
-                              class = "btn btn-danger btn-sm ml-1"
-                           ) Xóa 
-                           a(
-                              href=`/admin/products-category/detail/${item._id}`
-                              class = "btn btn-secondary btn-sm"
-                              ) Chi tiết
+                  +table-tree(records)

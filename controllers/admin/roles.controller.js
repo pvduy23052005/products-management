@@ -22,8 +22,6 @@ module.exports.create = async (req, res) => {
    }
    const records = await Roles.find(find);
 
-   console.log(records);
-
    res.render("admin/pages/roles/create.pug", {
       pageTitle: "Tạo nhóm quyền",
       records: records

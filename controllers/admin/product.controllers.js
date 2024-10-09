@@ -5,7 +5,7 @@ const helperSearch = require("../../helpers/search.js");
 const helperPagination = require("../../helpers/pagination.js");
 const Product = require("../../models/product.model.js");
 const ProductCategory = require("../../models/product-category.model.js");
-
+const createTreeHelper = require("../../helpers/createTree.js") ; 
 
 // phuogn thuc {GET} /product . 
 module.exports.product = async (req, res) => {
@@ -165,32 +165,11 @@ module.exports.createGet = async (req, res) => {
    let find = {
       deleted: false,
    }
-
    const records = await ProductCategory.find(find);
-
-   // let cnt = 0;
-   // function createTree(arr, parentId = "") {
-   //    // tao 1 mang tree ;
-   //    const tree = [];
-   //    arr.forEach((item) => {
-   //       if (item.parent_id === parentId) {
-   //          ++cnt;
-   //          const newItem = item;
-   //          newItem.index = cnt;
-   //          const children = createTree(arr, item.id);
-   //          if (children.length > 0) {
-   //             newItem.children = children;
-   //          }
-   //          tree.push(newItem);
-   //       }
-   //    });
-   //    return tree;
-   // }
-   // const newRecords = createTree(records);
-
+   const newRecords = createTreeHelper.tree(records) ; 
    res.render("admin/pages/products/create.pug", {
       pageTitle: "Thêm mới sản phẩm",
-      category: records 
+      records: newRecords 
    });
 }
 
@@ -293,4 +272,3 @@ module.exports.detail = async (req, res) => {
       res.redirect("/admin/products");
    }
 }
-
