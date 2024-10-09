@@ -6,7 +6,7 @@ mongoose.plugin(slug);
 // dinh dang cac truong muon lay ra trong database . 
 const productCategorySchema = new mongoose.Schema(
    {
-      TenSanPham: String,
+      title: String,
       parent_id : {
          type : String , 
          default : ""
@@ -17,10 +17,10 @@ const productCategorySchema = new mongoose.Schema(
       position : Number,
       slug : {
          type : String , 
-         slug : "TenSanPham",
+         slug : "title",
          unique : true 
       },
-      hienThi :{
+      deleted :{
          type : Boolean , 
          default : false ,
       },
@@ -34,4 +34,4 @@ const productCategorySchema = new mongoose.Schema(
 // product ten hinh dat . 
 // products : ten database .
 const productCategory = mongoose.model('productCategory', productCategorySchema, "products-category");
-module.exports = productCategory;  
+module.exports = productCategory;

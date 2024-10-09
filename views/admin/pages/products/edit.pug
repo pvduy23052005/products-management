@@ -15,7 +15,7 @@ block main
       enctype = "multipart/form-data"
       )
          div(class = "form-group")
-            label(for="TenSanPham") Tiêu đề
+            label(for="TenSanPham") -Tiêu đề
             input(
                type="text"
                class ="form-control"
@@ -25,7 +25,7 @@ block main
                required
             )
          div(class = "form-group")
-            label(for="parent_id") Danh mục sản phẩm  
+            label(for="parent_id") -Danh mục sản phẩm  
             select(
                id = "parent_id"
                name = "parent_id"
@@ -36,7 +36,7 @@ block main
                   +select-tree(category , 1 , category.parent_id)
 
          div(class = "form-group")
-            label(for="SoLuong") Số lượng
+            label(for="SoLuong") -Số lượng
             input(
                type="number"
                class ="form-control"
@@ -50,7 +50,7 @@ block main
             class = "form-group"
             upload-image
             )
-            label(for="hinhAnh") Ảnh
+            label(for="hinhAnh") -Ảnh
             input(
                type="file"
                class ="form-control"
@@ -65,7 +65,7 @@ block main
                height = "100px" 
                upload-image-preview 
                )
-
+         br
          div(class = "form-group")
             label(for="gia") Giá
             input(
@@ -78,7 +78,7 @@ block main
             )
          
          div(class = "form-group")
-            label(for="discount") % Giảm
+            label(for="discount") -%Giảm
             input(
                type="number"
                class ="form-control"
@@ -111,7 +111,7 @@ block main
             label(for = "statusInActive" class = "form-check-label") Dừng hoạt động
 
          div(class = "form-group")
-            label(for="position") Ví trí
+            label(for="position") -Ví trí
             input(
                type="number"
                class ="form-control"
@@ -123,12 +123,23 @@ block main
             )
 
          div(class = "form-group")
-            label(for="desc") Mô tả
+            label(for="desc") -Mô tả
             input(
                type="text"
                class ="form-control"
                id = "title"
                name = "description"
+               rows = "5"
+            )
+
+         div(class = "form-group")
+            label(for="nhaCungCap") -Nhà cung cấp
+            input(
+               type="text"
+               class ="form-control"
+               id = "nhaCungCap"
+               name = "nhaCungCap"
+               value = product.nhaCungCap
                rows = "5"
             )
 

@@ -162,36 +162,35 @@ module.exports.deleteItem = async (req, res) => {
 
 //[GET] products/create
 module.exports.createGet = async (req, res) => {
-
-   const records = await ProductCategory.find({ hienThi: false });
-
    let find = {
-      hienThi: false,
-   }
-   let cnt = 0;
-   function createTree(arr, parentId = "") {
-      // tao 1 mang tree ;
-      const tree = [];
-      arr.forEach((item) => {
-         if (item.parent_id === parentId) {
-            ++cnt;
-            const newItem = item;
-            newItem.index = cnt;
-            const children = createTree(arr, item.id);
-            if (children.length > 0) {
-               newItem.children = children;
-            }
-            tree.push(newItem);
-         }
-      });
-      return tree;
+      deleted: false,
    }
 
-   const newRecords = createTree(records);
+   const records = await ProductCategory.find(find);
+
+   // let cnt = 0;
+   // function createTree(arr, parentId = "") {
+   //    // tao 1 mang tree ;
+   //    const tree = [];
+   //    arr.forEach((item) => {
+   //       if (item.parent_id === parentId) {
+   //          ++cnt;
+   //          const newItem = item;
+   //          newItem.index = cnt;
+   //          const children = createTree(arr, item.id);
+   //          if (children.length > 0) {
+   //             newItem.children = children;
+   //          }
+   //          tree.push(newItem);
+   //       }
+   //    });
+   //    return tree;
+   // }
+   // const newRecords = createTree(records);
 
    res.render("admin/pages/products/create.pug", {
       pageTitle: "Thêm mới sản phẩm",
-      category: newRecords
+      category: records 
    });
 }
 

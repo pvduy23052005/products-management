@@ -34,7 +34,8 @@ block main
             )  
                option( value = "") --Danh muc cha-- 
                if(category)
-                  +select-tree(category ,1)
+                  each record in category
+                     option(value=record.id) #{record.title} 
 
          div(class = "form-group")
             label(for="SoLuong") Số lượng

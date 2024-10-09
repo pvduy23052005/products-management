@@ -10,7 +10,6 @@ router.get("/", controller.index);
 
 router.get("/create", controller.create);
 
-// [POST] /admin/products/create 
 router.post("/create",
    upload.single("hinhAnh"),
    uploadCloud.uploadCloud,

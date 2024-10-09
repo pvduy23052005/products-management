@@ -1,15 +1,13 @@
 extends ../../layouts/default.pug
 include ../../mixins/select-tree.pug
+include ../../mixins/alert.pug
+
 block main 
-   if( messages.error)
-      .info
-         div(
-            show-alert
-            time = 5000
-         ) #{messages.error} <span close-alert >X</span>
 
-
-   h1( class = "Them") Chinh sua san pham. 
+   h1( class = "") Chỉnh sửa Danh mục
+   
+   alert-success(5000)
+   alert-error(5000)
 
    form(
       action=`/admin/products-category/edit/${data._id}?_method=PATCH`
@@ -18,17 +16,17 @@ block main
       enctype = "multipart/form-data"
       )
          div(class = "form-group")
-            label(for="TenSanPham") Tiêu đề
+            label(for="title") Tiêu đề
             input(
                type="text"
                class ="form-control"
-               id = "TenSanPham"
-               name = "TenSanPham"
-               value = data.TenSanPham
+               id = "title"
+               name = "title"
+               value = data.title
                required
             )
          div(class = "form-group")
-            label(for="parent_id") danh muc cha 
+            label(for="parent_id") Danh mục cha 
             select(
                id = "parent_id"
                name = "parent_id"
@@ -36,7 +34,7 @@ block main
             )
                option(value="") --chon danh muc cha-- 
                if( records)
-                  +select-tree(records , 1 , data.parent_id)
+                  //- +select-tree(records , 1 , data.parent_id)
 
          div(
             class = "form-group"
@@ -104,4 +102,4 @@ block main
             button(
                type = "submit"
                class = "btn btn-primary"
-            ) CAP NHAT 
+            ) Cập nhật 
