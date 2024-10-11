@@ -5,7 +5,7 @@ const helperSearch = require("../../helpers/search.js");
 const helperPagination = require("../../helpers/pagination.js");
 const Product = require("../../models/product.model.js");
 const ProductCategory = require("../../models/product-category.model.js");
-const createTreeHelper = require("../../helpers/createTree.js") ; 
+const createTreeHelper = require("../../helpers/createTree.js");
 
 // phuogn thuc {GET} /product . 
 module.exports.product = async (req, res) => {
@@ -13,8 +13,7 @@ module.exports.product = async (req, res) => {
    // goi den su ly bo loc . 
    const listButton = helperListButton(req.query);
 
-   //goi den  phan tim kiem . 
-   // let find = helperFind(req.query); 
+   //goi den phan tim kiem . 
    const search = helperSearch(req.query);
 
    let find = {
@@ -50,13 +49,38 @@ module.exports.product = async (req, res) => {
       sort.position = "desc";
    }
 
+   const records = await product.find({hienThi : false}); 
+
+   // tao ra key nhaCungCap . 
+   let mapSupplier = new Map();
+   for(const item of records){
+      if (mapSupplier.has(item.nhaCungCap)) {
+         const cnt = mapSupplier.get(item.nhaCungCap);
+         mapSupplier.set(item.nhaCungCap, cnt + 1);
+      }
+      else {
+         mapSupplier.set(item.nhaCungCap , 1) ; 
+      }
+   }
+   
+   let arrSupplier = []; 
+   mapSupplier.forEach( (value , key) => {
+      const arr = []; 
+      const string = `${key}`; 
+      arr.value = string ;
+      arr.title = key ; 
+      arrSupplier.push(arr);
+   }); 
+   if(req.query.supplier){
+      find.nhaCungCap = req.query.supplier; 
+   }
 
    // limit(n) : so hang de query
    // skip(n) :  so hang bo qua . 
    const data = await product.find(find)
       .sort(sort)
       .limit(objectPagination.limitItems)
-      .skip(objectPagination.skip);
+      .skip(objectPagination.skip); 
 
    // ham de tra ve cac key cho file pug. 
    res.render("admin/pages/products/index.pug", {
@@ -64,7 +88,8 @@ module.exports.product = async (req, res) => {
       product: data,
       listbutton: listButton,
       keyword: search.keyword,
-      pagination: objectPagination
+      pagination: objectPagination,
+      supplier : arrSupplier 
    });
 }
 
@@ -166,10 +191,10 @@ module.exports.createGet = async (req, res) => {
       deleted: false,
    }
    const records = await ProductCategory.find(find);
-   const newRecords = createTreeHelper.tree(records) ; 
+   const newRecords = createTreeHelper.tree(records);
    res.render("admin/pages/products/create.pug", {
       pageTitle: "Thêm mới sản phẩm",
-      records: newRecords 
+      records: newRecords
    });
 }
 

@@ -3,7 +3,7 @@ const buttonChangeStatus = document.querySelectorAll("[button-change-status]");
 if (buttonChangeStatus.length > 0) {
    // lay ra the from 
    const fromStatus = document.querySelector("#from-change-status");
-   const path = fromStatus.getAttribute("data-path"); 
+   const path = fromStatus.getAttribute("data-path");
    buttonChangeStatus.forEach((button) => {
       // bat su kien cho cac nut . 
       button.addEventListener("click", () => {
@@ -125,7 +125,6 @@ const buttonDelete = document.querySelectorAll("[button-delete");
 if (buttonDelete.length > 0) {
    const formDelete = document.querySelector("#from-change-item");
    const path = formDelete.getAttribute("data-path");
-
    buttonDelete.forEach((button) => {
       button.addEventListener("click", () => {
          //su dung Ham confirm . 
@@ -136,9 +135,7 @@ if (buttonDelete.length > 0) {
             const id = button.getAttribute("data-id");
             // gui len sever . 
             const action = path + `/${id}?_method=PATCH`;
-
             formDelete.action = action;
-
             // lay len submit . 
             formDelete.submit();
          }
@@ -164,7 +161,7 @@ if (show) {
 }
 
 // TINH NANG SORT .
-const sort = document.querySelector("[sort='sort']");
+const sort = document.querySelector(".sort");
 if (sort) {
    let url = new URL(window.location.href);
    const sortSelect = sort.querySelector("[sort-select]");
@@ -187,19 +184,47 @@ if (sort) {
    sortClear.addEventListener("click", () => {
       url.searchParams.delete("sortKey");
       url.searchParams.delete("sortValue");
+      url.searchParams.delete("supplier"); 
 
       window.location.href = url.href;
    });
 
    // them selected cho option
-   const  sortKey = url.searchParams.get("sortKey"); 
-   const  sortValue = url.searchParams.get("sortValue"); 
+   const sortKey = url.searchParams.get("sortKey");
+   const sortValue = url.searchParams.get("sortValue");
    // neu no ton tai .      
-   if( sortKey && sortValue){
-      const stringSort = `${sortKey}-${sortValue}`; 
+   if (sortKey && sortValue) {
+      const stringSort = `${sortKey}-${sortValue}`;
       // lay ra client chon 
-      const daChon  = sortSelect.querySelector(`option[value='${stringSort}']`);
-      daChon.getAttribute( "selected" , true); 
+      const daChon = sortSelect.querySelector(`option[value='${stringSort}']`);
+      daChon.setAttribute("selected", true);
    }
+}
 
+// LOC THEO NHA CUNG CAP .
+const supplierSelect = document.querySelector("[supplier-select ]");
+if (supplierSelect) {
+   const url = new URL(window.location.href);
+   console.log(supplierSelect); 
+   supplierSelect.addEventListener("change", (event) => { 
+      var value = event.target.value;
+      const supplier = value;
+      if (supplier) {
+         url.searchParams.set("supplier", supplier);
+      }
+      window.location.href = url.href;
+   });
+
+   const valueOption = url.searchParams.get("supplier"); 
+   // neu no ton ta .
+   if (valueOption) {
+      // Lấy ra client chọn 
+      const checked = supplierSelect.querySelector(`option[value='${valueOption}']`); 
+      console.log(checked); 
+      if (checked) {
+         checked.setAttribute("selected", true);
+      } else {
+         console.warn(`Không tìm thhấy option với giá trị: ${supplier}`);
+      }
+   }
 }

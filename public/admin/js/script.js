@@ -22,6 +22,7 @@ if (formSearch) {
    formSearch.addEventListener("submit", (e) => {
       // lay ra url 
       let url = new URL(window.location.href);
+      // canh load lai trang . 
       e.preventDefault();
       //lay ra name = keyword o input . 
       const keyword = e.target.elements.keyword.value;
