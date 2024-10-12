@@ -6,14 +6,15 @@ const helperPagination = require("../../helpers/pagination.js");
 const Product = require("../../models/product.model.js");
 const ProductCategory = require("../../models/product-category.model.js");
 const createTreeHelper = require("../../helpers/createTree.js");
+const helperSupplier = require("../../helpers/supplier.js");
 
 // phuogn thuc {GET} /product . 
 module.exports.product = async (req, res) => {
 
-   // goi den su ly bo loc . 
+   // gọi đến bộ lọc và tìm kiếm .  
    const listButton = helperListButton(req.query);
 
-   //goi den phan tim kiem . 
+   // goị dến phần tìm kiếm . 
    const search = helperSearch(req.query);
 
    let find = {
@@ -41,7 +42,6 @@ module.exports.product = async (req, res) => {
       countProduct
    )
 
-
    let sort = {}
    if (req.query.sortKey && req.query.sortValue) {
       sort[req.query.sortKey] = req.query.sortValue;
@@ -62,7 +62,6 @@ module.exports.product = async (req, res) => {
          mapSupplier.set(item.nhaCungCap , 1) ; 
       }
    }
-   
    let arrSupplier = []; 
    mapSupplier.forEach( (value , key) => {
       const arr = []; 
@@ -70,9 +69,9 @@ module.exports.product = async (req, res) => {
       arr.value = string ;
       arr.title = key ; 
       arrSupplier.push(arr);
-   }); 
-   if(req.query.supplier){
-      find.nhaCungCap = req.query.supplier; 
+   });
+   if (req.query.supplier) { 
+      find.nhaCungCap = req.query.supplier ; 
    }
 
    // limit(n) : so hang de query
@@ -80,7 +79,7 @@ module.exports.product = async (req, res) => {
    const data = await product.find(find)
       .sort(sort)
       .limit(objectPagination.limitItems)
-      .skip(objectPagination.skip); 
+      .skip(objectPagination.skip);
 
    // ham de tra ve cac key cho file pug. 
    res.render("admin/pages/products/index.pug", {
@@ -89,7 +88,7 @@ module.exports.product = async (req, res) => {
       listbutton: listButton,
       keyword: search.keyword,
       pagination: objectPagination,
-      supplier : arrSupplier 
+      supplier: arrSupplier
    });
 }
 

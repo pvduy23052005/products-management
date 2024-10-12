@@ -3,13 +3,14 @@ include ../../mixins/table-tree.pug
 include ../../mixins/alert.pug
 
 block main  
-   h1(class ="mb-4") Danh mục sản phẩm  
+   h1(class ="title") Danh mục sản phẩm  
 
    +alert-success(5000)
    +alert-error(5000)
 
    .card.mb-3 
-      .card-header Danh sách danh mục
+      .card-header 
+         a(href="/admin/products-category" class = "btn") Danh sách danh mục
       .card-body 
          .row 
             .col-8

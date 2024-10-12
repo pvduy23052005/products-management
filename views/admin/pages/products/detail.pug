@@ -1,54 +1,51 @@
 extends ../../layouts/default.pug
 
 block main 
+   h1(class = "title") Chi tiết hoạt động 
 
    .card.mb-3
-      .card-header Chi tiết sản phẩm
-      .card-body 
-         .row
-            .col-6
-               div(class = "from-group")
-                  if( product.TenSanPham )
-                     h2( class = "mb-4") #{product.TenSanPham}
+      .card-header 
+         div(class = "from-group")
+            if( product.TenSanPham )
+               h2( class = "mb-4") #{product.TenSanPham}
 
-               div(class = "from-group") 
-                  if(product.SoLuong)
-                     div() Số lượng : #{product.SoLuong}
+         div(class = "from-group")
+            if(product.hinhAnh)
+               img(src=product.hinhAnh, 
+                  alt=""
+                  width = "100px"
+                  height = "100px"
+               )
+         div(class = "from-group") 
+            if(product.SoLuong)
+               div() Số lượng : #{product.SoLuong}
 
-               div(class = "from-group")
-                  if(product.hinhAnh)
-                     img(src=product.hinhAnh, 
-                        alt=""
-                        width = "100px"
-                        height = "100px"
-                     )
+         div(class = "from-group")
+            if(product.gia) 
+               div() Giá bán : #{product.gia}
 
-               div(class = "from-group")
-                  if(product.gia) 
-                     div() Giá bán : #{product.gia}
+         div(class = "from-group")
+            if( product.giam)
+               div() Giảm : #{product.giam} %
 
-               div(class = "from-group")
-                  if( product.giam)
-                     div() Giảm : #{product.giam} %
+         div(class = "from-group")
+            if( product.position)
+               div() Ví trí : #{product.position}
 
-               div(class = "from-group")
-                  if( product.position)
-                     div() Ví trí : #{product.position}
-
-               div(class = "from-group")
-                  if( product.status)
-                     if(product.status == 'active')
-                        div() Trạng thái: Hoạt động 
-                     else 
-                        div() Trạng thái: Dừng hoạt động  
-               div(class = "from-group")
-                  if( product.nhaCungCap)
-                     div() Nhà cung cấp : #{product.nhaCungCap}
-               
-            div(class = "from-group")
-               a(
-                  href = `/admin/products/edit/${product._id}`
-                  class = "btn btn-primary"
-                  ) Chỉnh sửa
+         div(class = "from-group")
+            if( product.status)
+               if(product.status == 'active')
+                  div() Trạng thái: Hoạt động 
+               else 
+                  div() Trạng thái: Dừng hoạt động  
+         div(class = "from-group")
+            if( product.nhaCungCap)
+               div() Nhà cung cấp : #{product.nhaCungCap}
+         
+         div(class = "from-group")
+            a(
+               href = `/admin/products/edit/${product._id}`
+               class = "btn btn-primary"
+               ) Chỉnh sửa
 
 

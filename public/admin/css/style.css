@@ -95,12 +95,14 @@
 }
 
 .form-group {
-  margin: 5px;
-  width: 500px;
-  height: 30px;
-  font-family: 50px;
-  display: inline;
-  margin-top : 10px ; 
+   margin: 5px;
+   width: 500px;
+   height: 30px;
+   font-family: 50px;
+   display: inline;
+   margin-top : 10px ; 
+   font-size: large;
+   text-align: center;
 }
 
 [upload-image-preview] {
@@ -178,3 +180,6 @@ button:hover {
    margin-top: 13px;
  }
  
+.title{
+   text-align: center;
+}

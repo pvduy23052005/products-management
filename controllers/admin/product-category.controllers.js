@@ -60,10 +60,12 @@ module.exports.edit = async (req, res) => {
       });
       const records = await ProductCategory.find({deleted : false });
 
+      const newRecords = createTreeHelpers.tree(records) ; 
+
       res.render("admin/pages/product-category/edit.pug", {
          pageTitle: "Trang chỉnh sửa danh mục sản phẩm",
          data: data1,
-         records: records
+         records: newRecords 
       });
    } catch (error) {
       res.redirect("/admin/products-category");

@@ -7,95 +7,96 @@ block main
    +alert-success(5000)
    +alert-error(5000)
 
-   h1( class = "mb-4") Thêm danh mục sản phẩm 
+   h1( class = "title") Thêm danh mục sản phẩm 
+   .card.mb-3 
+      .card-header
+         form(
+            action="/admin/products-category/create"
+            id = "form-create-products"
+            method = "POST"
+            enctype = "multipart/form-data"
+            )
+               div(class = "form-group")
+                  label(for="title") Tiêu đề
+                  input(
+                     type="text"
+                     class ="form-control"
+                     id = "title"
+                     name = "title"
+                     required
+                  )
+               div(class = "form-group")
+                  label(for="parent_id") Danh mục cha 
+                  select(
+                     id = "parent_id"
+                     name = "parent_id"
+                     class ="form-control"  
+                  )
+                     option(value="") --Chọn danh muc cha-- 
+                     if( records)
+                        +select-tree(records , 1)
 
-   form(
-      action="/admin/products-category/create"
-      id = "form-create-products"
-      method = "POST"
-      enctype = "multipart/form-data"
-      )
-         div(class = "form-group")
-            label(for="title") Tiêu đề
-            input(
-               type="text"
-               class ="form-control"
-               id = "title"
-               name = "title"
-               required
-            )
-         div(class = "form-group")
-            label(for="parent_id") Danh mục cha 
-            select(
-               id = "parent_id"
-               name = "parent_id"
-               class ="form-control"  
-            )
-               option(value="") --Chọn danh muc cha-- 
-               if( records)
-                  +select-tree(records , 1)
+               div(
+                  class = "form-group"
+                  upload-image
+                  )
+                  label(for="hinhAnh") Ảnh
+                  input(
+                     type="file"
+                     class ="form-control"
+                     id = "hinhAnh" 
+                     name = "hinhAnh"
+                     accept = "image/*"
+                     upload-image-input
+                  )
+                  img(
+                     src="" , width = "100px" , height = "100px" 
+                     upload-image-preview 
+                     )
+               
+               div(for ="statusActive form-check form-check-inline")
+                  input(
+                     type = "radio"
+                     class = "form-check-input"
+                     id = "statusActive"
+                     name = "status"
+                     value = "active"
+                     checked
+                  )
+                  label(for = "statusActive" class = "form-check-label") Hoạt động
+               div(for ="statusActive form-check form-check-inline")
+                  input(
+                     type = "radio"
+                     class = "form-check-input"
+                     id = "statusInactive"
+                     name = "status"
+                     value = "inactive"
+                  )
+                  label(for = "statusInActive" class = "form-check-label") Dừng hoạt động
 
-         div(
-            class = "form-group"
-            upload-image
-            )
-            label(for="hinhAnh") Ảnh
-            input(
-               type="file"
-               class ="form-control"
-               id = "hinhAnh" 
-               name = "hinhAnh"
-               accept = "image/*"
-               upload-image-input
-            )
-            img(
-               src="" , width = "100px" , height = "100px" 
-               upload-image-preview 
-               )
-         
-         div(for ="statusActive form-check form-check-inline")
-            input(
-               type = "radio"
-               class = "form-check-input"
-               id = "statusActive"
-               name = "status"
-               value = "active"
-               checked
-            )
-            label(for = "statusActive" class = "form-check-label") Hoạt động
-         div(for ="statusActive form-check form-check-inline")
-            input(
-               type = "radio"
-               class = "form-check-input"
-               id = "statusInactive"
-               name = "status"
-               value = "inactive"
-            )
-            label(for = "statusInActive" class = "form-check-label") Dừng hoạt động
+               div(class = "form-group")
+                  label(for="position") Ví trí
+                  input(
+                     type="number"
+                     class ="form-control"
+                     id = "position"
+                     name = "position"
+                     placeholder = "Tự động tăng"
+                     min = "1"
+                  )
 
-         div(class = "form-group")
-            label(for="position") Ví trí
-            input(
-               type="number"
-               class ="form-control"
-               id = "position"
-               name = "position"
-               placeholder = "Tự động tăng"
-               min = "1"
-            )
+               div(class = "form-group")
+                  label(for="description") Mô tả
+                  input(
+                     type="text"
+                     class ="form-control"
+                     id = "description"
+                     name = "description"
+                     rows = "5"
+                  )
 
-         div(class = "form-group")
-            label(for="description") Mô tả
-            input(
-               type="text"
-               class ="form-control"
-               id = "description"
-               name = "description"
-               rows = "5"
-            )
-
-         div(class ="form-group")
-            button(
-               type = "submit"
-               class = "btn btn-primary"
-            ) Tạo mới 
+               div(class ="form-group")
+                  button(
+                     type = "submit"
+                     class = "btn btn-primary"
+                  ) Tạo mới 
