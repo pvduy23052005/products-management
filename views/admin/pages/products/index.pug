@@ -3,192 +3,204 @@ include ../../mixins/select-tree.pug
 include ../../mixins/alert.pug
 
 block main 
+   if(role.permissions.includes("products_view"))
+      +alert-success(5000)
+      +alert-error(5000)
+      h1(class = "title") #{pageTitle}
 
-   +alert-success(5000)
-   +alert-error(5000)
-   h1(class = "title") #{pageTitle}
-
-   .card.mb-3
-      .card-header 
-         a(href="/admin/products" class = "btn") Bộ lọc và tìm kiếm
-      .card-body 
-         .row
-            .col-6
-               each item in listbutton 
-                  button(
-                     class = `btn btn-sm ml-1 btn-outline-success ${item.class}`
-                     button-status = item.status
-                  ) #{item.name}
-            .col-6
-               //- tinh nang tinh kiem . 
-               form(id ="form-search")
-                  .input-group
-                     input(
-                        type="text"
-                        placeholder = "Nhập từ khóa"
-                        class = "form-control"
-                        name ="keyword"
-                        value = keyword
+      .card.mb-3
+         .card-header 
+            a(href="/admin/products" class = "btn") Bộ lọc và tìm kiếm
+         .card-body 
+            .row
+               .col-6
+                  each item in listbutton 
+                     button(
+                        class = `btn btn-sm ml-1 btn-outline-success ${item.class}`
+                        button-status = item.status
+                     ) #{item.name}
+               .col-6
+                  //- tinh nang tinh kiem . 
+                  form(id ="form-search")
+                     .input-group
+                        input(
+                           type="text"
+                           placeholder = "Nhập từ khóa"
+                           class = "form-control"
+                           name ="keyword"
+                           value = keyword
+                        )
+                        .input-group-append
+                           button(
+                              type ="submit" 
+                              class ="btn btn-success"
+                              ) Tìm kiếm  
+                  
+            .row
+               .col-4
+                  .sort
+                     select(
+                        class="form-control"
+                        name ="sort" 
+                        sort-select
+                     ) 
+                        option(value ="position-desc") Vi trí giảm dần 
+                        option(value ="position-asc") Vi trí tăng dần 
+                        option(value ="gia-desc") Gia giảm dần  
+                        option(value ="gia-asc") Giá tăng dần
+                        option(value ="TenSanPham-asc") Tiêu đề A-Z 
+                        option(value ="TenSanPham-desc") Tiêu đề Z-A
+                     button(
+                        sort-clear
+                        class = ""
+                     ) Clear
+               .col-6
+                  select(
+                     name="supplier"
+                     supplier-select 
+                     class = "form-control"
+                     ) 
+                        option(value= "") --Nhà cung cấp-- 
+                        each item , index in supplier 
+                           option( value = item.value) #{item.title} 
+                           
+      .card.mb-3
+         .card-header
+            .card-body
+               .row
+                  .col-8
+                     //- tinh nang chinh sua status product
+                     form(
+                        action=`products/change-multi?_method=PATCH`
+                        method = "POST"
+                        form-change-multi 
                      )
-                     .input-group-append
+                        input(
+                           type="type"
+                           value=""
+                           name = "ids"
+                           class = "d-none"
+                        )
+                        select(name="type" class = "" height = "100px") ; 
+                           option(value="active") Hoạt động  
+                           option(value ="inactive") Dừng hoạt động
+                           option(value = "delete-all") Xóa tất cả
+                           option(value = "change-position") Thay đổi vị trí
                         button(
                            type ="submit" 
-                           class ="btn btn-success"
-                           ) Tìm kiếm  
-               
-         .row
-            .col-4
-               //- tinh nang chinh sua status product
-               form(
-                  action=`products/change-multi?_method=PATCH`
-                  method = "POST"
-                  form-change-multi 
-               )
-                  input(
-                     type="type"
-                     value=""
-                     name = "ids"
-                     class = "d-none"
-                  )
-                  select(name="type" class = "form-control")
-                     option(value="active") Hoạt động  
-                     option(value ="inactive") Dừng hoạt động
-                     option(value = "delete-all") Xóa tất cả
-                     option(value = "change-position") Thay đổi vị trí
-                  button(
-                     type ="submit" 
-                     class = "btn btn-primary"
-                     ) Áp dụng 
-            .col-6
-               select(
-                  name="supplier"
-                  supplier-select 
-                  class = "form-control"
-                  ) 
-                     option(value= "") --Nhà cung cấp-- 
-                     each item , index in supplier 
-                        option( value = item.value) #{item.title} 
-                        
-   .card.mb-3
-      .card-header
-         .row
-            .product-header Danh sách sản phẩm
-         .row
-            .col-8
-               .sort
-                  select(
-                     class="form-control"
-                     name ="sort" 
-                     sort-select
-                  ) 
-                     option(value ="position-desc") Vi trí giảm dần 
-                     option(value ="position-asc") Vi trí tăng dần 
-                     option(value ="gia-desc") Gia giảm dần  
-                     option(value ="gia-asc") Giá tăng dần
-                     option(value ="TenSanPham-asc") Tiêu đề A-Z 
-                     option(value ="TenSanPham-desc") Tiêu đề Z-A
-                  button(
-                     sort-clear
-                     class = ""
-                  ) Clear
-            .col-2
-               .product-create
-                  a(
-                     href="/admin/products/create"
-                     class = "btn btn-outline-success"
-                  ) + THêm mới
-      .card-body 
-         .row
-            table(class = "table.table-hover.table-sm" checkbox-multi)
-                  thead   
-                     tr  
-                        th 
-                           input(type ="checkbox" , name = "checkAll")
-                        th STT 
-                        th hình ảnh
-                        th tiêu đề  
-                        th giá
-                        th vị trí 
-                        th trạng thái  
-                        th hành động
-                  tbody
-                     each item,index  in product 
-                        tr
-                           td
-                              input(
-                                 type="checkbox"
-                                 name ="id"
-                                 value = item._id 
-                              )
-                           td #{index + 1}
-                           td    
-                              a(
-                              href=`/admin/products/detail/${item._id}`
+                           class = "btn btn-primary"
+                           ) Áp dụng
+                  .col-2
+                     .product-create
+                        if(role.permissions.includes("products_create"))
+                           a(
+                              href="/admin/products/create"
+                              class = "btn btn-outline-success"
+                           ) + THêm mới
+               .row
+                  table(class = "table.table-hover.table-sm" checkbox-multi)
+                     thead   
+                        tr  
+                           th 
+                              input(type ="checkbox" , name = "checkAll")
+                           th STT 
+                           th hình ảnh
+                           th tiêu đề  
+                           th giá
+                           th vị trí 
+                           th trạng thái  
+                           th hành động
+                     tbody
+                        each item,index  in product 
+                           tr
+                              td
+                                 input(
+                                    type="checkbox"
+                                    name ="id"
+                                    value = item._id 
                                  )
-                                 img(src=item.hinhAnh, width = "100px" alt="")
-                           td #{item.TenSanPham}
-                           td #{item.gia}$
-                           td
-                              input(
-                                 type = "number"
-                                 value = item.position 
-                                 style = "width : 50px "
-                                 min = "1"
-                                 name = "position"
-                              )
-                           td 
-                              if(  item.status === "active")
-                                 button(
-                                    href = "javascript:;"
-                                    data-status = item.status
-                                    data-id = item._id 
-                                    class = "btn btn-primary"
-                                    button-change-status  
-                                 ) Hoạt động
-                              else 
-                                 button(
-                                    href = "javascript:;"
-                                    class = "btn btn-danger"
-                                    data-status = item.status
-                                    data-id = item._id 
-                                    button-change-status 
-                                 ) Dừng hoạt động  
-                           td 
-                              a(
-                                 href = `/admin/products/edit/${item._id}`
-                                 data-id = item._id 
-                                 class = "btn btn-warning btn-sm"
-                              ) Sửa
-                              button(
-                                 button-delete
-                                 data-id = item._id  
-                                 class = "btn btn-danger btn-sm ml-1"
-                              ) Xóa 
-                              a(
+                              td #{index + 1}
+                              td    
+                                 a(
                                  href=`/admin/products/detail/${item._id}`
-                                 class = "btn btn-secondary btn-sm"
-                                 ) Chi tiết
+                                    )
+                                    img(src=item.hinhAnh, width = "100px" alt="")
+                              td #{item.TenSanPham}
+                              td #{item.gia}$
+                              td
+                                 input(
+                                    type = "number"
+                                    value = item.position 
+                                    style = "width : 50px "
+                                    min = "1"
+                                    name = "position"
+                                 )
+                              td 
+                                 if(role.permissions.includes("products_edit"))
+                                    if(  item.status === "active")
+                                       button(
+                                          href = "javascript:;"
+                                          data-status = item.status
+                                          data-id = item._id 
+                                          class = "badge badge-success btn btn-success"
+                                          button-change-status  
+                                       ) Hoạt động
+                                    else 
+                                       button(
+                                          href = "javascript:;"
+                                          class = "badge badge-danger btn btn-danger "
+                                          data-status = item.status
+                                          data-id = item._id 
+                                          button-change-status 
+                                       ) Dừng hoạt động  
+                                 else 
+                                    if(  item.status === "active")
+                                       button(
+                                          class = "badge badge-success btn btn-success" 
+                                       ) Hoạt động
+                                    else 
+                                       button(
+                                          class = "badge badge-danger btn btn-danger "
+                                       ) Dừng hoạt động
+                                       
+                              td 
+                                 if(role.permissions.includes("products_edit"))
+                                    a(
+                                       href = `/admin/products/edit/${item._id}`
+                                       data-id = item._id 
+                                       class = "btn btn-warning btn-sm"
+                                    ) Sửa
+                                 if(role.permissions.includes("products_delete"))
+                                    button(
+                                       button-delete
+                                       data-id = item._id
+                                       class = "btn btn-danger btn-sm ml-1"
+                                    ) Xóa 
+                                 a(
+                                    href=`/admin/products/detail/${item._id}`
+                                    class = "btn btn-secondary btn-sm"
+                                    ) Chi tiết
 
-   div(class = "text-center") 
-      ul(class ="pagination")
-         li(class = "page-item")
-            if(pagination.currentPase > 1)
-               li(class = "page-item")
-                  button(class = "page-link" 
-                     button-page = pagination.currentPase -1  
-                  ) Trang trước
-            
-         - for( let i = 1 ; i <= pagination.soLuongPage ;i++)
-            li(class = `page-item ${pagination.currentPase === i ? "active" : "" }`)
-               button(class = "page-link"
-                     button-page = i 
-                     ) #{i}
+      div(class = "text-center") 
+         ul(class ="pagination")
+            li(class = "page-item")
+               if(pagination.currentPase > 1)
+                  li(class = "page-item")
+                     button(class = "page-link" 
+                        button-page = pagination.currentPase -1  
+                     ) Trang trước
+               
+            - for( let i = 1 ; i <= pagination.soLuongPage ;i++)
+               li(class = `page-item ${pagination.currentPase === i ? "active" : "" }`)
+                  button(class = "page-link"
+                        button-page = i 
+                        ) #{i}
 
-         if(pagination.currentPase < pagination.soLuongPage)
-               li(class = "page-item")
-                  button(class = "page-link" 
-                     button-page = pagination.currentPase +1 
-                  ) Trang sau
+            if(pagination.currentPase < pagination.soLuongPage)
+                  li(class = "page-item")
+                     button(class = "page-link" 
+                        button-page = pagination.currentPase +1 
+                     ) Trang sau
    //- status . 
    form(
       action=""

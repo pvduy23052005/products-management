@@ -1,5 +1,6 @@
 
 const Account = require("../../models/accounts.model.js");
+const md5 = require("md5");
 
 // [get]  /admin/auth/login
 module.exports.login = (req, res) => {
@@ -15,7 +16,7 @@ module.exports.login = (req, res) => {
 // [post]  /admin/auth/login
 module.exports.loginPost = async (req, res) => {
    const email = req.body.email;
-   const password = req.body.password;
+   const password = md5(req.body.password);
    const user = await Account.findOne({
       email: email,
       deleted: false,
@@ -41,7 +42,7 @@ module.exports.loginPost = async (req, res) => {
       res.redirect("/admin/auth/login");
       return;
    }
-   // xet 
+   // xet  
    res.cookie("token", user.token);
    res.redirect("/admin/dashboard");
 }

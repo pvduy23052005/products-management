@@ -3,149 +3,149 @@ include ../../mixins/select-tree.pug
 include ../../mixins/alert.pug
 
 block main 
-   +alert-success(5000)
-   +alert-error(5000)
+   if(role.permissions.includes("products_view"))
+      +alert-success(5000)
+      +alert-error(5000)
 
-
-   h1( class = "title") Thêm mới sản phẩm  
-   .card.mb-3
-      .card-header
-         form(
-            action="/admin/products/create"
-            id = "form-create-products"
-            method = "POST"
-            enctype = "multipart/form-data"
-            )
-               div(class = "form-group")
-                  label(for="TenSanPham") Tiêu đề
-                  input(
-                     type="text"
-                     class ="form-control"
-                     id = "TenSanPham"
-                     name = "TenSanPham"
-                     required
-                  )
-
-               div(class = "form-group")
-                  label(for="product-category-id") Danh mục 
-                  select(
-                     name="product-category-id"
-                     id = "product-category-id"
-                     class = "form-control"
-                  )  
-                     option( value = "") --Danh mục cha-- 
-                     if(records)
-                        +select-tree(records , 1) 
-
-               div(class = "form-group")
-                  label(for="SoLuong") Số lượng
-                  input(
-                     type="number"
-                     class ="form-control"
-                     id = "SoLuong"
-                     name = "SoLuong"
-                     value ="0"
-                     min ="0"
-                     required
-                  )
-               
-               div(
-                  class = "form-group"
-                  upload-image
-                  )
-                  label(for="hinhAnh") Ảnh
-                  input(
-                     type="file"
-                     class ="form-control"
-                     id = "hinhAnh" 
-                     name = "hinhAnh"
-                     accept = "image/*"
-                     upload-image-input
-                     required
-                  )
-                  img(
-                     src="" , width = "100px" , height = "100px" , ,
-                     upload-image-preview 
+      h1( class = "title") Thêm mới sản phẩm  
+      .card.mb-3
+         .card-header
+            form(
+               action="/admin/products/create"
+               id = "form-create-products"
+               method = "POST"
+               enctype = "multipart/form-data"
+               )
+                  div(class = "form-group")
+                     label(for="TenSanPham") Tiêu đề
+                     input(
+                        type="text"
+                        class ="form-control"
+                        id = "TenSanPham"
+                        name = "TenSanPham"
+                        required
                      )
 
-               div(class = "form-group")
-                  label(for="gia") Giá
-                  input(
-                     type="number"
-                     class ="form-control"
-                     id = "gia"
-                     name = "gia"
-                     value ="0"
-                     min ="0"
-                     required
-                  )
-               
-               div(class = "form-group")
-                  label(for="discount") %Giảm
-                  input(
-                     type="number"
-                     class ="form-control"
-                     id = "discount"
-                     name = "giam"
-                     value ="0"
-                     min ="0"
-                  )
+                  div(class = "form-group")
+                     label(for="product-category-id") Danh mục 
+                     select(
+                        name="product-category-id"
+                        id = "product-category-id"
+                        class = "form-control"
+                     )  
+                        option( value = "") --Danh mục cha-- 
+                        if(records)
+                           +select-tree(records , 1) 
+
+                  div(class = "form-group")
+                     label(for="SoLuong") Số lượng
+                     input(
+                        type="number"
+                        class ="form-control"
+                        id = "SoLuong"
+                        name = "SoLuong"
+                        value ="0"
+                        min ="0"
+                        required
+                     )
+                  
+                  div(
+                     class = "form-group"
+                     upload-image
+                     )
+                     label(for="hinhAnh") Ảnh
+                     input(
+                        type="file"
+                        class ="form-control"
+                        id = "hinhAnh" 
+                        name = "hinhAnh"
+                        accept = "image/*"
+                        upload-image-input
+                        required
+                     )
+                     img(
+                        src="" , width = "100px" , height = "100px" , ,
+                        upload-image-preview 
+                        )
+
+                  div(class = "form-group")
+                     label(for="gia") Giá
+                     input(
+                        type="number"
+                        class ="form-control"
+                        id = "gia"
+                        name = "gia"
+                        value ="0"
+                        min ="0"
+                        required
+                     )
+                  
+                  div(class = "form-group")
+                     label(for="discount") %Giảm
+                     input(
+                        type="number"
+                        class ="form-control"
+                        id = "discount"
+                        name = "giam"
+                        value ="0"
+                        min ="0"
+                     )
 
 
-               div(for ="statusActive form-check form-check-inline")
-                  input(
-                     type = "radio"
-                     class = "form-check-input"
-                     id = "statusActive"
-                     name = "status"
-                     value = "active"
-                     checked
-                  )
-                  label(for = "statusActive" class = "form-check-label") Hoạt động
-               div(for ="statusActive form-check form-check-inline")
-                  input(
-                     type = "radio"
-                     class = "form-check-input"
-                     id = "statusInactive"
-                     name = "status"
-                     value = "inactive"
-                  )
-                  label(for = "statusInActive" class = "form-check-label") Dừng hoạt động
+                  div(for ="statusActive form-check form-check-inline")
+                     input(
+                        type = "radio"
+                        class = "form-check-input"
+                        id = "statusActive"
+                        name = "status"
+                        value = "active"
+                        checked
+                     )
+                     label(for = "statusActive" class = "form-check-label") Hoạt động
+                  div(for ="statusActive form-check form-check-inline")
+                     input(
+                        type = "radio"
+                        class = "form-check-input"
+                        id = "statusInactive"
+                        name = "status"
+                        value = "inactive"
+                     )
+                     label(for = "statusInActive" class = "form-check-label") Dừng hoạt động
 
-               div(class = "form-group")
-                  label(for="position") Ví trí
-                  input(
-                     type="number"
-                     class ="form-control"
-                     id = "position"
-                     name = "position"
-                     placeholder = "Tự động tăng"
-                     min = "1"
-                  )
+                  div(class = "form-group")
+                     label(for="position") Ví trí
+                     input(
+                        type="number"
+                        class ="form-control"
+                        id = "position"
+                        name = "position"
+                        placeholder = "Tự động tăng"
+                        min = "1"
+                     )
 
-               div(class = "form-group")
-                  label(for="desc") Mô tả
-                  input(
-                     type="text"
-                     class ="form-control"
-                     id = "title"
-                     name = "description"
-                     rows = "5"
-                  )
+                  div(class = "form-group")
+                     label(for="desc") Mô tả
+                     input(
+                        type="text"
+                        class ="form-control"
+                        id = "title"
+                        name = "description"
+                        rows = "5"
+                     )
 
-               div(class = "form-group")
-                  label(for="nhaCungCap") Nhà cung cấp
-                  input(
-                     type="text"
-                     class ="form-control"
-                     id = "nhaCungCap"
-                     name = "nhaCungCap"
-                     rows = "5"
-                     required
-                  )
+                  div(class = "form-group")
+                     label(for="nhaCungCap") Nhà cung cấp
+                     input(
+                        type="text"
+                        class ="form-control"
+                        id = "nhaCungCap"
+                        name = "nhaCungCap"
+                        rows = "5"
+                        required
+                     )
 
-               div(class ="form-group")
-                  button(
-                     type = "submit"
-                     class = "btn btn-primary"
-                  ) tạo mới 
+                  div(class ="form-group")
+                     button(
+                        type = "submit"
+                        class = "btn btn-primary"
+                     ) tạo mới 

@@ -56,7 +56,6 @@ module.exports.createPost = async (req, res) => {
       deleted: false,
       email: req.body.email
    });
-   console.log(check);
    try {
       if (check) {// email da ton tai roi 
          try {
@@ -67,8 +66,8 @@ module.exports.createPost = async (req, res) => {
          res.redirect("back");
       } else { // email chua ton tai .  
          try {
-            const record = new Account(req.body);
             req.body.password = md5(req.body.password);
+            const record = new Account(req.body);
             await record.save();
             req.flash("success", "Tạo thành công");
          } catch (error) {

@@ -38,16 +38,18 @@ mixin table-tree( records , level = 1 )
                   class = "btn btn-danger"
                ) Dừng hoạt dộng
          td 
-            a(
-               href = `/admin/products-category/edit/${item._id}`
-               class = "btn btn-warning btn-sm"
-               data-id = item._id 
-            ) Sửa 
-            button(
-               button-delete
-               data-id = item._id  
-               class = "btn btn-danger btn-sm ml-1"
-            ) Xóa 
+            if(role.permissions.includes("products-category_edit"))
+               a(
+                  href = `/admin/products-category/edit/${item._id}`
+                  class = "btn btn-warning btn-sm"
+                  data-id = item._id 
+               ) Sửa 
+            if(role.permissions.includes("products-category_delete"))
+               button(
+                  button-delete
+                  data-id = item._id  
+                  class = "btn btn-danger btn-sm ml-1"
+               ) Xóa 
             a(
                href=`/admin/products-category/detail/${item._id}`
                class = "btn btn-secondary btn-sm"
