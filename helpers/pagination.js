@@ -11,7 +11,7 @@ module.exports =  (objectPagination , query , countProduct) =>{
    const soLuongPage = Math.ceil(countProduct /objectPagination.limitItems);
 
    // so luong san pham cua 1 trang phan trang . 
-   objectPagination.skip = (objectPagination.currentPase -1) * 4
+   objectPagination.skip = (objectPagination.currentPase -1) * objectPagination.limitItems ; 
    
    // cap  nhat so trang vao object . 
    objectPagination.soLuongPage = soLuongPage; 

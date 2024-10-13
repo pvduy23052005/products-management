@@ -1,6 +1,7 @@
 extends ../../layouts/default.pug
 include ../../mixins/select-tree.pug
 include ../../mixins/alert.pug
+include ../../mixins/moment.pug
 
 block main 
    if(role.permissions.includes("products_view"))
@@ -46,7 +47,7 @@ block main
                      ) 
                         option(value ="position-desc") Vi trí giảm dần 
                         option(value ="position-asc") Vi trí tăng dần 
-                        option(value ="gia-desc") Gia giảm dần  
+                        option(value ="gia-desc") Giá giảm dần  
                         option(value ="gia-asc") Giá tăng dần
                         option(value ="TenSanPham-asc") Tiêu đề A-Z 
                         option(value ="TenSanPham-desc") Tiêu đề Z-A
@@ -104,12 +105,14 @@ block main
                            th 
                               input(type ="checkbox" , name = "checkAll")
                            th STT 
-                           th hình ảnh
-                           th tiêu đề  
-                           th giá
-                           th vị trí 
-                           th trạng thái  
-                           th hành động
+                           th Hình ảnh
+                           th Tiêu đề  
+                           th Giá
+                           th Vị trí 
+                           th Số lượng 
+                           th Trạng thái  
+                           th Người tạo
+                           th Hành động
                      tbody
                         each item,index  in product 
                            tr
@@ -135,6 +138,7 @@ block main
                                     min = "1"
                                     name = "position"
                                  )
+                              td #{item.SoLuong}
                               td 
                                  if(role.permissions.includes("products_edit"))
                                     if(  item.status === "active")
@@ -162,7 +166,10 @@ block main
                                        button(
                                           class = "badge badge-danger btn btn-danger "
                                        ) Dừng hoạt động
-                                       
+                              td 
+                                 p #{item.accountFullName}
+                                 p 
+                                    +formatDateTime(item.createBy.createAt)
                               td 
                                  if(role.permissions.includes("products_edit"))
                                     a(

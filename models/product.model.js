@@ -14,13 +14,24 @@ const productSchema = new mongoose.Schema(
    nhaCungCap : String ,
    SoLuong: Number,
    slug : {
-      type : String , 
+      type : String ,
       slug : "TenSanPham",
       unique : true// tao slug la duy nhat .
    },
    hienThi: {
       type : Boolean, 
       default :false, 
+   },
+   createBy : {
+      account_id : String , 
+      createAt : {
+        type: Date , 
+         default : Date.now 
+      }
+   },
+   deleteBy : {
+      account_id : String , 
+      deleteAt : Date
    },
    hinhAnh: String,
    gia: Number,

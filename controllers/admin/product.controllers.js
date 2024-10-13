@@ -7,6 +7,8 @@ const Product = require("../../models/product.model.js");
 const ProductCategory = require("../../models/product-category.model.js");
 const createTreeHelper = require("../../helpers/createTree.js");
 const helperSupplier = require("../../helpers/supplier.js");
+const Accounts = require("../../models/accounts.model.js"); 
+const Account = require("../../models/accounts.model.js");
 
 // phuogn thuc {GET} /product . 
 module.exports.product = async (req, res) => {
@@ -36,7 +38,7 @@ module.exports.product = async (req, res) => {
    let objectPagination = helperPagination(
       {
          currentPase: 1,
-         limitItems: 4
+         limitItems: 5
       },
       req.query,
       countProduct
@@ -81,6 +83,19 @@ module.exports.product = async (req, res) => {
       .limit(objectPagination.limitItems)
       .skip(objectPagination.skip);
 
+   for(const product of data){
+      const user = await Account.findOne({
+         _id : product.createBy.account_id ,
+         deleted : false 
+      }); 
+      if(user){   
+         product.accountFullName = user.fullName ; 
+      }else {
+         continue ; 
+      }
+
+   }
+
    // ham de tra ve cac key cho file pug. 
    res.render("admin/pages/products/index.pug", {
       pageTitle: "Trang sản phẩm",
@@ -116,7 +131,6 @@ module.exports.changeStatus = async (req, res) => {
    }
 }
 
-// 
 // /change-status/:status/:id: 
 module.exports.changeMulti = async (req, res) => {
    const type = req.body.type
@@ -210,6 +224,9 @@ module.exports.createPost = async (req, res) => {
    }
    else {
       req.body.position = parseInt(req.body.position);
+   }
+   req.body.createBy = { 
+      account_id : res.locals.user.id
    }
 
    try {

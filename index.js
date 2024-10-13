@@ -41,6 +41,10 @@ app.use(flash());
 app.set("views", `${__dirname}/views`);
 app.set("view engine", "pug");
 
+// su ly 
+const moment = require("moment");
+app.locals.moment = moment ; 
+
 // goi route vua nhung o code 5 .chuyen vao app .  
 route1(app);
 routeAdmin(app); 
