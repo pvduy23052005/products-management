@@ -14,7 +14,7 @@ module.exports.requireAuth = async (req, res, next) => {
          if (!user) {// neu ko co user
             res.redirect("/admin/auth/login");
          } else { // neu co user
-            res.locals.user = user ; 
+            res.locals.user = user ;
             const role = await Role.findOne({
                _id : user.role_id 
 

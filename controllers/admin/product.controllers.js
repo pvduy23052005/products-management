@@ -184,12 +184,18 @@ module.exports.changeMulti = async (req, res) => {
 }
 
 // XOA 1 SAN PHAM . 
-// : /admin/products/delete/:id 
+// [Post] /admin/products/delete/:id 
 module.exports.deleteItem = async (req, res) => {
    try {
       const id = req.params.id;
       // update lai hienThi . 
-      await product.updateOne({ _id: id }, { hienThi: true });
+      await product.updateOne({ _id: id }, { 
+         hienThi: true ,
+         deleteBy :{
+            account_id : res.locals.user.id , 
+            deleteAt : new Date() 
+         }
+      });
       req.flash("success", `Xóa thành công`);
    } catch (error) {
       req.flash("error", `Xóa không thành công`);
