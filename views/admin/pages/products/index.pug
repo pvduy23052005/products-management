@@ -11,7 +11,15 @@ block main
 
       .card.mb-3
          .card-header 
-            a(href="/admin/products" class = "btn") Bộ lọc và tìm kiếm
+            .row 
+               .col-2
+                  a(href="/admin/products" class = "btn") Bộ lọc và tìm kiếm
+               .col-10
+                  .sort-head
+                     button(
+                        sort-clear
+                        class = "clear-button"
+                     ) Xóa thay đổi
          .card-body 
             .row
                .col-6
@@ -44,6 +52,7 @@ block main
                         class="form-control"
                         name ="sort" 
                         sort-select
+                        style = "text-align : center"
                      ) 
                         option(value ="position-desc") Vi trí giảm dần 
                         option(value ="position-asc") Vi trí tăng dần 
@@ -51,10 +60,6 @@ block main
                         option(value ="gia-asc") Giá tăng dần
                         option(value ="TenSanPham-asc") Tiêu đề A-Z 
                         option(value ="TenSanPham-desc") Tiêu đề Z-A
-                     button(
-                        sort-clear
-                        class = ""
-                     ) Clear
                .col-6
                   select(
                      name="supplier"
@@ -82,7 +87,7 @@ block main
                            name = "ids"
                            class = "d-none"
                         )
-                        select(name="type" class = "" height = "100px") ; 
+                        select(name="type" class = "select-inProducts") ; 
                            option(value="active") Hoạt động  
                            option(value ="inactive") Dừng hoạt động
                            option(value = "delete-all") Xóa tất cả
@@ -108,7 +113,6 @@ block main
                            th Hình ảnh
                            th Tiêu đề  
                            th Giá
-                           th Vị trí 
                            th Số lượng 
                            th Trạng thái  
                            th Người tạo
@@ -130,14 +134,15 @@ block main
                                     img(src=item.hinhAnh, width = "100px" alt="")
                               td #{item.TenSanPham}
                               td #{item.gia}$
-                              td
-                                 input(
-                                    type = "number"
-                                    value = item.position 
-                                    style = "width : 50px "
-                                    min = "1"
-                                    name = "position"
-                                 )
+                              //- td
+                              //-    input(
+                              //-       class = "d-none"
+                              //-       type = "number"
+                              //-       value = item.position 
+                              //-       style = "width : 50px "
+                              //-       min = "1"
+                              //-       name = "position"
+                              //-    )
                               td #{item.SoLuong}
                               td 
                                  if(role.permissions.includes("products_edit"))

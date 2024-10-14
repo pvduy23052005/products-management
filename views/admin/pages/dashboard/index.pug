@@ -2,6 +2,25 @@ extends ../../layouts/default.pug
 
 block main 
    h1(class = "trangtq") Trang tổng quan
-   div  #{user}
 
-   div() #{role}
+
+   .card.mb-3 
+      .card-head 
+         a(href="/admin/products" class = "btn") Bộ lọc và tìm kiếm
+      .card-body 
+         table(class = "table.table-hover.table-sm")
+            thead   
+               tr 
+                  th STT
+                  th Tên sản phẩm 
+                  th Số lượng 
+            tbody 
+               each item ,index in products
+                  tr 
+                     th #{index + 1}
+                     th #{item.TenSanPham}
+                     th #{item.SoLuong}
+                  
+                  
+
+         

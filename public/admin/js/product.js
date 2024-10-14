@@ -162,10 +162,12 @@ if (show) {
 
 // TINH NANG SORT .
 const sort = document.querySelector(".sort");
+const sortHead = document.querySelector(".sort-head") ; 
+console.log(sortHead) ;  
 if (sort) {
    let url = new URL(window.location.href);
    const sortSelect = sort.querySelector("[sort-select]");
-   const sortClear = sort.querySelector("[sort-clear]");
+   const sortClear = sortHead.querySelector("[sort-clear]");
 
    // nang nghe su kien thay doi . 
    sortSelect.addEventListener("change", (event) => {
