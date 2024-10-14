@@ -12,27 +12,27 @@ block main
       .card.mb-3 
          .card-header 
             a(href="/admin/products-category" class = "btn") Danh sách danh mục
-         .card-body 
-            .row 
-               .col-8
-               .col-4 
-                  if(role.permissions.includes("products-category_create"))
-                     a(
-                        href=`/admin/products-category/create`
-                        class = "btn btn-outline-success"
-                     ) + Thêm mới
+            .card-body 
+               .row 
+                  .col-8
+                  .col-4 
+                     if(role.permissions.includes("products-category_create"))
+                        a(
+                           href=`/admin/products-category/create`
+                           class = "btn btn-outline-success"
+                        ) + Thêm mới
 
-            .row
-               table(class = "table.table-hover.table-sm" checkbox-multi)
-                  thead
-                     tr 
-                        th 
-                           input(type ="checkbox" , name = "checkAll")
-                        th STT 
-                        th hình ảnh
-                        th tiêu đề  
-                        th vị trí 
-                        th trạng thái  
-                        th hành động
-                  tbody
-                     +table-tree(records)
+               .row
+                  table(class = "table table-hover table-sm" checkbox-multi)
+                     thead
+                        tr 
+                           th 
+                              input(type ="checkbox" , name = "checkAll")
+                           th STT 
+                           th hình ảnh
+                           th tiêu đề  
+                           th vị trí 
+                           th trạng thái  
+                           th hành động
+                     tbody
+                        +table-tree(records)

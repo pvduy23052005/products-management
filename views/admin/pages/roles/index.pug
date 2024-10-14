@@ -17,35 +17,35 @@ block main
                            class ="btn btn-outline-success"
                         ) + Thêm mới
 
-            table(class ="table table-hover table-sm")  
-               thead 
-                  tr 
-                     th STT 
-                     th Nhóm quyền  
-                     th Mô tả ngắn 
-                     th Hành động
-               tbody  
-                  if(records.length > 0)
-                     each item , index in records
-                        tr
-                           td #{index + 1}
-                           td #{item.title}
-                           td #{item.description}
-                           td 
-                              if(role.permissions.includes("roles_edit"))
-                                 a(href=`/admin/roles/edit/${item.id}`
-                                    class = "btn btn-warning btn-sm"
-                                 ) Sửa
-                              a(
-                                 href=`/admin/roles/detail/${item.id}`
-                                 class = "btn btn-secondary"
-                                 class = ""
-                                 ) Chi tiết 
-                              if(role.permissions.includes("roles_delete"))
-                                 a(
-                                    href=`/admin/roles/delete/${item.id}`
-                                    class = "btn btn-danger"
-                                 ) Xóa
-                  else 
+               table(class ="table table-hover table-sm")
+                  thead 
                      tr 
-                        td Chưa có nhóm quyền
+                        th STT 
+                        th Nhóm quyền  
+                        th Mô tả ngắn 
+                        th Hành động
+                  tbody  
+                     if(records.length > 0)
+                        each item , index in records
+                           tr
+                              td #{index + 1}
+                              td #{item.title}
+                              td #{item.description}
+                              td 
+                                 if(role.permissions.includes("roles_edit"))
+                                    a(href=`/admin/roles/edit/${item.id}`
+                                       class = "btn btn-warning btn-sm"
+                                    ) Sửa
+                                 a(
+                                    href=`/admin/roles/detail/${item.id}`
+                                    class = "btn btn-secondary"
+                                    class = ""
+                                    ) Chi tiết 
+                                 if(role.permissions.includes("roles_delete"))
+                                    a(
+                                       href=`/admin/roles/delete/${item.id}`
+                                       class = "btn btn-danger"
+                                    ) Xóa
+                     else 
+                        tr 
+                           td Chưa có nhóm quyền

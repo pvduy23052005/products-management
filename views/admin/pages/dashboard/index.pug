@@ -1,26 +1,74 @@
 extends ../../layouts/default.pug
+include ../../mixins/moment.pug
 
 block main 
    h1(class = "trangtq") Trang tổng quan
 
 
-   .card.mb-3 
-      .card-head 
-         a(href="/admin/products" class = "btn") Bộ lọc và tìm kiếm
-      .card-body 
-         table(class = "table.table-hover.table-sm")
-            thead   
-               tr 
-                  th STT
-                  th Tên sản phẩm 
-                  th Số lượng 
-            tbody 
-               each item ,index in products
-                  tr 
-                     th #{index + 1}
-                     th #{item.TenSanPham}
-                     th #{item.SoLuong}
-                  
+   .card.mb-3
+      .card-header Hàng số lượng thấp
+         .card-body
+            .row
+               .col-8  
+               .col-4.text-right 
+
+            table(class = "table table-hover table-sm" checkbox-multi)
+               thead   
+                  tr  
+                     th STT 
+                     th Hình ảnh
+                     th Tiêu đề
+                     th Giá
+                     th Số lượng
+                     th Trạng thái  
+                     th Hành động
+               tbody
+                  each item,index  in products
+                     tr
+                        td
+                        td #{index + 1}
+                        td    
+                           a(
+                           href=`/admin/products/detail/${item._id}`
+                              )
+                              img(src=item.hinhAnh, width = "100px" alt="")
+                        td #{item.TenSanPham}
+                        td #{item.gia}$
+                        td #{item.SoLuong}
+                        td 
+                           if(role.permissions.includes("products_edit"))
+                              if(  item.status === "active")
+                                 button(
+                                    href = "javascript:;"
+                                    data-status = item.status
+                                    data-id = item._id 
+                                    class = "badge badge-success btn btn-success"
+                                    button-change-status  
+                                 ) Hoạt động
+                              else 
+                                 button(
+                                    href = "javascript:;"
+                                    class = "badge badge-danger btn btn-danger "
+                                    data-status = item.status
+                                    data-id = item._id 
+                                    button-change-status 
+                                 ) Dừng hoạt động
+                           else 
+                              if(  item.status === "active")
+                                 button(
+                                    class = "badge badge-success btn btn-success" 
+                                 ) Hoạt động
+                              else 
+                                 button(
+                                    class = "badge badge-danger btn btn-danger "
+                                 ) Dừng hoạt động
+                        td 
+                           a(
+                              href=`/admin/products/detail/${item._id}`
+                              class = "btn btn-secondary btn-sm"
+                              ) Chi tiết
+
+                        
                   
 
          
