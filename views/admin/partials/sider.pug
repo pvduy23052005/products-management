@@ -2,19 +2,19 @@
    .inner-menu    
       ul 
          li 
-            a(href="/admin/dashboard" class = "btn" ) Tổng quan
+            a(href="/admin/dashboard" class = "btn" btn-sider ) Tổng quan
          if(role.permissions.includes("products-category_view"))
             li    
-               a(href="/admin/products-category" class = "btn") Danh mục sản phẩm
+               a(href="/admin/products-category" class = "btn" btn-sider) Danh mục sản phẩm
          if(role.permissions.includes("products_view"))
             li    
-               a(href="/admin/products" class = "btn") Danh sách sản phẩm  
+               a(href="/admin/products" class = "btn" btn-sider ) Danh sách sản phẩm  
          if(role.permissions.includes("roles_view"))
             li 
-               a(href="/admin/roles" class ="btn") Nhóm quyền
+               a(href="/admin/roles" class ="btn" btn-sider ) Nhóm quyền
          if(role.permissions.includes("roles_permissions"))
             li 
-               a(href ="/admin/roles/permissions" class = "btn") Phân quyền 
+               a(href ="/admin/roles/permissions" class = "btn" btn-sider) Phân quyền 
          if(role.permissions.includes("accounts_view"))
             li 
-               a(href ="/admin/accounts" class = "btn" ) Danh sách tài khoản
+               a(href ="/admin/accounts" class = "btn" btn-sider) Danh sách tài khoản

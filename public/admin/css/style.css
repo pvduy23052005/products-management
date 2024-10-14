@@ -33,15 +33,16 @@
 
 .sider .inner-menu ul {
   list-style: none;
-  padding: 0;
-  margin: 0;
+  padding: 1px;
+  margin: 1px;
 }
 
 .sider .inner-menu ul li a {
   color: #fff;
-  display: block;
+  display: block; 
+  margin : 10px 10px;
   padding: 6px 10px;
-  border-bottom: 1px solid #726e6e;
+  border-bottom: 2px solid #726e6e;
 }
 
 /* xet mau cho phan trang  */
@@ -111,11 +112,6 @@
   display: inline;
   width: 100px;
   height: 100px;
-}
-
-.khoi3 {
-  border: 1px solid rgb(143, 126, 126);
-  margin-top: 30px;
 }
 
 /* login */
@@ -210,3 +206,4 @@ button:hover {
    background-color: red;
    color: white;
 }
+
